@@ -14,3 +14,11 @@ class FontFamily {
   static const String medium = 'Poppins-Medium';
   static const String bold = 'Poppins-Bold';
 }
+
+Widget trip2(BuildContext context) {
+  return Image.asset(
+    "assets/logo/trip2.png",
+    width: MediaQuery.of(context).size.width,
+    fit: BoxFit.cover,
+  );
+}
