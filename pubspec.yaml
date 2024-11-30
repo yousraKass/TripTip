@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.5.3
 
 dependencies:
   flutter:
@@ -28,4 +28,37 @@ flutter:
           weight: 500
 
   assets:
+    - assets/images/agencybackground.png
+    - assets/images/agencypfp.png
+    - assets/images/image.png
+    - assets/images/backgroundimage.jpeg
+    - assets/images/offer1.png
+    - assets/images/offer2.png
+    - assets/images/offer3.png
+    - assets/images/offer4.png
+    - assets/images/pfp1.png
+    - assets/images/pfp2.png
+    - assets/images/pfp3.png
+    - assets/images/pfp4.png
     - assets/logo/
+    - assets/icons/favorites.png
+    - assets/icons/emptyfavorite.png
+    - assets/icons/filledfavorite.png
+    - assets/icons/back.png
+    - assets/icons/home.png
+    - assets/icons/money.png
+    - assets/icons/notification.png
+    - assets/icons/profile.png
+    - assets/icons/search.png
+    - assets/icons/time.png
+    - assets/icons/whatsapp.png
+    - assets/icons/Ellipse.png
+    - assets/icons/nav_circle.png
+    - assets/icons/send.png
+    - assets/icons/editer.png
+    - assets/icons/Phone.png
+    - assets/icons/gmail.png
+    - assets/icons/location.png
+    - assets/icons/reseau.png
+    - assets/icons/instagram.png
+    
