@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/screens/agency_login/login_page.dart';
+import 'views/OfferScreen.dart';
+import 'package:triptip/views/ReviewScreen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,8 +11,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginPage(),
+    return   MaterialApp(
+      initialRoute: OfferDetailsPage.pageRoute,
+      routes: {
+        OfferDetailsPage.pageRoute : (ctx) => OfferDetailsPage(),
+        ReviewScreen.pageRoute : (ctx) => ReviewScreen(),
+
+      },
     );
   }
 }
