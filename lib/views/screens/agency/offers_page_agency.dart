@@ -63,7 +63,7 @@ class _OffersPageAgencyState extends State<OffersPageAgency> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/AddOffer');
+              Navigator.pushNamed(context, '/AddOfferPage');
             },
           ),
         ),
