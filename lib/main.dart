@@ -74,6 +74,9 @@ class MainApp extends StatelessWidget {
         Intro03.pageRoute : (ctx) => const Intro03(), 
         LandingPage.pageRoute : (ctx) => const LandingPage(),
         SearchPage.pageRoute : (ctx) => const SearchPage(),
+        OffersPage.pageRoute : (ctx) => const OffersPage,
+        OffersPageAgency.PageRoute : (ctx) => const OffersPageAgency,
+
         
       
 
