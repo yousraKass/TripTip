@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 
 
 class EditClientProfileScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _EditClientProfileScreenState extends State<EditClientProfileScreen> {
           backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
           leading: back_btn(context),
         ),
-        bottomNavigationBar: BottomNavigationBarExample(),
+        bottomNavigationBar: BottomNavigationBarExampleClient(),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ListView(

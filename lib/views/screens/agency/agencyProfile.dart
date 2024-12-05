@@ -8,7 +8,7 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/data/repo/review_agency/ReviewText.dart';
 import 'package:triptip/views/widgets/ReviewItem.dart';
 import 'EditAgencyProfile.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 
 
 class AgencyScreen extends StatefulWidget {
@@ -62,7 +62,7 @@ class _AgencyScreenState extends State<AgencyScreen> {
           }
         },
       ),
-      bottomNavigationBar:BottomNavigationBarExample(),
+      bottomNavigationBar:BottomNavigationBarExampleAgency(),
     );
   }
 

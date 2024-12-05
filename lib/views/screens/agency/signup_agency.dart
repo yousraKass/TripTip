@@ -5,12 +5,19 @@ import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/themes/colors.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+
+SignUpAs role = SignUpAs.Agency;
+
+
+
 
 class SignUpAgency extends StatefulWidget {
+  
   const SignUpAgency({super.key});
 
   static const pageRoute = "/agency_signup_page";
-
+  
   @override
   State<SignUpAgency> createState() => _SignUpAgencyState();
 }

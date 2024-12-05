@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:triptip/data/repo/agency_profile/AgencyText.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 
 class EditAgencyProfileScreen extends StatefulWidget {
   static const pageRoute = '/EditAgencyProfile';
@@ -67,7 +68,7 @@ class _EditAgencyProfileScreenState extends State<EditAgencyProfileScreen> {
           }
         },
       ),
-      bottomNavigationBar: BottomNavigationBarExample(),
+      bottomNavigationBar: BottomNavigationBarExampleClient(),
     );
   }
 

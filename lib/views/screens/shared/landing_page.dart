@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 // import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart'; // Import your BottomNavigationBar widget
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+// Import your BottomNavigationBar widget
 import 'package:triptip/views/themes/colors.dart';
 // import 'package:triptip/views/screens//offer_model.dart';
 // import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
@@ -12,6 +14,7 @@ import 'package:triptip/views/screens/client/notifications_client.dart';
 // import 'package:triptip/views/screens/agency/notifications_agency.dart';
 import 'OfferScreen.dart';
 import 'search_page.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 
 class LandingPage extends StatelessWidget {
   static const pageRoute = '/LandingPage';
@@ -254,9 +257,10 @@ class LandingPage extends StatelessWidget {
               ),
             ),
           ),
-          BottomNavigationBarExample(), // Include your Bottom Navigation Bar widget here
+           // Include your Bottom Navigation Bar widget here
         ],
       ),
+      bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
     );
   }
 

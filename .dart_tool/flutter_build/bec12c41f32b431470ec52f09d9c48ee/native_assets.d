@@ -1,0 +1,1 @@
+ /home/dell/MyTRIPTIP/TripTip/.dart_tool/flutter_build/bec12c41f32b431470ec52f09d9c48ee/native_assets.yaml: 

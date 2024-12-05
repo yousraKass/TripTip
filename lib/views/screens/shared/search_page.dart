@@ -3,8 +3,9 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'filter_page.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart'; // Import the BottomNavigationBar widget
-
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart'; // Import the BottomNavigationBar widget
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 class SearchPage extends StatefulWidget {
   static const pageRoute = '/SearchPage';
   const SearchPage({super.key});
@@ -158,7 +159,7 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarExample(), // Move BottomNavigationBar here
+      bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(), // Move BottomNavigationBar here
     );
   }
 }

@@ -25,10 +25,11 @@ import 'package:triptip/views/screens/shared/intro02.dart';
 import 'package:triptip/views/screens/shared/intro03.dart';
 import 'package:triptip/views/screens/shared/landing_page.dart';
 import 'package:triptip/views/screens/shared/search_page.dart';
+import 'package:triptip/data/repo/notification_agency/DummyNotificationAgency.dart';
+import 'package:triptip/data/repo/notification_agency/AbstractNotificationAgency.dart';
+import 'package:triptip/views/screens/client/favorite_page.dart';
 
-
-
-
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 
 late AbstractPreferenes preferences;
 late Abstractnotificationagency notifications;
@@ -39,7 +40,7 @@ Future<bool> my_init_app() async {
   return true;
 }
 
-void main() async{
+void main() async {
   await my_init_app();
   runApp(const MainApp());
 }
@@ -50,33 +51,33 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Intro01.pageRoute ,
+      initialRoute: SignUpChoicePage.pageRoute,
       routes: {
+        FavoritePage.pageRoute: (ctx) => FavoritePage(),
         LoginPageAgency.pageRoute: (ctx) => LoginPageAgency(),
         ForgetPassword.pageRoute: (ctx) => ForgetPassword(),
         NewPassword.pageRoute: (ctx) => NewPassword(),
         SignUpAgency.pageRoute: (ctx) => SignUpAgency(),
         SignUpClient.pageRoute: (ctx) => SignUpClient(),
         MyPreferencesPage.pageRoute: (ctx) => MyPreferencesPage(),
-        NotificationsAgency.pageRoute: (ctx) =>NotificationsAgency(),
-        NotificationsClient.pageRoute: (ctx) =>NotificationsClient(),
-        ClientProfile.pageRoute: (ctx) =>ClientProfile(),
-        EditClientProfileScreen.pageRoute: (ctx) =>EditClientProfileScreen(),
-        OfferDetailsPage.pageRoute : (ctx) => const OfferDetailsPage(),
-        ReviewScreenAgency.pageRoute : (ctx) => const ReviewScreenAgency(),
-        ReviewScreenClient.pageRoute : (ctx) => const ReviewScreenClient(),
-        AgencyScreen.pageRoute : (ctx) => const AgencyScreen(),
-        EditAgencyProfileScreen.pageRoute : (ctx) => const EditAgencyProfileScreen(),
-        SettingsScreenClient.pageRoute : (ctx) => const SettingsScreenClient(),
-        SettingsScreenAgency.pageRoute : (ctx) => const SettingsScreenAgency(),
-        Intro01.pageRoute : (ctx) => const Intro01(),
-        Intro02.pageRoute : (ctx) => const Intro02(),                             
-        Intro03.pageRoute : (ctx) => const Intro03(), 
-        LandingPage.pageRoute : (ctx) => const LandingPage(),
-        SearchPage.pageRoute : (ctx) => const SearchPage(),
-        
-      
+        NotificationsAgency.pageRoute: (ctx) => NotificationsAgency(),
+        NotificationsClient.pageRoute: (ctx) => NotificationsClient(),
+        ClientProfile.pageRoute: (ctx) => ClientProfile(),
+        EditClientProfileScreen.pageRoute: (ctx) => EditClientProfileScreen(),
+        OfferDetailsPage.pageRoute: (ctx) => OfferDetailsPage(),
+        ReviewScreenAgency.pageRoute: (ctx) => ReviewScreenAgency(),
+        ReviewScreenClient.pageRoute: (ctx) => ReviewScreenClient(),
+        AgencyScreen.pageRoute: (ctx) => AgencyScreen(),
+        EditAgencyProfileScreen.pageRoute: (ctx) => EditAgencyProfileScreen(),
+        SettingsScreenClient.pageRoute: (ctx) => const SettingsScreenClient(),
+        SettingsScreenAgency.pageRoute: (ctx) => const SettingsScreenAgency(),
+        Intro01.pageRoute: (ctx) => const Intro01(),
+        Intro02.pageRoute: (ctx) => const Intro02(),
+        Intro03.pageRoute: (ctx) => const Intro03(),
+        LandingPage.pageRoute: (ctx) => const LandingPage(),
+        SearchPage.pageRoute: (ctx) => const SearchPage(),
 
+        SignUpChoicePage.pageRoute: (ctx) => const SignUpChoicePage(),
       },
     );
   }
