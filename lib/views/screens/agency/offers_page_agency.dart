@@ -8,7 +8,7 @@ import 'package:triptip/views/widgets/BottomNavigationBar.dart';
 
 class OffersPageCompany extends StatefulWidget {
   const OffersPageCompany({super.key});
-  static const pageRoute = '/offersPageCompany';
+  static const pageRoute = '/OffersPageCompany';
 
   @override
   _OffersPageCompanyState createState() => _OffersPageCompanyState();
