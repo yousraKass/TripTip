@@ -50,7 +50,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Intro01.pageRoute ,
+      initialRoute: SignUpAgency.pageRoute , // should start with intro01
       routes: {
         LoginPageAgency.pageRoute: (ctx) => LoginPageAgency(),
         ForgetPassword.pageRoute: (ctx) => ForgetPassword(),

@@ -4,6 +4,7 @@ import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
+import 'package:triptip/views/widgets/Password_form_field.dart';
 import 'package:triptip/views/themes/colors.dart';
 
 class SignUpAgency extends StatefulWidget {
@@ -18,10 +19,8 @@ class SignUpAgency extends StatefulWidget {
 class _SignUpAgencyState extends State<SignUpAgency> {
   // form key
   final _formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
   String? selectedCountryCode;
   bool isChecked = false;
-  List<String> countryCodes = ['+213', '+1', '+44', '+91'];
 
   final TextEditingController txt_controller_psd = TextEditingController();
 
@@ -66,77 +65,9 @@ class _SignUpAgencyState extends State<SignUpAgency> {
 
                           // agency phone
                           InputLabel("Phone"),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.925,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 100,
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 8.0),
-                                  decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: Colors.grey.shade300),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: DropdownButton<String>(
-                                    value: selectedCountryCode,
-                                    isExpanded: true,
-                                    underline:
-                                        SizedBox(), // Remove the default underline
-                                    icon: Icon(Icons.arrow_drop_down),
-                                    items:countryCodes
-                                        .map(
-                                          (code) => DropdownMenuItem<String>(
-                                            value: code,
-                                            child: Text(code),
-                                          ),
-                                        )
-                                        .toList(),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedCountryCode = value!;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                SizedBox(width: 8.0),
+                          UserInput(context, 'Enter phone number',
+                              validatePhoneNumber, null),
 
-                                // Phone Number Input Field
-                                Expanded(
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.phone,
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter phone number',
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade500,
-                                        ),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey
-                                              .shade500, // Set the border color when the field is enabled
-                                          width: 0.5,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: AppColors
-                                              .main, // Set the border color when the field is focused
-                                          width: 0.5,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
                           SizedBox(
                             height: 20,
                           ),
@@ -150,59 +81,12 @@ class _SignUpAgencyState extends State<SignUpAgency> {
                           // agency location
                           InputLabel("Agency location"),
                           UserInput(context, "Enter agency location",
-                              validateEmail, null),
+                              validateLocation, null),
 
                           SizedBox(height: 20),
                           // password
                           InputLabel("Password"),
-                          Center(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              child: TextFormField(
-                                obscureText: _obscureText,
-                                decoration: InputDecoration(
-                                  hintText: "Enter your password",
-                                  hintStyle: field_hint,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade500,
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey
-                                          .shade500, // Set the border color when the field is enabled
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: AppColors
-                                          .main, // Set the border color when the field is focused
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _obscureText
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureText = !_obscureText;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                controller: txt_controller_psd,
-                                validator: (value) {
-                                  return validatePassword(value);
-                                },
-                              ),
-                            ),
-                          ),
+                          PasswordFormField(txtControllerPsd: txt_controller_psd),
 
                           SizedBox(height: 20),
                           Row(
@@ -241,7 +125,12 @@ class _SignUpAgencyState extends State<SignUpAgency> {
                           ),
                           SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushNamed(
+                                    context, LoginPageAgency.pageRoute);
+                              }
+                            },
                             child: Text(
                               "Create account",
                               style: accounts_button_text_style,
@@ -252,7 +141,6 @@ class _SignUpAgencyState extends State<SignUpAgency> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -263,7 +151,8 @@ class _SignUpAgencyState extends State<SignUpAgency> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, LoginPageAgency.pageRoute);
+                            Navigator.pushNamed(
+                                context, LoginPageAgency.pageRoute);
                           },
                           child: Text(
                             'Log In ',

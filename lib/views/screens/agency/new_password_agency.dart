@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/logos.dart';
-import 'package:triptip/logic/form_validators.dart';
+import 'package:triptip/views/widgets/Password_form_field.dart';
+import 'package:triptip/views/screens/agency/login_page_agency.dart';
+
 
 class NewPassword extends StatefulWidget {
   const NewPassword({super.key});
@@ -15,7 +17,7 @@ class NewPassword extends StatefulWidget {
 
 class _NewPasswordState extends State<NewPassword> {
   final _formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
+  final TextEditingController txt_controller_psd = TextEditingController();
 
 
   @override
@@ -59,36 +61,14 @@ class _NewPasswordState extends State<NewPassword> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Center(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              child: TextFormField(
-                                obscureText: _obscureText,
-                                decoration: InputDecoration(
-                                  hintText: "Enter your password",
-                                  hintStyle: field_hint,
-                                  border: OutlineInputBorder(),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _obscureText
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureText = !_obscureText;
-                                      });
-                                    },
-                                  ),
-                                ),                                
-                                validator: (value) {
-                                  return validatePassword(value);
-                                },
-                              ),
-                            ),
-                          ),                          SizedBox(height: 20),
+                          PasswordFormField(txtControllerPsd: txt_controller_psd),
+                          SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushNamed(context, LoginPageAgency.pageRoute);  
+                              }
+                            },
                             child: Text(
                               "Save new password",
                               style: accounts_button_text_style,

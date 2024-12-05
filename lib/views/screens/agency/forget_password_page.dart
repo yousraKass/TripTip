@@ -4,6 +4,7 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
+import 'package:triptip/views/screens/shared/landing_page.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -62,7 +63,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               context, "Enter your email", validateEmail, null),
                           SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushNamed(
+                                    context, LandingPage.pageRoute);
+                              }
+                            },
                             child: Text(
                               "Request code",
                               style: accounts_button_text_style,
