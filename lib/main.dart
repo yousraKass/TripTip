@@ -25,6 +25,8 @@ import 'package:triptip/views/screens/shared/intro02.dart';
 import 'package:triptip/views/screens/shared/intro03.dart';
 import 'package:triptip/views/screens/shared/landing_page.dart';
 import 'package:triptip/views/screens/shared/search_page.dart';
+import 'package:triptip/views/screens/shared/filter_page.dart';
+import 'package:triptip/views/screens/shared/results_page.dart';
 
 
 
@@ -74,6 +76,8 @@ class MainApp extends StatelessWidget {
         Intro03.pageRoute : (ctx) => const Intro03(), 
         LandingPage.pageRoute : (ctx) => const LandingPage(),
         SearchPage.pageRoute : (ctx) => const SearchPage(),
+        FilterPage.pageRoute : (ctx) => const FilterPage(),
+        ResultsPage.pageRoute : (ctx) => const ResultsPage(),
         OffersPage.pageRoute : (ctx) => const OffersPage(),
         OffersPageAgency.PageRoute : (ctx) => const OffersPageAgency(),
         AddOfferPage.PageRoute : (ctx) => const AddOfferPage(),
