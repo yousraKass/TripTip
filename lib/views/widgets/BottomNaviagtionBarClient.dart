@@ -5,7 +5,6 @@ import 'package:triptip/views/screens/client/notifications_client.dart';
 import 'package:triptip/views/screens/client/client_profile.dart';
 import 'package:triptip/views/screens/client/favorite_page.dart';
 import 'package:triptip/views/screens/shared/search_page.dart';
-import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 
 class BottomNavigationBarExampleClient extends StatefulWidget {
   const BottomNavigationBarExampleClient({super.key});
