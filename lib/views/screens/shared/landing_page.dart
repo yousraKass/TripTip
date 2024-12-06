@@ -4,19 +4,17 @@ import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
-
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/screens//offer_model.dart';
+import 'package:triptip/data/repo/offer/offer_model.dart';
 import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
 import 'package:triptip/views/screens/client/SettingsScreenClient.dart';
 import 'package:triptip/views/screens/client/notifications_client.dart';
 import 'package:triptip/views/screens/agency/notifications_agency.dart';
-import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'OfferScreen.dart';
 import 'search_page.dart';
 
-import 'offers_page.dart'
+import 'offers_page.dart';
 
 
 
@@ -70,7 +68,7 @@ class LandingPage extends StatelessWidget {
                                 
                                MaterialPageRoute(
                                     builder: (context) => role == SignUpAs.Client ?
-                                        ? NotificationsClient()
+                                         NotificationsClient()
                                         : NotificationsAgency (),
                                   ),
                                 );
@@ -88,7 +86,7 @@ class LandingPage extends StatelessWidget {
                                 
                                   MaterialPageRoute(
                                     builder: (context) => role == SignUpAs.Client ?
-                                        ? SettingsScreenClient ()
+                                         SettingsScreenClient ()
                                         : SettingsScreenAgency (),
                                   ),
                                 );
@@ -183,7 +181,7 @@ class LandingPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => OfferPage()),
+                                    MaterialPageRoute(builder: (context) => OfferDetailsPage()),
                                   );
                                 },
                                 style: ButtonStyle(
@@ -268,7 +266,7 @@ class LandingPage extends StatelessWidget {
             ),
           ),
 
-          bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
+        
 
         ],
       ),
