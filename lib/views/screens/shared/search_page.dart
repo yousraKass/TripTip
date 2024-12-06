@@ -14,6 +14,7 @@ import 'package:triptip/views/themes/fonts.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
+  static const pageRoute = "/SearchPage";
 
   
 
