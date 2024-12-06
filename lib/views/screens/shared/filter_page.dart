@@ -348,33 +348,41 @@ class _FilterPageState extends State<FilterPage> {
   }
 
   Widget _buildOfferRating() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const Text('Offer Rating:',
-            style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18)),
-        const SizedBox(width: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(5, (index) {
-            return IconButton(
-              icon: Icon(
-                index < selectedStars ? Icons.star : Icons.star_border,
-                color: AppColors.primaryColor,
-                size: 30,
-              ),
-              onPressed: () {
-                setState(() {
-                  selectedStars = index + 1;
-                  selectedStar['Offer Rating'] = selectedStars.toString();
-                });
-              },
-            );
-          }),
-        ),
-      ],
-    );
-  }
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      const Text(
+        'Offer Rating:',
+        style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18),
+      ),
+      SizedBox(width: 20,),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(5, (index) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedStars = index + 1;
+                selectedStar['Offer Rating'] = selectedStars.toString();
+              });
+            },
+            child: Icon(
+              index < selectedStars ? Icons.star : Icons.star_border,
+              color: AppColors.primaryColor,
+              size: 20,
+            ),
+          );
+        }).map((icon) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0), // Adjust spacing here
+            child: icon,
+          );
+        }).toList(),
+      ),
+    ],
+  );
+}
+
 
   TextStyle _sectionTitleStyle() {
     return const TextStyle(
