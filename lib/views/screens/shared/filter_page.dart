@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/widgets/offer_card.dart';
-import 'package:triptip/views/widgets/search_bar_widget.dart';
-import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
-import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/screens//offer_model.dart';
-import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
-import 'package:triptip/views/screens/client/SettingsScreenClient.dart';
-import 'package:triptip/views/screens/client/notifications_client.dart';
-import 'package:triptip/views/screens/agency/notifications_agency.dart';
-import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
-import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
-import 'OfferScreen.dart';
-import 'search_page.dart';
-import 'offers_page.dart'
-import 'results_page.dart'; 
+
+import 'results_page.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -24,9 +12,9 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-Map<String, List<String>> selectedItems = {}; 
-  Map<String, String> selectedStar = {}; 
-  int selectedStars = 0; 
+  Map<String, List<String>> selectedItems = {};
+  Map<String, String> selectedStar = {};
+  int selectedStars = 0;
   double minPrice = 20000;
   double maxPrice = 100000;
   RangeValues selectedPriceRange = const RangeValues(20000, 100000);
@@ -36,7 +24,6 @@ Map<String, List<String>> selectedItems = {};
     'Dining',
     'Adventure',
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,53 +78,48 @@ Map<String, List<String>> selectedItems = {};
                         ),
                         const SizedBox(height: 15),
                         const Divider(color: Colors.grey),
-                        
                         _buildCategorySection(),
                         const Divider(color: Colors.grey),
-
-                          _buildPlaceFilters(),
-                        const Divider(color: Colors.grey), 
-
+                        _buildPlaceFilters(),
+                        const Divider(color: Colors.grey),
                         _buildFeatures(),
                         const Divider(color: Colors.grey),
-                        
                         _buildTravelOptions(),
                         const Divider(color: Colors.grey),
                         const SizedBox(height: 15),
                         _buildPriceRange(),
                         const SizedBox(height: 10),
-
                         const Divider(color: Colors.grey),
-                       const SizedBox(height: 10), 
+                        const SizedBox(height: 10),
                         _buildOfferRating(),
-                        
                         const SizedBox(height: 23),
                         Center(
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const ResultsPage()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.primaryColor,
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-      ),
-    ),
-    child: const Text(
-      'Apply',
-      style: TextStyle(
-        fontFamily: FontFamily.medium,
-        fontSize: 18,
-        color: Colors.white,
-      ),
-    ),
-  ),
-),
-
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ResultsPage()),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primaryColor,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 15),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: const Text(
+                              'Apply',
+                              style: TextStyle(
+                                fontFamily: FontFamily.medium,
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -150,11 +132,12 @@ Map<String, List<String>> selectedItems = {};
     );
   }
 
-   Widget _buildCategorySection() {
+  Widget _buildCategorySection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Categories:', style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18)),
+        const Text('Categories:',
+            style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18)),
         const SizedBox(height: 10),
         SizedBox(
           height: 120,
@@ -163,7 +146,8 @@ Map<String, List<String>> selectedItems = {};
             itemCount: categoryNames.length,
             itemBuilder: (context, index) {
               String category = categoryNames[index];
-              bool isSelected = selectedItems['Categories']?.contains(category) ?? false;
+              bool isSelected =
+                  selectedItems['Categories']?.contains(category) ?? false;
               return GestureDetector(
                 onTap: () {
                   setState(() {
@@ -180,14 +164,17 @@ Map<String, List<String>> selectedItems = {};
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: isSelected ? AppColors.primaryColor : Colors.transparent,
+                      color: isSelected
+                          ? AppColors.primaryColor
+                          : Colors.transparent,
                     ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
                     children: [
                       Expanded(
-                        child: Image.asset('assets/images/cat0${index + 1}.png', fit: BoxFit.cover),
+                        child: Image.asset('assets/images/cat0${index + 1}.png',
+                            fit: BoxFit.cover),
                       ),
                       Text(category, style: const TextStyle(fontSize: 14)),
                     ],
@@ -201,7 +188,6 @@ Map<String, List<String>> selectedItems = {};
     );
   }
 
-  
   Widget _buildPlaceFilters() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -306,7 +292,7 @@ Map<String, List<String>> selectedItems = {};
     return GestureDetector(
       onTap: () {
         setState(() {
-          selectedItems['Travel Option'] = [label]; 
+          selectedItems['Travel Option'] = [label];
         });
       },
       child: Container(
@@ -320,7 +306,9 @@ Map<String, List<String>> selectedItems = {};
         ),
         child: Column(
           children: [
-            Icon(icon, size: 40, color: isSelected ? AppColors.primaryColor : Colors.grey),
+            Icon(icon,
+                size: 40,
+                color: isSelected ? AppColors.primaryColor : Colors.grey),
             Text(label),
           ],
         ),
@@ -332,7 +320,8 @@ Map<String, List<String>> selectedItems = {};
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Price Range:', style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18)),
+        const Text('Price Range:',
+            style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18)),
         RangeSlider(
           values: selectedPriceRange,
           min: 20000,
@@ -357,27 +346,26 @@ Map<String, List<String>> selectedItems = {};
     );
   }
 
-
-    Widget _buildOfferRating() {
+  Widget _buildOfferRating() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Text('Offer Rating:', style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18)),
+        const Text('Offer Rating:',
+            style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18)),
         const SizedBox(width: 10),
         Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(5, (index) {
             return IconButton(
               icon: Icon(
                 index < selectedStars ? Icons.star : Icons.star_border,
-                color:  AppColors.primaryColor,
+                color: AppColors.primaryColor,
                 size: 30,
               ),
               onPressed: () {
                 setState(() {
                   selectedStars = index + 1;
                   selectedStar['Offer Rating'] = selectedStars.toString();
-
                 });
               },
             );
@@ -386,7 +374,7 @@ Map<String, List<String>> selectedItems = {};
       ],
     );
   }
-  
+
   TextStyle _sectionTitleStyle() {
     return const TextStyle(
       fontFamily: FontFamily.medium,
@@ -396,17 +384,14 @@ Map<String, List<String>> selectedItems = {};
   }
 }
 
-  InputDecoration _inputDecoration(String hint) {
-    return InputDecoration(
-      hintText: hint,
-      filled: true,
-      fillColor: Colors.grey[200],
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: BorderSide.none,
-      ),
-    );
-  }
-
-
-
+InputDecoration _inputDecoration(String hint) {
+  return InputDecoration(
+    hintText: hint,
+    filled: true,
+    fillColor: Colors.grey[200],
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      borderSide: BorderSide.none,
+    ),
+  );
+}
