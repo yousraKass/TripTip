@@ -93,7 +93,7 @@ class _MyPreferencesPageState extends State<MyPreferencesPage> {
                 // Customize color
               ),
               child: Text(
-                "Next",
+                "Save",
                 style: TextStyle(color: AppColors.white),
               ),
             ),

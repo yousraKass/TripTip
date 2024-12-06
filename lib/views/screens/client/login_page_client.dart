@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/screens/agency/forget_password_page.dart';
+import 'package:triptip/views/screens/agency/forget_password_page_agency.dart';
+import 'package:triptip/views/screens/client/signup_client.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
+import 'package:triptip/views/widgets/Password_form_field.dart';
+import 'package:triptip/views/screens/shared/landing_page.dart';
+
 
 class LoginPageClient extends StatefulWidget {
   const LoginPageClient({super.key});
 
-  static const pageRoute = "/agency_login_page";
+  static const pageRoute = "/client_login_page";
 
   @override
   State<LoginPageClient> createState() => _LoginPageClientState();
@@ -17,7 +21,6 @@ class LoginPageClient extends StatefulWidget {
 class _LoginPageClientState extends State<LoginPageClient> {
   // form key
   final _formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
 
   final TextEditingController txt_controller_email = TextEditingController();
   final TextEditingController txt_controller_psd = TextEditingController();
@@ -66,36 +69,7 @@ class _LoginPageClientState extends State<LoginPageClient> {
 
                               // password
                               InputLabel("Password"),
-                              Center(
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.9,
-                                  child: TextFormField(
-                                    obscureText: _obscureText,
-                                    decoration: InputDecoration(
-                                      hintText: "Enter your password",
-                                      hintStyle: field_hint,
-                                      border: OutlineInputBorder(),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          _obscureText
-                                              ? Icons.visibility_off
-                                              : Icons.visibility,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            _obscureText = !_obscureText;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    controller: txt_controller_psd,
-                                    validator: (value) {
-                                      return validatePassword(value);
-                                    },
-                                  ),
-                                ),
-                              ),
+                              PasswordFormField(txtControllerPsd: txt_controller_psd),
 
                               Align(
                                 alignment: Alignment.centerRight,
@@ -111,7 +85,11 @@ class _LoginPageClientState extends State<LoginPageClient> {
                               ),
 
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    Navigator.pushNamed(context, LandingPage.pageRoute);
+                                  }
+                                },
                                 child: Text(
                                   "Login",
                                   style: accounts_button_text_style,
@@ -193,7 +171,9 @@ class _LoginPageClientState extends State<LoginPageClient> {
                           style: dont_have_account,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignUpClient.pageRoute);
+                          },
                           child: Text(
                             'Create account',
                             style: create_account,
