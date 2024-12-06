@@ -8,15 +8,9 @@ import 'filter_page.dart';
 import 'results_page.dart';
 import 'package:triptip/views/themes/fonts.dart';
 
-
-
-
-
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
   static const pageRoute = "/SearchPage";
-
-  
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -24,7 +18,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String? selectedSuggestion;
- 
+
   final List<String> suggestions = [
     'Free Food', 'In-Hotel habitat', 'Bus Travel',
     'Easy Omra', 'By Plane travel', 'Only women',
@@ -33,16 +27,15 @@ class _SearchPageState extends State<SearchPage> {
   ];
 
   void handleSuggestionClick(String suggestion) {
-  setState(() {
-    selectedSuggestion = suggestion;
-  });
-  print('Selected Suggestion: $suggestion');
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => ResultsPage()),
-  );
-}
-
+    setState(() {
+      selectedSuggestion = suggestion;
+    });
+    print('Selected Suggestion: $suggestion');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ResultsPage()),
+    );
+  }
 
   void openFilterPage() {
     showModalBottomSheet(
@@ -87,7 +80,7 @@ class _SearchPageState extends State<SearchPage> {
           centerTitle: true,
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,15 +164,9 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
-
-     bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
-  
-
-
+      bottomNavigationBar: role == SignUpAs.Client
+          ? BottomNavigationBarExampleClient()
+          : BottomNavigationBarExampleAgency(),
     );
   }
 }
-
-
-
-
