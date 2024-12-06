@@ -53,7 +53,7 @@ class _ResultsPageState extends State<ResultsPage> {
           title: const Padding(
             padding: EdgeInsets.only(top: 15.0),
             child: Text(
-              'Sraech Page',
+              'Sreach Page',
               style: TextStyle(
                 fontFamily: FontFamily.bold,
                 fontSize: 24,
