@@ -52,7 +52,7 @@ class LandingPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 170),
+                      const SizedBox(width: 115),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0), // Move icons down
                         child: Row(
@@ -98,7 +98,7 @@ class LandingPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 37),
 
                   // Search Bar Section with Transparent Overlay
                   GestureDetector(
@@ -125,7 +125,7 @@ class LandingPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 38),
 
                   // Chosen Offer Section
                   Container(
@@ -177,7 +177,7 @@ class LandingPage extends StatelessWidget {
                                   color: Color.fromARGB(255, 118, 114, 114),
                                 ),
                               ),
-                              const SizedBox(height: 18),
+                              const SizedBox(height: 13),
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(
