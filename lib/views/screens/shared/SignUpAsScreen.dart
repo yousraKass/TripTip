@@ -80,45 +80,6 @@ class SignUpChoicePage extends StatelessWidget {
 
                   const SizedBox(height: 40),
 
-                  // Enhanced terms and conditions
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFF20B2AA).withOpacity(0.05),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    child: Row(
-                      children: [
-                        Transform.scale(
-                          scale: 0.9,
-                          child: Checkbox(
-                            value: false,
-                            onChanged: (value) {},
-                            activeColor: const Color(0xFF20B2AA),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                        ),
-                        const Text(
-                          'I accept ',
-                          style: TextStyle(color: Color(0xFF757575)),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Text(
-                            'terms and conditions',
-                            style: TextStyle(
-                              color: Color(0xFF20B2AA),
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
                   const SizedBox(height: 32),
 
                   // Enhanced login link
