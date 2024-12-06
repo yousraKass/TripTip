@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/screens//offer_model.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'filter_page.dart';
-
-import 'OfferScreen.dart';
-import 'search_page.dart';
-import 'results_page';
+import 'results_page.dart';
+import 'package:triptip/views/themes/fonts.dart';
 
 
 
