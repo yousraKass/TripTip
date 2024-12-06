@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:triptip/views/screens/client/ReviewScreenClient.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/data/repo/offer/OfferText.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/views/widgets/ReviewItem.dart';
 import 'package:triptip/data/repo/review_agency/ReviewText.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 
 
 // Modified OfferScreen.dart
@@ -74,7 +76,7 @@ class _OfferDetailsPageState extends State<OfferDetailsPage> {
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBarExample(),
+      bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
     );
   }
 

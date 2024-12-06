@@ -4,6 +4,7 @@ import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/screens//offer_model.dart';
 import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
@@ -14,7 +15,9 @@ import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'OfferScreen.dart';
 import 'search_page.dart';
+
 import 'offers_page.dart'
+
 
 
 class LandingPage extends StatelessWidget {
@@ -264,9 +267,12 @@ class LandingPage extends StatelessWidget {
               ),
             ),
           ),
+
           bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
+
         ],
       ),
+      bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
     );
   }
 

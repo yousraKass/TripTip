@@ -7,9 +7,11 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/screens//offer_model.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'filter_page.dart';
+
 import 'OfferScreen.dart';
 import 'search_page.dart';
 import 'results_page';
+
 
 
 
@@ -172,8 +174,10 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
+
      bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
   
+
 
     );
   }

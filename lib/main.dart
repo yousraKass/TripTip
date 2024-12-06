@@ -25,12 +25,13 @@ import 'package:triptip/views/screens/shared/intro02.dart';
 import 'package:triptip/views/screens/shared/intro03.dart';
 import 'package:triptip/views/screens/shared/landing_page.dart';
 import 'package:triptip/views/screens/shared/search_page.dart';
+
 import 'package:triptip/views/screens/shared/filter_page.dart';
 import 'package:triptip/views/screens/shared/results_page.dart';
 
 
-
-
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+import 'package:triptip/views/screens/client/agencyScreenClientView.dart';
 
 late AbstractPreferenes preferences;
 late Abstractnotificationagency notifications;
@@ -41,7 +42,7 @@ Future<bool> my_init_app() async {
   return true;
 }
 
-void main() async{
+void main() async {
   await my_init_app();
   runApp(const MainApp());
 }
@@ -52,14 +53,16 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Intro01.pageRoute ,
+      initialRoute: AgencyScreenClientView.pageRoute,
       routes: {
+        FavoritePage.pageRoute: (ctx) => FavoritePage(),
         LoginPageAgency.pageRoute: (ctx) => LoginPageAgency(),
         ForgetPassword.pageRoute: (ctx) => ForgetPassword(),
         NewPassword.pageRoute: (ctx) => NewPassword(),
         SignUpAgency.pageRoute: (ctx) => SignUpAgency(),
         SignUpClient.pageRoute: (ctx) => SignUpClient(),
         MyPreferencesPage.pageRoute: (ctx) => MyPreferencesPage(),
+
         NotificationsAgency.pageRoute: (ctx) =>NotificationsAgency(),
         NotificationsClient.pageRoute: (ctx) =>NotificationsClient(),
         ClientProfile.pageRoute: (ctx) =>ClientProfile(),
@@ -84,6 +87,7 @@ class MainApp extends StatelessWidget {
 
         
       
+
 
       },
     );

@@ -5,6 +5,9 @@ import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/themes/colors.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+
+SignUpAs role = SignUpAs.Client;
 
 class SignUpClient extends StatefulWidget {
   const SignUpClient({super.key});

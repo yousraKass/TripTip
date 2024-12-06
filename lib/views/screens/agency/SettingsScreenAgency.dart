@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'EditAgencyProfile.dart';
+import 'notifications_agency.dart';
 
 class SettingsScreenAgency extends StatelessWidget {
   static const pageRoute = '/SettingsScreenAgency';
@@ -51,7 +52,7 @@ class SettingsScreenAgency extends StatelessWidget {
                     icon: Icons.notifications_outlined,
                     title: 'Notification',
                     onTap: () {
-                      
+                      Navigator.pushNamed(context, NotificationsAgency.pageRoute);
                     },
                     iconColor: const Color(0xFF00BFB3),
                   ),
@@ -103,7 +104,7 @@ class SettingsScreenAgency extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBarExample(),
+      bottomNavigationBar: BottomNavigationBarExampleAgency(),
     );
   }
 

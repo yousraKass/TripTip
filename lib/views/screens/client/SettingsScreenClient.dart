@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
-import 'package:triptip/views/screens/agency/EditAgencyProfile.dart';
+import 'edit_client_profile.dart';
+import 'notifications_client.dart';
 
 class SettingsScreenClient extends StatelessWidget {
   static const pageRoute = '/SettingsScreenClient';
@@ -51,7 +52,7 @@ class SettingsScreenClient extends StatelessWidget {
                     icon: Icons.notifications_outlined,
                     title: 'Notification',
                     onTap: () {
-                      
+                      Navigator.pushNamed(context, NotificationsClient.pageRoute);
                     },
                     iconColor: const Color(0xFF00BFB3),
                   ),
@@ -59,7 +60,7 @@ class SettingsScreenClient extends StatelessWidget {
                     icon: Icons.person_outline,
                     title: 'Edit profile',
                     onTap: () {
-                      Navigator.pushNamed(context, EditAgencyProfileScreen.pageRoute);
+                      Navigator.pushNamed(context, EditClientProfileScreen.pageRoute);
                     },
                     iconColor: const Color(0xFF00BFB3),
                   ),
@@ -103,7 +104,7 @@ class SettingsScreenClient extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBarExample(),
+      bottomNavigationBar: BottomNavigationBarExampleClient(),
     );
   }
 
