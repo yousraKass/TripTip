@@ -12,8 +12,8 @@ Widget PreferenceCell(
       Stack(
         children: [
           Container(
-            width: 180,
-            height: 180,
+            width: 150,
+            height: 150,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(data["image"]),
@@ -24,8 +24,8 @@ Widget PreferenceCell(
           ),
           // Semi-transparent overlay // Apply color overlay if condition is true
           Container(
-            width: 180,
-            height: 180,
+            width: 150,
+            height: 150,
             decoration: BoxDecoration(
               color: cell_color, // Semi-transparent overlay
               borderRadius: BorderRadius.circular(16),
