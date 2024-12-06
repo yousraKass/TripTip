@@ -44,8 +44,8 @@ class LandingPage extends StatelessWidget {
                           child: Center(
                             child: Image.asset(
                               "assets/logo/New_logo.png",
-                              width: 100, // Increased size
-                              height: 100,
+                              width: 120, // Increased size
+                              height: 120,
                             ),
                           ),
                         ),
@@ -58,7 +58,7 @@ class LandingPage extends StatelessWidget {
                             IconButton(
                               icon: Image.asset(
                                 "assets/notifications.png",
-                                width: 20,
+                                width: 18,
                                 height: 20,
                               ),
                               onPressed: () {
@@ -76,7 +76,7 @@ class LandingPage extends StatelessWidget {
                             IconButton(
                               icon: Image.asset(
                                 "assets/settings.png",
-                                width: 20,
+                                width: 18,
                                 height: 20,
                               ),
                               onPressed: () {
