@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/themes/fonts.dart';
-import 'filter_page.dart';
+import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart'; // Import the BottomNavigationBar widget
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+import 'package:triptip/views/themes/colors.dart';
+import 'package:triptip/views/screens//offer_model.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+import 'filter_page.dart';
+import 'OfferScreen.dart';
+import 'search_page.dart';
+import 'results_page';
+
+
+
 
 class SearchPage extends StatefulWidget {
-  static const pageRoute = '/SearchPage';
   const SearchPage({super.key});
+
+  
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -15,7 +25,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String? selectedSuggestion;
-
+ 
   final List<String> suggestions = [
     'Free Food', 'In-Hotel habitat', 'Bus Travel',
     'Easy Omra', 'By Plane travel', 'Only women',
@@ -24,11 +34,16 @@ class _SearchPageState extends State<SearchPage> {
   ];
 
   void handleSuggestionClick(String suggestion) {
-    setState(() {
-      selectedSuggestion = suggestion;
-    });
-    print('Selected Suggestion: $suggestion');
-  }
+  setState(() {
+    selectedSuggestion = suggestion;
+  });
+  print('Selected Suggestion: $suggestion');
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => ResultsPage()),
+  );
+}
+
 
   void openFilterPage() {
     showModalBottomSheet(
@@ -42,17 +57,17 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80.0),
         child: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.white,
           elevation: 0,
           toolbarHeight: 80,
           leading: Padding(
             padding: const EdgeInsets.only(top: 15.0),
             child: IconButton(
-              icon: Icon(Icons.arrow_back, color: AppColors.main),
+              icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -130,15 +145,14 @@ class _SearchPageState extends State<SearchPage> {
                   onTap: () => handleSuggestionClick(suggestion),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(228, 255, 255, 255),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(13),
-                      border: Border.all(color: const Color.fromARGB(255, 110, 108, 108), width: 0.1),
+                      border: Border.all(color: Colors.grey, width: 0.1),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black12.withOpacity(0.25),
                           offset: const Offset(0, 4),
                           blurRadius: 4,
-                          spreadRadius: 0,
                         ),
                       ],
                     ),
@@ -158,7 +172,13 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarExample(), // Move BottomNavigationBar here
+     bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
+  
+
     );
   }
 }
+
+
+
+
