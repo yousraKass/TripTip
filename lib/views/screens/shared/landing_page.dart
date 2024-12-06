@@ -1,20 +1,23 @@
 
 import 'package:flutter/material.dart';
-// import 'package:triptip/views/widgets/offer_card.dart';
+import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart'; // Import your BottomNavigationBar widget
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 import 'package:triptip/views/themes/colors.dart';
-// import 'package:triptip/views/screens//offer_model.dart';
-// import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
+import 'package:triptip/views/screens//offer_model.dart';
+import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
 import 'package:triptip/views/screens/client/SettingsScreenClient.dart';
 import 'package:triptip/views/screens/client/notifications_client.dart';
-// import 'package:triptip/views/screens/agency/notifications_agency.dart';
-// import 'package:triptip/views/screens/agency/notifications_agency.dart';
+import 'package:triptip/views/screens/agency/notifications_agency.dart';
+import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'OfferScreen.dart';
 import 'search_page.dart';
+import 'offers_page.dart'
+
 
 class LandingPage extends StatelessWidget {
-  static const pageRoute = '/LandingPage';
   const LandingPage({super.key});
 
   @override
@@ -40,7 +43,7 @@ class LandingPage extends StatelessWidget {
                           },
                           child: Center(
                             child: Image.asset(
-                              "assets/logos/new_logo.png",
+                              "assets/logo/New_logo.png",
                               width: 100, // Increased size
                               height: 100,
                             ),
@@ -61,7 +64,12 @@ class LandingPage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => NotificationsClient()),
+                                
+                               MaterialPageRoute(
+                                    builder: (context) => role == SignUpAs.Client ?
+                                        ? NotificationsClient()
+                                        : NotificationsAgency (),
+                                  ),
                                 );
                               },
                             ),
@@ -74,7 +82,12 @@ class LandingPage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => SettingsScreenClient()),
+                                
+                                  MaterialPageRoute(
+                                    builder: (context) => role == SignUpAs.Client ?
+                                        ? SettingsScreenClient ()
+                                        : SettingsScreenAgency (),
+                                  ),
                                 );
                               },
                             ),
@@ -167,7 +180,7 @@ class LandingPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => OfferDetailsPage()),
+                                    MaterialPageRoute(builder: (context) => OfferPage()),
                                   );
                                 },
                                 style: ButtonStyle(
@@ -222,39 +235,36 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40),
-                 
+
                   // Recommended Places Section with Gradient
                   gradientTitleSection("Top Popular Places To Visit"),
-                  buildHorizontalList1(),
+                  buildHorizontalList1(context),
                   const SizedBox(height: 30),
                   gradientTitleSection("What are you interested in?"),
-                  buildHorizontalList2(),
+                  buildHorizontalList2(context),
                   const SizedBox(height: 30),
+
+                  // Recommended Offers Section
                   gradientTitleSection("Recommended Offers"),
                   const SizedBox(height: 20),
-            //    Expanded(
-            //   child: ListView.builder(
-            //     itemCount: dummyOffers.length,
-            //     itemBuilder: (context, index) {
-            //       return Padding(
-            //         padding: const EdgeInsets.only(bottom: 10),
-            //         child: OfferCard(
-            //           offer: dummyOffers[index],
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
-
-
-
-                    
-                  // ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: dummyOffers.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: OfferCard(
+                          offer: dummyOffers[index],
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
           ),
-          BottomNavigationBarExample(), // Include your Bottom Navigation Bar widget here
+          bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
         ],
       ),
     );
@@ -288,65 +298,82 @@ class LandingPage extends StatelessWidget {
   }
 
   // Horizontal List for Places
-  Widget buildHorizontalList1() {
+  Widget buildHorizontalList1(BuildContext context) {
     return SizedBox(
       height: 120,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildPlaceCard("assets/images/Annaba.png", "Algeria", "Annaba"),
-          buildPlaceCard("assets/images/Tunis.png", "Tunisia", "Tunis"),
-          buildPlaceCard("assets/images/Istanbul.png", "Turkey", "Istanbul"),
-          buildPlaceCard("assets/images/Jijel.png", "Algeria", "Jijel"),
-          buildPlaceCard("assets/images/sahara.png", "Algeria", "Sahara"),
+          buildPlaceCard(context, "assets/images/Annaba.png", "Algeria", "Annaba"),
+          buildPlaceCard(context, "assets/images/Tunis.png", "Tunisia", "Tunis"),
+          buildPlaceCard(context, "assets/images/Istanbul.png", "Turkey", "Istanbul"),
+          buildPlaceCard(context, "assets/images/Jijel.png", "Algeria", "Jijel"),
+          buildPlaceCard(context, "assets/images/sahara.png", "Algeria", "Sahara"),
         ],
       ),
     );
   }
 
-  Widget buildHorizontalList2() {
+  Widget buildHorizontalList2(BuildContext context) {
     return SizedBox(
       height: 150,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildInterestCard("assets/images/cat01.png", "Shopping"),
-          buildInterestCard("assets/images/cat02.png", "Swimming"),
-          buildInterestCard("assets/images/cat03.png", "Mountains"),
-          buildInterestCard("assets/images/cat04.png", "Camping"),
+          buildInterestCard(context, "assets/images/cat01.png", "Shopping"),
+          buildInterestCard(context, "assets/images/cat02.png", "Swimming"),
+          buildInterestCard(context, "assets/images/cat03.png", "Mountains"),
+          buildInterestCard(context, "assets/images/cat04.png", "Camping"),
         ],
       ),
     );
   }
 
-  // Placeholder for Place Cards
-  Widget buildPlaceCard(String imagePath, String country, String city) {
-    return Container(
-      margin: const EdgeInsets.only(left: 16),
-      width: 100,
-      child: Column(
-        children: [
-          Expanded(
-            child: Image.asset(imagePath, fit: BoxFit.cover),
-          ),
-          Text(country, style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(city),
-        ],
+  // Place Cards
+  Widget buildPlaceCard(BuildContext context, String imagePath, String country, String city) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => OffersPage()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(left: 16),
+        width: 100,
+        child: Column(
+          children: [
+            Expanded(
+              child: Image.asset(imagePath, fit: BoxFit.cover),
+            ),
+            Text(country, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(city),
+          ],
+        ),
       ),
     );
   }
 
-  Widget buildInterestCard(String imagePath, String category) {
-    return Container(
-      margin: const EdgeInsets.only(left: 16),
-      width: 120,
-      child: Column(
-        children: [
-          Expanded(
-            child: Image.asset(imagePath, fit: BoxFit.cover),
-          ),
-          Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
+  // Interest Cards
+  Widget buildInterestCard(BuildContext context, String imagePath, String category) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => OffersPage()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(left: 16),
+        width: 100,
+        child: Column(
+          children: [
+            Expanded(
+              child: Image.asset(imagePath, fit: BoxFit.cover),
+            ),
+            Text(category),
+          ],
+        ),
       ),
     );
   }
