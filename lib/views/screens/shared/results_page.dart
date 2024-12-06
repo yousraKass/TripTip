@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/views/widgets/offer_card.dart';
-import 'offer_model.dart';
-import '../views/themes/colors.dart';
-import '../views/themes/fonts.dart';
-import '../views/widgets/BottomNavigationBar.dart'; 
-import '../views/widgets/search_bar_widget.dart';
+import 'package:triptip/views/widgets/offer_card.dart';
+import 'package:triptip/views/widgets/search_bar_widget.dart';
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+import 'package:triptip/views/themes/colors.dart';
+import 'package:triptip/views/screens//offer_model.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'filter_page.dart';
-// import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
-// import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
-// import 'package:triptip/views/screens/client/SettingsScreenClient.dart';
-// import 'package:triptip/views/screens/client/notifications_client.dart';
-// import 'package:triptip/views/screens/agency/notifications_agency.dart';
-//  import 'package:triptip/views/screens/agency/notifications_agency.dart';
-// import 'OfferScreen.dart';
-// import 'search_page.dart';
-// import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+
 
 
 class ResultsPage extends StatefulWidget {
@@ -187,7 +180,7 @@ class _ResultsPageState extends State<ResultsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavigationBarExample(),
+     bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
     );
   }
 }
