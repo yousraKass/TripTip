@@ -3,7 +3,7 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/widgets/offer_card_agency.dart';
 import 'package:triptip/data/repo/offer/offer_model.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 
 class OffersPageAgency extends StatefulWidget {
   const OffersPageAgency({super.key});
@@ -28,7 +28,7 @@ class _OffersPageAgencyState extends State<OffersPageAgency> {
       backgroundColor: AppColors.white,
       appBar: _buildAppBar(context),
       body: _buildOffersList(),
-      bottomNavigationBar: const BottomNavigationBarExample(),
+      bottomNavigationBar: const BottomNavigationBarExampleAgency(),
     );
   }
 
