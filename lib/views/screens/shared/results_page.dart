@@ -8,44 +8,18 @@ import 'package:triptip/views/screens//offer_model.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'filter_page.dart';
 
-import 'OfferScreen.dart';
-import 'search_page.dart';
-import 'results_page';
 
 
-
-
-
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
-
-  
+class ResultsPage extends StatefulWidget {
+  const ResultsPage({super.key});
+  static const pageRoute = '/ResultsPage';
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _ResultsPageState createState() => _ResultsPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
-  String? selectedSuggestion;
- 
-  final List<String> suggestions = [
-    'Free Food', 'In-Hotel habitat', 'Bus Travel',
-    'Easy Omra', 'By Plane travel', 'Only women',
-    'Short Trip', 'Long travel', 'kachafa trip',
-    '4-5 stars hotel'
-  ];
-
-  void handleSuggestionClick(String suggestion) {
-  setState(() {
-    selectedSuggestion = suggestion;
-  });
-  print('Selected Suggestion: $suggestion');
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => ResultsPage()),
-  );
-}
-
+class _ResultsPageState extends State<ResultsPage> {
+  String? selectedRankBy; // Store the selected rank by option
 
   void openFilterPage() {
     showModalBottomSheet(
@@ -78,7 +52,7 @@ class _SearchPageState extends State<SearchPage> {
           title: const Padding(
             padding: EdgeInsets.only(top: 15.0),
             child: Text(
-              'Search Page',
+              'Sraech Page',
               style: TextStyle(
                 fontFamily: FontFamily.bold,
                 fontSize: 24,
@@ -129,60 +103,84 @@ class _SearchPageState extends State<SearchPage> {
             const SizedBox(height: 40),
             Divider(color: Colors.grey.withOpacity(0.5)),
             const SizedBox(height: 10),
-            const Text(
-              'Suggestions:',
-              style: TextStyle(
-                fontFamily: FontFamily.bold,
-                fontSize: 18,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Results',
+                  style: TextStyle(
+                    fontFamily: FontFamily.bold,
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12.withOpacity(0.25),
+                        offset: const Offset(0, 2),
+                        blurRadius: 4,
+                        spreadRadius: -1,
+                      ),
+                    ],
+                  ),
+                  child: DropdownButton<String>(
+                    value: selectedRankBy,
+                    underline: const SizedBox(),
+                    hint: const Text('Rank By'),
+                    icon: const Icon(Icons.arrow_drop_down),
+                    iconSize: 24,
+                    style: const TextStyle(
+                      fontFamily: FontFamily.regular,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                    dropdownColor: Colors.white,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedRankBy = value; // Hold the selected value
+                      });
+                    },
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'Price',
+                        child: Text('Price'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Popularity',
+                        child: Text('Popularity'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Rating',
+                        child: Text('Rating'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 20),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: suggestions.map((suggestion) {
-                return GestureDetector(
-                  onTap: () => handleSuggestionClick(suggestion),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(13),
-                      border: Border.all(color: Colors.grey, width: 0.1),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12.withOpacity(0.25),
-                          offset: const Offset(0, 4),
-                          blurRadius: 4,
-                        ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Text(
-                      suggestion,
-                      style: const TextStyle(
-                        fontFamily: FontFamily.bold,
-                        fontSize: 14,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8.0),
+                itemCount: dummyOffers.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: OfferCard(offer: dummyOffers[index]),
+                  );
+                },
+              ),
             ),
           ],
         ),
       ),
-
      bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
-  
-
-
     );
   }
 }
-
-
-
-

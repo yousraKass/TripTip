@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+
+ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
 
-// Screen Util class to manage responsive dimensions
 class ScreenUtil {
   static late MediaQueryData _mediaQueryData;
   static late double screenWidth;
@@ -45,12 +45,26 @@ class ScreenUtil {
 
 class AddOfferPage extends StatefulWidget {
   const AddOfferPage({super.key});
+  static const pageRoute = '/AddOfferPage';
 
   @override
   State<AddOfferPage> createState() => _AddOfferPageState();
 }
 
 class _AddOfferPageState extends State<AddOfferPage> {
+  final _formKey = GlobalKey<FormState>();
+  
+  // Form controllers
+  final _titleController = TextEditingController();
+  final _destinationController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _priceController = TextEditingController();
+
+  // Form error states
+ 
+  String? _imageError;
+  String? _dateError;
+  
   DateTime? fromDate = DateTime(2024, 2, 8);
   DateTime? toDate = DateTime(2024, 2, 22);
   File? mainImage;
@@ -58,7 +72,97 @@ class _AddOfferPageState extends State<AddOfferPage> {
   final ImagePicker _picker = ImagePicker();
   bool isHovering = false;
 
-  Future<void> _pickImage({bool isMainImage = true}) async {
+  // Availability states
+  String guideAvailability = 'Available';
+  String mealsAvailability = 'Available';
+  String hotelAvailability = 'Available';
+  String transportAvailability = 'Available';
+
+  // Validation functions
+  String? validateTitle(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Title is required';
+    }
+    if (value.length < 10) {
+      return 'Title must be at least 10 characters';
+    }
+    return null;
+  }
+
+  String? validateDestination(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Destination is required';
+    }
+    return null;
+  }
+
+  String? validatePrice(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Price is required';
+    }
+    if (double.tryParse(value) == null) {
+      return 'Please enter a valid number';
+    }
+    if (double.parse(value) <= 0) {
+      return 'Price must be greater than 0';
+    }
+    return null;
+  }
+
+  String? validateDescription(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Description is required';
+    }
+    if (value.length < 20) {
+      return 'Description must be at least 20 characters';
+    }
+    return null;
+  }
+
+  bool validateDates() {
+    if (fromDate == null || toDate == null) {
+      setState(() => _dateError = 'Both dates are required');
+      return false;
+    }
+    if (toDate!.isBefore(fromDate!)) {
+      setState(() => _dateError = 'End date must be after start date');
+      return false;
+    }
+    setState(() => _dateError = null);
+    return true;
+  }
+
+  bool validateImages() {
+    if (mainImage == null) {
+      setState(() => _imageError = 'Main image is required');
+      return false;
+    }
+  
+    setState(() => _imageError = null);
+    return true;
+  }
+
+  void _submitForm() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    final datesValid = validateDates();
+    final imagesValid = validateImages();
+
+    if (isValid && datesValid && imagesValid) {
+      Navigator.pushNamed(context, '/OfferPage');
+    }
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _destinationController.dispose();
+    _descriptionController.dispose();
+    _priceController.dispose();
+    super.dispose();
+  }
+
+
+   Future<void> _pickImage({bool isMainImage = true}) async {
     try {
       final XFile? pickedFile = await _picker.pickImage(
         source: ImageSource.gallery,
@@ -111,7 +215,7 @@ class _AddOfferPageState extends State<AddOfferPage> {
     ScreenUtil().init(context);
     
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         leading: IconButton(
           icon: Image.asset('assets/icons/undo_icon.png'),
           onPressed: () => Navigator.pop(context),
@@ -128,17 +232,20 @@ class _AddOfferPageState extends State<AddOfferPage> {
         ),
       ),
       backgroundColor: AppColors.white,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(ScreenUtil.scaledWidth(16)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MouseRegion(
-              onEnter: (_) => setState(() => isHovering = true),
-              onExit: (_) => setState(() => isHovering = false),
-              child: Stack(
-                children: [
-                  Container(
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(ScreenUtil.scaledWidth(16)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Image Upload Section
+              MouseRegion(
+                onEnter: (_) => setState(() => isHovering = true),
+                onExit: (_) => setState(() => isHovering = false),
+                child: Stack(
+                  children: [
+                     Container(
                     width: double.infinity,
                     height: ScreenUtil.scaledHeight(200),
                     decoration: BoxDecoration(
@@ -220,31 +327,82 @@ class _AddOfferPageState extends State<AddOfferPage> {
                         ),
                       ),
                 ],
+                ),
               ),
-            ),
-            SizedBox(height: ScreenUtil.scaledHeight(24)),
-            _buildTextField('Offer Title', 'Enter Offer title'),
-            SizedBox(height: ScreenUtil.scaledHeight(16)),
-            _buildTextField('Destination', 'enter destination'),
-            SizedBox(height: ScreenUtil.scaledHeight(16)),
+              if (_imageError != null)
+                Padding(
+                  padding: EdgeInsets.only(top: ScreenUtil.scaledHeight(8)),
+                  child: Text(
+                    _imageError!,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: ScreenUtil.fontSize(12),
+                    ),
+                  ),
+                ),
+
+              SizedBox(height: ScreenUtil.scaledHeight(24)),
+              
+              // Modified form fields with validation
+              _buildValidatedTextField(
+                'Offer Title',
+                'Enter Offer title',
+                _titleController,
+                validateTitle,
+              ),
+              
+              SizedBox(height: ScreenUtil.scaledHeight(16)),
+              
+              _buildValidatedTextField(
+                'Destination',
+                'enter destination',
+                _destinationController,
+                validateDestination,
+              ),
+
+              SizedBox(height: ScreenUtil.scaledHeight(16)),
+              
+              // Date Fields
+              Row(
+                children: [
+                  Expanded(child: _buildDateField('From', fromDate)),
+                  SizedBox(width: ScreenUtil.scaledWidth(16)),
+                  Expanded(child: _buildDateField('To', toDate)),
+                ],
+              ),
+              if (_dateError != null)
+                Padding(
+                  padding: EdgeInsets.only(top: ScreenUtil.scaledHeight(8)),
+                  child: Text(
+                    _dateError!,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: ScreenUtil.fontSize(12),
+                    ),
+                  ),
+                ),
+
+              SizedBox(height: ScreenUtil.scaledHeight(16)),
+              
+              // Price and Transport Fields
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildValidatedTextField(
+                      'Price',
+                      'Enter price',
+                      _priceController,
+                      validatePrice,
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  SizedBox(width: ScreenUtil.scaledWidth(16)),
+                  Expanded(child: _buildDropdownField('Transport', 'Available')),
+                ],
+              ),
+
             
-            Row(
-              children: [
-                Expanded(child: _buildDateField('From', fromDate)),
-                SizedBox(width: ScreenUtil.scaledWidth(16)),
-                Expanded(child: _buildDateField('To', toDate)),
-              ],
-            ),
-            SizedBox(height: ScreenUtil.scaledHeight(16)),
-            
-            Row(
-              children: [
-                Expanded(child: _buildPriceField('Price', 0)),
-                SizedBox(width: ScreenUtil.scaledWidth(16)),
-                Expanded(child: _buildDropdownField('Transport', 'Available')),
-              ],
-            ),
-            SizedBox(height: ScreenUtil.scaledHeight(16)),
+              SizedBox(height: ScreenUtil.scaledHeight(16)),
             
             Row(
               children: [
@@ -258,12 +416,17 @@ class _AddOfferPageState extends State<AddOfferPage> {
             _buildDropdownField('Hotel', 'Available'),
             SizedBox(height: ScreenUtil.scaledHeight(16)),
             
-            _buildTextField(
-              'Description',
-              'Write a detailed description about the offer...',
-              maxLines: 5,
-            ),
-            SizedBox(height: ScreenUtil.scaledHeight(24)),
+              
+              _buildValidatedTextField(
+                'Description',
+                'Write a detailed description about the offer...',
+                _descriptionController,
+                validateDescription,
+                maxLines: 5,
+              ),
+
+              // Additional Photos Section remains the same...
+                  SizedBox(height: ScreenUtil.scaledHeight(24)),
             
             // Additional Photos Section
             Column(
@@ -357,39 +520,46 @@ class _AddOfferPageState extends State<AddOfferPage> {
                   ),
               ],
             ),
-            SizedBox(height: ScreenUtil.scaledHeight(24)),
-            
-            SizedBox(
-              width: double.infinity,
-              height: ScreenUtil.scaledHeight(50),
-              child: ElevatedButton(
-                
-                onPressed: () {
-                 /*  Navigator.pushNamed(context, '/offers_page'); */
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.main,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(ScreenUtil.scaledWidth(12)),
+
+              SizedBox(height: ScreenUtil.scaledHeight(24)),
+              
+              // Submit Button
+              SizedBox(
+                width: double.infinity,
+                height: ScreenUtil.scaledHeight(50),
+                child: ElevatedButton(
+                  onPressed: _submitForm,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.main,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(ScreenUtil.scaledWidth(12)),
+                    ),
                   ),
-                ),
-                child: Text(
-                  'Add offer',
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontFamily: FontFamily.medium,
-                    fontSize: ScreenUtil.fontSize(16),
+                  child: Text(
+                    'Add offer',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontFamily: FontFamily.medium,
+                      fontSize: ScreenUtil.fontSize(16),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTextField(String label, String hint, {int maxLines = 1}) {
+  Widget _buildValidatedTextField(
+    String label,
+    String hint,
+    TextEditingController controller,
+    String? Function(String?) validator, {
+    int maxLines = 1,
+    TextInputType? keyboardType,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -402,8 +572,11 @@ class _AddOfferPageState extends State<AddOfferPage> {
           ),
         ),
         SizedBox(height: ScreenUtil.scaledHeight(8)),
-        TextField(
+        TextFormField(
+          controller: controller,
           maxLines: maxLines,
+          keyboardType: keyboardType,
+          validator: validator,
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(
@@ -423,13 +596,22 @@ class _AddOfferPageState extends State<AddOfferPage> {
               borderRadius: BorderRadius.circular(ScreenUtil.scaledWidth(12)),
               borderSide: const BorderSide(color: AppColors.main),
             ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(ScreenUtil.scaledWidth(12)),
+              borderSide: const BorderSide(color: Colors.red),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(ScreenUtil.scaledWidth(12)),
+              borderSide: const BorderSide(color: Colors.red),
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildDateField(String label, DateTime? date) {
+
+    Widget _buildDateField(String label, DateTime? date) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -556,10 +738,6 @@ class _AddOfferPageState extends State<AddOfferPage> {
       ],
     );
   }
- String guideAvailability = 'Available';
-  String mealsAvailability = 'Available';
-  String hotelAvailability = 'Available';
-  String transportAvailability = 'Available';
 
   Widget _buildDropdownField(String label, String initialValue) {
     return Column(
