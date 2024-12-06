@@ -20,6 +20,7 @@ import 'offers_page.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
+  static const pageRoute = "/LandingPage";
 
   @override
   Widget build(BuildContext context) {
