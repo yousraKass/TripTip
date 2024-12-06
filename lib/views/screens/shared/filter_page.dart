@@ -6,6 +6,7 @@ import 'results_page.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
+  static const pageRoute = "/FilterPage";
 
   @override
   _FilterPageState createState() => _FilterPageState();
