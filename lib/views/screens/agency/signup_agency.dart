@@ -179,7 +179,12 @@ class _SignUpAgencyState extends State<SignUpAgency> {
                           ),
                           SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushNamed(
+                                    context, LoginPageAgency.pageRoute);
+                              }
+                            },
                             child: Text(
                               "Create account",
                               style: accounts_button_text_style,
