@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/logos.dart';
-import 'package:triptip/views/widgets/Password_form_field.dart';
-import 'package:triptip/views/screens/agency/login_page_agency.dart';
+import 'package:triptip/logic/form_validators.dart';
+import 'package:triptip/views/widgets/Forms_widgets.dart';
+import 'package:triptip/views/screens/shared/landing_page.dart';
 
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({super.key});
 
-class NewPasswordAgency extends StatefulWidget {
-  const NewPasswordAgency({super.key});
-
-  static const pageRoute = "/new_password_ agency_page";
+  static const pageRoute = "/agency_forget_password_page";
 
   @override
-  State<NewPasswordAgency> createState() => _NewPasswordAgencyState();
+  State<ForgetPassword> createState() => _ForgetPasswordState();
 }
 
-class _NewPasswordAgencyState extends State<NewPasswordAgency> {
+class _ForgetPasswordState extends State<ForgetPassword> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController txt_controller_psd = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +40,14 @@ class _NewPasswordAgencyState extends State<NewPasswordAgency> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Create New Password",
+                      "Forget Password",
                       style: mainTitle,
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     Text(
-                      "Keep your account secure by creating a new password",
+                      "Enter your email address below , we will send you an email to reset your password",
                       style: subTitle,
                     ),
                     SizedBox(
@@ -61,16 +59,18 @@ class _NewPasswordAgencyState extends State<NewPasswordAgency> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          PasswordFormField(txtControllerPsd: txt_controller_psd),
+                          UserInput(
+                              context, "Enter your email", validateEmail, null),
                           SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(context, LoginPageAgency.pageRoute);  
+                                Navigator.pushNamed(
+                                    context, LandingPage.pageRoute);
                               }
                             },
                             child: Text(
-                              "Save new password",
+                              "Request code",
                               style: accounts_button_text_style,
                             ),
                             style: accounts_button_style(context),

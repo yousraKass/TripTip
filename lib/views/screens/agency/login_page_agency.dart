@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/screens/agency/forget_password_page.dart';
+import 'package:triptip/views/screens/agency/forget_password_page_agency.dart';
+import 'package:triptip/views/screens/agency/signup_agency.dart';
+import 'package:triptip/views/screens/shared/landing_page.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
+import 'package:triptip/views/widgets/Password_form_field.dart';
 
 class LoginPageAgency extends StatefulWidget {
   const LoginPageAgency({super.key});
@@ -17,7 +20,6 @@ class LoginPageAgency extends StatefulWidget {
 class _LoginPageAgencyState extends State<LoginPageAgency> {
   // form key
   final _formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
 
   final TextEditingController txt_controller_email = TextEditingController();
   final TextEditingController txt_controller_psd = TextEditingController();
@@ -63,36 +65,8 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
 
                           // password
                           InputLabel("Password"),
-                          Center(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              child: TextFormField(
-                                obscureText: _obscureText,
-                                decoration: InputDecoration(
-                                  hintText: "Enter your password",
-                                  hintStyle: field_hint,
-                                  border: OutlineInputBorder(),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _obscureText
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureText = !_obscureText;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                controller: txt_controller_psd,
-                                validator: (value) {
-                                  return validatePassword(value);
-                                },
-                              ),
-                            ),
-                          ),
-
+                          PasswordFormField(
+                              txtControllerPsd: txt_controller_psd),
                           Align(
                             alignment: Alignment.centerRight,
                             child: TextButton(
@@ -107,7 +81,11 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
                           ),
 
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushNamed(context, LandingPage.pageRoute);
+                              }                              
+                            },
                             child: Text(
                               "Login",
                               style: accounts_button_text_style,
@@ -128,7 +106,9 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: Center(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                // implement login with facebook
+                              },
                               style: LoginInWith_button_style(context),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +131,9 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: Center(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                // implement login with gmail
+                              },
                               style: LoginInWith_button_style(context),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +165,9 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
                           style: dont_have_account,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignUpAgency.pageRoute);
+                          },
                           child: Text(
                             'Create account',
                             style: create_account,
