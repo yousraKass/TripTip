@@ -28,7 +28,7 @@ class Intro01 extends StatelessWidget {
                 width: double.infinity,
                 height: double.infinity,
               ),
-              Image.asset('assets/logos/logo_intro01.png',
+              Image.asset('assets/logo/logo_intro01.png',
               width:250,
               height:300,
               ),
