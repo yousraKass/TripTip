@@ -379,4 +379,3 @@ class LandingPage extends StatelessWidget {
   }
 }
 
-
