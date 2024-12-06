@@ -4,9 +4,10 @@ import 'package:triptip/views/widgets/search_bar_widget.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/screens//offer_model.dart';
+import 'package:triptip/data/repo/offer/offer_model.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'filter_page.dart';
+import 'package:triptip/views/themes/fonts.dart';
 
 
 
