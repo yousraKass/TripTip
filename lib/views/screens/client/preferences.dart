@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/themes/fonts.dart';
-import 'package:triptip/main.dart';
+import 'package:triptip/main(1).dart';
 import 'package:triptip/views/widgets/Preference_widget.dart';
 
 const widgetInRow = 2;

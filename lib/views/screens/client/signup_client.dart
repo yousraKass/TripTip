@@ -7,7 +7,6 @@ import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
 
-
 class SignUpClient extends StatefulWidget {
   const SignUpClient({super.key});
 

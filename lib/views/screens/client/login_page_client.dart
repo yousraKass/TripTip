@@ -8,7 +8,6 @@ import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
 
-
 class LoginPageClient extends StatefulWidget {
   const LoginPageClient({super.key});
 

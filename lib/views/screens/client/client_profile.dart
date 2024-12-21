@@ -4,7 +4,7 @@ import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Preferences_image_slider.dart';
 import 'package:triptip/views/widgets/ClientrProfileHeader.dart';
 import 'package:triptip/views/screens/client/preferences.dart';
-import 'package:triptip/main.dart';
+import 'package:triptip/main(1).dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 
 class ClientProfile extends StatefulWidget {
