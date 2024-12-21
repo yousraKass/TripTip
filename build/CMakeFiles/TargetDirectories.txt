@@ -1,0 +1,3 @@
+/home/dell/Triptip/TripTip/build/CMakeFiles/flutter_assemble.dir
+/home/dell/Triptip/TripTip/build/CMakeFiles/edit_cache.dir
+/home/dell/Triptip/TripTip/build/CMakeFiles/rebuild_cache.dir

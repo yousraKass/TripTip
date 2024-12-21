@@ -39,6 +39,16 @@ import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'blocs/Offer_bloc/offer_cubit.dart';
 import 'data/repositories/OfferRepo.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+import 'package:triptip/blocs/shared/choice_bloc.dart';
+import 'package:triptip/blocs/shared/password_visibility_bloc.dart';
+import 'package:triptip/views/screens/agency/login_page_agency.dart';
+import 'package:triptip/views/screens/client/login_page_client.dart';
+import 'package:triptip/views/screens/agency/signup_agency.dart';
+import 'package:triptip/views/screens/client/signup_client.dart';
+
 late AbstractPreferenes preferences;
 late Abstractnotificationagency notifications;
 
@@ -59,7 +69,7 @@ Future<bool> my_init_app() async {
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
-//       initialRoute: OffersPage.pageRoute,
+//       initialRoute: LandingPage.pageRoute,
 //       routes: {
 //         FavoritePage.pageRoute: (ctx) => FavoritePage(),
 //         SignUpChoicePage.pageRoute : (ctx) => SignUpChoicePage(),
@@ -81,7 +91,7 @@ Future<bool> my_init_app() async {
 //         ReviewScreenClient.pageRoute: (ctx) => const ReviewScreenClient(),
 //         AgencyScreen.pageRoute: (ctx) => const AgencyScreen(),
 //         EditAgencyProfileScreen.pageRoute: (ctx) =>
-//             const EditAgencyProfileScreen(),
+//         const EditAgencyProfileScreen(),
 //         SettingsScreenClient.pageRoute: (ctx) => const SettingsScreenClient(),
 //         SettingsScreenAgency.pageRoute: (ctx) => const SettingsScreenAgency(),
 //         Intro01.pageRoute: (ctx) => const Intro01(),
@@ -99,32 +109,75 @@ Future<bool> my_init_app() async {
 //   }
 // }
 
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiBlocProvider(
+//       providers: [
+//         BlocProvider(
+//           create: (context) => OfferCubit(
+//             offerRepo: OfferRepo(),
+//           ),
+//         ),
+//         // Add other BlocProviders here if needed
+//       ],
+//       child: MaterialApp(
+//         title: 'Your App Name',
+//         theme: ThemeData(
+//             // Your theme configuration
+//             ),
+//         home: const LandingPage(),
+//         // Your route configuration
+//       ),
+//     );
+//   }
+// }
+
 void main() {
-  runApp(const MyApp());
+  runApp(const TripTipApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class TripTipApp extends StatelessWidget {
+  const TripTipApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<ChoiceBloc>(
+          create: (context) => ChoiceBloc(),
+        ),
+        BlocProvider<PasswordVisibilityBloc>(
+          create: (context) => PasswordVisibilityBloc(),
+        ),
         BlocProvider(
           create: (context) => OfferCubit(
             offerRepo: OfferRepo(),
           ),
         ),
-        // Add other BlocProviders here if needed
       ],
       child: MaterialApp(
-        title: 'Your App Name',
+        title: 'TripTip App',
         theme: ThemeData(
-            // Your theme configuration
-            ),
-        home: const LandingPage(),
-        // Your route configuration
+          primarySwatch: Colors.teal,
+        ),
+        initialRoute: SignUpChoicePage.pageRoute,
+        routes: {
+          SignUpChoicePage.pageRoute: (context) => const SignUpChoicePage(),
+          SignUpClient.pageRoute: (context) => SignUpClient(),
+          LoginPageClient.pageRoute: (context) => LoginPageClient(),
+          SignUpAgency.pageRoute: (context) => SignUpAgency(),
+          LoginPageAgency.pageRoute: (context) => LoginPageAgency(),
+          LandingPage.pageRoute: (context) => const LandingPage(),
+        },
       ),
     );
   }
 }
+

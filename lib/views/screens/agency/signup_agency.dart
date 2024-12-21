@@ -1,41 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/screens/agency/login_page_agency.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:triptip/blocs/agency/agency_bloc.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
-import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+import 'package:triptip/views/widgets/Forms_widgets.dart';
+import 'package:triptip/views/screens/agency/login_page_agency.dart';
+import 'package:triptip/blocs/shared/password_visibility_bloc.dart';
+import 'package:triptip/blocs/agency/agency_event.dart';
+import 'package:triptip/blocs/agency/agency_state.dart';
+import 'package:triptip/blocs/shared/password_event_visible.dart';
+import 'package:triptip/blocs/shared/password_state_visible.dart';
+import 'package:triptip/data/repositories/agency/agency_repo.dart';
 
-SignUpAs role = SignUpAs.Agency;
 
+class SignUpAgency extends StatelessWidget {
+  SignUpAgency({super.key});
+     static const pageRoute = "/SignUpAgency";
+      late final agencyRepository = AgencyRepository();
+      late final   signupBloc = AgencyBloc(repository: agencyRepository);
+  // Controllers for form fields
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
 
-
-
-class SignUpAgency extends StatefulWidget {
-  
-  const SignUpAgency({super.key});
-
-  static const pageRoute = "/agency_signup_page";
-  
-  @override
-  State<SignUpAgency> createState() => _SignUpAgencyState();
-}
-
-class _SignUpAgencyState extends State<SignUpAgency> {
-  // form key
+  // Form Key
   final _formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
-  String? selectedCountryCode;
-  bool isChecked = false;
-  List<String> countryCodes = ['+213', '+1', '+44', '+91'];
-
-  final TextEditingController txt_controller_psd = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    bool isChecked = false;
+    return BlocProvider(
+      create: (context) => signupBloc, 
+      child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -49,106 +49,119 @@ class _SignUpAgencyState extends State<SignUpAgency> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Create agency's account",
+                      "Create your account",
                       style: mainTitle,
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Get the best out of TripTip by creating an account",
-                      style: subTitle,
+                      "Join TripTip and explore endless possibilities",
+                      style: subTitle, 
                     ),
                     SizedBox(height: 30),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                    BlocListener<AgencyBloc, AgencyState>(
+                      listener: (context, state) {
+                        if (state is SignupSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Signup Successful!')),
+                          );
+                          Navigator.pushNamed(context, '/login');
+                        } else if (state is AgencyFailure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.error)),
+                          );
+                        }
+                      },
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // agency name
-                          InputLabel("Agency's name"),
+                          children: [
+                            // Name Field
+                            InputLabel("Agency's name"),
                           UserInput(context, "Enter agency name",
-                              validateAgencyName, null),
+                              validateAgencyName, nameController),
+                            SizedBox(height: 20),
 
-                          SizedBox(height: 20),
-
-                          // agency phone
+                            // agency phone
                           InputLabel("Phone"),
                           UserInput(context, 'Enter phone number',
-                              validatePhoneNumber, null),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          // agency email
+                              validatePhoneNumber, phoneController),
+                            SizedBox(height: 20),
+
+                            // agency email
                           InputLabel("Agency email"),
                           UserInput(context, "Enter agency email",
-                              validateEmail, null),
+                              validateEmail, emailController),
+                            SizedBox(height: 20),
 
-                          SizedBox(height: 20),
-
-                          // agency location
+                            // agency location
                           InputLabel("Agency location"),
                           UserInput(context, "Enter agency location",
-                              validateEmail, null),
+                              validateLocation, locationController),
+                            SizedBox(height: 20),
 
-                          SizedBox(height: 20),
-                          // password
-                          InputLabel("Password"),
-                          Center(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              child: TextFormField(
-                                obscureText: _obscureText,
-                                decoration: InputDecoration(
-                                  hintText: "Enter your password",
-                                  hintStyle: field_hint,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade500,
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey
-                                          .shade500, // Set the border color when the field is enabled
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: AppColors
-                                          .main, // Set the border color when the field is focused
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _obscureText
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureText = !_obscureText;
-                                      });
-                                    },
-                                  ),
+                         
+                            // Password Field
+                            InputLabel("Password"),
+                            Center(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                child: BlocBuilder<PasswordVisibilityBloc, PasswordVisibilityState>(
+                                  builder: (context, state) {
+                                    return TextFormField(
+                                      obscureText: !state.isPasswordVisible,
+                                      decoration: InputDecoration(
+                                        hintText: "Enter your password",
+                                        hintStyle: field_hint,
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.grey.shade500,
+                                            width: 0.5,
+                                          ),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.grey.shade500,
+                                            width: 0.5,
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: AppColors.main,
+                                            width: 0.5,
+                                          ),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            state.isPasswordVisible
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                          ),
+                                          onPressed: () {
+                                            context.read<PasswordVisibilityBloc>().add(TogglePasswordVisibility());
+                                          },
+                                        ),
+                                      ),
+                                      controller: passwordController,
+                                      validator: validatePassword,
+                                    );
+                                  },
                                 ),
-                                controller: txt_controller_psd,
-                                validator: (value) {
-                                  return validatePassword(value);
-                                },
                               ),
                             ),
-                          ),
+                            SizedBox(height: 20),
 
-                          SizedBox(height: 20),
-                          Row(
+                            // Terms & Conditions
+                            Row(
                             children: [
                               // Checkbox
                               Checkbox(
                                 value: isChecked,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                    isChecked = value ?? false;
+                                    
+                                },
                               ),
 
                               // Text with underlined terms and conditions
@@ -177,43 +190,65 @@ class _SignUpAgencyState extends State<SignUpAgency> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(
-                                    context, LoginPageAgency.pageRoute);
-                              }
-                            },
-                            child: Text(
-                              "Create account",
-                              style: accounts_button_text_style,
+                            SizedBox(height: 20),
+
+                            // Submit Button
+                            BlocBuilder<AgencyBloc, AgencyState>(
+                              builder: (context, state) {
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      BlocProvider.of<AgencyBloc>(context).add(
+                                        AgencySignupSubmitted(
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          password: passwordController.text,
+                                          phoneNumber: phoneController.text,
+                                          location: TransferNametoNumber(locationController.text) ?? 0,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  style: accounts_button_style(context),
+                                  child: state is AgencyLoading
+                                      ? CircularProgressIndicator(
+                                          color: Colors.white,
+                                        )
+                                      : Text(
+                                          "Create Account",
+                                          style: accounts_button_text_style,
+                                        ),
+                                );
+                              },
                             ),
-                            style: accounts_button_style(context),
-                          ),
-                        ],
+                            SizedBox(height: 20),
+
+                            // Login Prompt
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Already have an account?",
+                                  style: dont_have_account,
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPageAgency()),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Log In',
+                                    style: create_account,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: dont_have_account,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, LoginPageAgency.pageRoute);
-                          },
-                          child: Text(
-                            'Log In ',
-                            style: create_account,
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
