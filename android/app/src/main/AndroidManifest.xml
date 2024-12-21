@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" 
         android:maxSdkVersion="32"/>
 
+
+
     <application
         android:label="triptip"
         android:name="${applicationName}"
@@ -50,4 +52,6 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+
+    
 </manifest>

@@ -53,6 +53,7 @@ class LandingPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 115),
+<<<<<<< HEAD
                       // Padding(
                       //   padding: const EdgeInsets.only(top: 10.0), // Move icons down
                       //   child: Row(
@@ -96,6 +97,51 @@ class LandingPage extends StatelessWidget {
                       //     ],
                       //   ),
                       // ),
+=======
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0), // Move icons down
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Image.asset(
+                                "assets/icons/notifications.png",
+                                width: 18,
+                                height: 20,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                
+                               MaterialPageRoute(
+                                    builder: (context) => role == SignUpAs.Client ?
+                                         NotificationsClient()
+                                        : NotificationsAgency (),
+                                  ),
+                                );
+                              },
+                            ),
+                            IconButton(
+                              icon: Image.asset(
+                                "assets/icons/settings.png",
+                                width: 18,
+                                height: 20,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                
+                                  MaterialPageRoute(
+                                    builder: (context) => role == SignUpAs.Client ?
+                                         SettingsScreenClient ()
+                                        : SettingsScreenAgency (),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+>>>>>>> 9eee275f4f02efd9859bc8a32dba072c9f4a2e1a
                     ],
                   ),
                   const SizedBox(height: 37),
