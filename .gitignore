@@ -1,0 +1,62 @@
+# Flutter/Dart-specific files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Android-specific
+/android/.gradle/
+/android/captures/
+/android/app/build/
+/android/local.properties
+/android/GeneratedPluginRegistrant.java
+
+# Gradle wrapper scripts (do NOT ignore)
+/gradle-wrapper.jar
+/gradlew
+/gradlew.bat
+
+# iOS-specific
+ios/Flutter/Flutter.framework/
+ios/Flutter/Flutter.podspec
+ios/.generated/
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/App.framework
+ios/Flutter/engine/
+xcuserdata/
+*.xcuserstate
+
+# macOS-specific
+*.DS_Store
+
+# Windows-specific
+windows/Flutter/generated_plugin_registrant.cc
+windows/.vs/
+windows/.flutter-plugins-dependencies
+
+# Linux-specific
+linux/Flutter/generated_plugin_registrant.cc
+
+# Web-specific
+web/.dart_tool/
+web/flutter_service_worker.js
+web/canvaskit/
+
+# Keystore-related (NEVER commit sensitive files)
+/key.properties
+**/*.keystore
+**/*.jks
+
+# Firebase-specific
+firebase_app_id_file.json
+
+# Editor-specific
+.vscode/
+*.code-workspace
+.idea/
+*.iml

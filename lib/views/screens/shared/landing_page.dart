@@ -6,10 +6,6 @@ import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/data/repo/offer/offer_model.dart';
-import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
-import 'package:triptip/views/screens/client/SettingsScreenClient.dart';
-import 'package:triptip/views/screens/client/notifications_client.dart';
-import 'package:triptip/views/screens/agency/notifications_agency.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'OfferScreen.dart';
 import 'search_page.dart';
@@ -53,95 +49,6 @@ class LandingPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 115),
-<<<<<<< HEAD
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 10.0), // Move icons down
-                      //   child: Row(
-                      //     children: [
-                      //       IconButton(
-                      //         icon: Image.asset(
-                      //           "assets/icons/notifications.png",
-                      //           width: 18,
-                      //           height: 20,
-                      //         ),
-                      //         onPressed: () {
-                      //           Navigator.push(
-                      //             context,
-                                
-                      //          MaterialPageRoute(
-                      //               builder: (context) => role == SignUpAs.Client ?
-                      //                    NotificationsClient()
-                      //                   : NotificationsAgency (),
-                      //             ),
-                      //           );
-                      //         },
-                      //       ),
-                      //       IconButton(
-                      //         icon: Image.asset(
-                      //           "assets/icons/settings.png",
-                      //           width: 18,
-                      //           height: 20,
-                      //         ),
-                      //         onPressed: () {
-                      //           Navigator.push(
-                      //             context,
-                                
-                      //             MaterialPageRoute(
-                      //               builder: (context) => role == SignUpAs.Client ?
-                      //                    SettingsScreenClient ()
-                      //                   : SettingsScreenAgency (),
-                      //             ),
-                      //           );
-                      //         },
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-=======
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0), // Move icons down
-                        child: Row(
-                          children: [
-                            IconButton(
-                              icon: Image.asset(
-                                "assets/icons/notifications.png",
-                                width: 18,
-                                height: 20,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                
-                               MaterialPageRoute(
-                                    builder: (context) => role == SignUpAs.Client ?
-                                         NotificationsClient()
-                                        : NotificationsAgency (),
-                                  ),
-                                );
-                              },
-                            ),
-                            IconButton(
-                              icon: Image.asset(
-                                "assets/icons/settings.png",
-                                width: 18,
-                                height: 20,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                
-                                  MaterialPageRoute(
-                                    builder: (context) => role == SignUpAs.Client ?
-                                         SettingsScreenClient ()
-                                        : SettingsScreenAgency (),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
->>>>>>> 9eee275f4f02efd9859bc8a32dba072c9f4a2e1a
                     ],
                   ),
                   const SizedBox(height: 37),
