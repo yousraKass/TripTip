@@ -5,9 +5,9 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/widgets/Preference_widget.dart';
-import 'package:triptip/bloc/blocs/preferences_cubit.dart';
-import 'package:triptip/bloc/states/preferences_state.dart';
-import 'package:triptip/bloc/repositories/preferences_repository.dart';
+import 'package:triptip/bloc/blocs/client/preferences_cubit.dart';
+import 'package:triptip/bloc/states/client/preferences_state.dart';
+import 'package:triptip/bloc/repositories/client/preferences_repository.dart';
 class MyPreferencesPage extends StatelessWidget {
   static const pageRoute = "client_preferences_page";
   late final PrefRepository = PreferencesRepository();

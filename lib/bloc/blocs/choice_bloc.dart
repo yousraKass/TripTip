@@ -13,5 +13,4 @@ class ChoiceBloc extends Bloc<ChoiceEvent, ChoiceState> {
     });
   }
 
-
 }

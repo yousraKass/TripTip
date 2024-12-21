@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:triptip/bloc/events/client_event.dart';
-import 'package:triptip/bloc/repositories/client_repo.dart';
+import 'package:triptip/bloc/blocs/agency/agency_bloc.dart';
+import 'package:triptip/bloc/events/agency/agency_event.dart';
+import 'package:triptip/bloc/repositories/agency/agency_repo.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/views/screens/agency/forget_password_page_agency.dart';
 import 'package:triptip/logic/form_validators.dart';
-import 'package:triptip/bloc/signup_page_client.dart';
-import 'package:triptip/bloc/states/client_state.dart';
-import 'package:triptip/bloc/blocs/client_bloc.dart';
+import 'package:triptip/bloc/screens/agency/signup_page_agency.dart';
+import 'package:triptip/bloc/states/agency/agency_state.dart';
 
 
 
-class LoginScreenClient extends StatelessWidget {
-   static const pageRoute = "/LoginScreenClient";
-    late final clientRepository = ClientRepository();
-    late final loginBloc = ClientBloc(repository: clientRepository);
-  // Controllers for form inputs
+
+class LoginScreen extends StatelessWidget {
+  static const pageRoute = "/LoginScreen";
+    late final clientRepository = AgencyRepository();
+  late final   loginBloc = AgencyBloc(repository: clientRepository);
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,21 +30,21 @@ class LoginScreenClient extends StatelessWidget {
       body: SingleChildScrollView(
         child: BlocProvider(
           create: (context) => loginBloc,
-          child: BlocConsumer<ClientBloc, ClientState>(
+          child: BlocConsumer<AgencyBloc, AgencyState>(
             listener: (context, state) {
-              if (state is ClientSuccess) {
+              if (state is LoginSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Login Successful!')),
                 );
                 Navigator.pushReplacementNamed(context, '/home');
-              } else if (state is ClientFailure) {
+              } else if (state is AgencyFailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.error)),
                 );
               }
             },
             builder: (context, state) {
-              if (state is ClientLoading) {
+              if (state is AgencyLoading) {
                 return Center(child: CircularProgressIndicator());
               }
 
@@ -103,8 +103,8 @@ class LoginScreenClient extends StatelessWidget {
                                     final email = emailController.text;
                                     final password = passwordController.text;
 
-                                    BlocProvider.of<ClientBloc>(context).add(
-                                      ClientLoginSubmitted(
+                                    BlocProvider.of<AgencyBloc>(context).add(
+                                      AgencyLoginSubmitted(
                                           email: email, password: password),
                                     );
                                   }
@@ -185,7 +185,11 @@ class LoginScreenClient extends StatelessWidget {
                                 style: dont_have_account),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, SignUpClient.pageRoute);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignupScreen()),
+                                );
                               },
                               child:
                                   Text('Create account', style: create_account),

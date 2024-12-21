@@ -5,11 +5,11 @@ import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Preferences_image_slider.dart';
 import 'package:triptip/views/widgets/ClientrProfileHeader.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
-import 'package:triptip/bloc/blocs/client_profile_cubit.dart';
-import 'package:triptip/bloc/states/client_profile_state.dart';
-import 'package:triptip/bloc/preferences.dart';
-import 'package:triptip/bloc/repositories/client_repo.dart';
-import 'package:triptip/bloc/models/preferences_model.dart';
+import 'package:triptip/bloc/blocs/client/client_profile_cubit.dart';
+import 'package:triptip/bloc/states/client/client_profile_state.dart';
+import 'package:triptip/bloc/screens/client/preferences.dart';
+import 'package:triptip/bloc/repositories/client/client_repo.dart';
+import 'package:triptip/bloc/models/client/preferences_model.dart';
 
 class ClientProfile extends StatelessWidget {
   ClientProfile({super.key});

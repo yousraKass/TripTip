@@ -5,9 +5,9 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
-import 'package:triptip/bloc/blocs/client_profile_cubit.dart';
-import 'package:triptip/bloc/states/client_profile_state.dart';
-import 'package:triptip/bloc/models/client_model.dart';
+import 'package:triptip/bloc/blocs/client/client_profile_cubit.dart';
+import 'package:triptip/bloc/states/client/client_profile_state.dart';
+import 'package:triptip/bloc/models/client/client_model.dart';
 import 'dart:io';
 
 class EditClientProfileScreen extends StatelessWidget {

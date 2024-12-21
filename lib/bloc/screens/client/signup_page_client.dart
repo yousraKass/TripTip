@@ -6,11 +6,11 @@ import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
-import 'package:triptip/bloc/blocs/client_bloc.dart'; // Import the SignupBloc
-import 'package:triptip/bloc/login_page_client.dart';
-import 'package:triptip/bloc/states/client_state.dart';
-import 'package:triptip/bloc/events/client_event.dart';
-import 'package:triptip/bloc/repositories/client_repo.dart';
+import 'package:triptip/bloc/blocs/client/client_bloc.dart'; // Import the SignupBloc
+import 'package:triptip/bloc/screens/client/login_page_client.dart';
+import 'package:triptip/bloc/states/client/client_state.dart';
+import 'package:triptip/bloc/events/client/client_event.dart';
+import 'package:triptip/bloc/repositories/client/client_repo.dart';
 
 class SignUpClient extends StatelessWidget {
 

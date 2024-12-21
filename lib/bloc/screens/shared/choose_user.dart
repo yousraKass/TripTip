@@ -5,8 +5,8 @@ import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/bloc/blocs/choice_bloc.dart';
 import 'package:triptip/bloc/states/choice_state.dart';
 import 'package:triptip/bloc/events/choice_event.dart';
-import 'package:triptip/bloc/signup_page_agency.dart';
-import 'package:triptip/bloc/signup_page_client.dart';
+import 'package:triptip/bloc/screens/agency/signup_page_agency.dart';
+import 'package:triptip/bloc/screens/client/signup_page_client.dart';
 
 class SignUpChoicePage extends StatelessWidget {
   static const pageRoute = '/SignUpChoicePage';

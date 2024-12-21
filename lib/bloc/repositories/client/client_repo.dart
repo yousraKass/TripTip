@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:triptip/bloc/models/client_model.dart';
+import 'package:triptip/bloc/models/client/client_model.dart';
 
 class ClientRepository {
   final String baseUrl = 'http://localhost:3000/TripTip/client';

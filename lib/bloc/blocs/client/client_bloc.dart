@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:triptip/logic/form_validators.dart';
-import 'package:triptip/bloc/events/client_event.dart';
-import 'package:triptip/bloc/states/client_state.dart';
-import 'package:triptip/bloc/models/client_model.dart';
-import 'package:triptip/bloc/repositories/client_repo.dart';
+import 'package:triptip/bloc/events/client/client_event.dart';
+import 'package:triptip/bloc/states/client/client_state.dart';
+import 'package:triptip/bloc/models/client/client_model.dart';
+import 'package:triptip/bloc/repositories/client/client_repo.dart';
 
 // Bloc
 class ClientBloc extends Bloc<ClientEvent, ClientState> {

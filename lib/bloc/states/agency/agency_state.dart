@@ -1,4 +1,4 @@
-import 'package:triptip/bloc/models/agency_model.dart';
+import 'package:triptip/bloc/models/agency/agency_model.dart';
 
 // States
 // Base state class

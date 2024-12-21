@@ -1,7 +1,7 @@
 // agency_repository.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:triptip/bloc/models/agency_model.dart';
+import 'package:triptip/bloc/models/agency/agency_model.dart';
 
 
 class AgencyRepository {

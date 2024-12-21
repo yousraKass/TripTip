@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:triptip/bloc/blocs/agency_bloc.dart';
+import 'package:triptip/bloc/blocs/agency/agency_bloc.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
-import 'package:triptip/bloc/login_page_agency.dart';
+import 'package:triptip/bloc/screens/agency/login_page_agency.dart';
 import 'package:triptip/bloc/blocs/password_visibility_bloc.dart';
-import 'package:triptip/bloc/events/agency_event.dart';
-import 'package:triptip/bloc/states/agency_state.dart';
+import 'package:triptip/bloc/events/agency/agency_event.dart';
+import 'package:triptip/bloc/states/agency/agency_state.dart';
 import 'package:triptip/bloc/events/password_event_visible.dart';
 import 'package:triptip/bloc/states/password_state_visible.dart';
-import 'package:triptip/bloc/repositories/agency_repo.dart';
+import 'package:triptip/bloc/repositories/agency/agency_repo.dart';
 
 
 class SignupScreen extends StatelessWidget {

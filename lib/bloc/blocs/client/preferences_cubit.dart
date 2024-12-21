@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:triptip/bloc/states/preferences_state.dart';
-import 'package:triptip/bloc/repositories/preferences_repository.dart';
-import 'package:triptip/bloc/models/preferences_model.dart';
+import 'package:triptip/bloc/states/client/preferences_state.dart';
+import 'package:triptip/bloc/repositories/client/preferences_repository.dart';
+import 'package:triptip/bloc/models/client/preferences_model.dart';
 
 
 class PreferencesCubit extends Cubit<PreferencesState> {

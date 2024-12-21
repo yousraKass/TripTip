@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:triptip/bloc/blocs/agency_bloc.dart';
-import 'package:triptip/bloc/events/agency_event.dart';
-import 'package:triptip/bloc/repositories/agency_repo.dart';
+import 'package:triptip/bloc/events/client/client_event.dart';
+import 'package:triptip/bloc/repositories/client/client_repo.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/views/screens/agency/forget_password_page_agency.dart';
 import 'package:triptip/logic/form_validators.dart';
-import 'package:triptip/bloc/signup_page_agency.dart';
-import 'package:triptip/bloc/states/agency_state.dart';
+import 'package:triptip/bloc/screens/client/signup_page_client.dart';
+import 'package:triptip/bloc/states/client/client_state.dart';
+import 'package:triptip/bloc/blocs/client/client_bloc.dart';
 
 
 
-
-class LoginScreen extends StatelessWidget {
-  static const pageRoute = "/LoginScreen";
-    late final clientRepository = AgencyRepository();
-  late final   loginBloc = AgencyBloc(repository: clientRepository);
+class LoginScreenClient extends StatelessWidget {
+   static const pageRoute = "/LoginScreenClient";
+    late final clientRepository = ClientRepository();
+    late final loginBloc = ClientBloc(repository: clientRepository);
+  // Controllers for form inputs
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,21 +30,21 @@ class LoginScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: BlocProvider(
           create: (context) => loginBloc,
-          child: BlocConsumer<AgencyBloc, AgencyState>(
+          child: BlocConsumer<ClientBloc, ClientState>(
             listener: (context, state) {
-              if (state is LoginSuccess) {
+              if (state is ClientSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Login Successful!')),
                 );
                 Navigator.pushReplacementNamed(context, '/home');
-              } else if (state is AgencyFailure) {
+              } else if (state is ClientFailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.error)),
                 );
               }
             },
             builder: (context, state) {
-              if (state is AgencyLoading) {
+              if (state is ClientLoading) {
                 return Center(child: CircularProgressIndicator());
               }
 
@@ -103,8 +103,8 @@ class LoginScreen extends StatelessWidget {
                                     final email = emailController.text;
                                     final password = passwordController.text;
 
-                                    BlocProvider.of<AgencyBloc>(context).add(
-                                      AgencyLoginSubmitted(
+                                    BlocProvider.of<ClientBloc>(context).add(
+                                      ClientLoginSubmitted(
                                           email: email, password: password),
                                     );
                                   }
@@ -185,11 +185,7 @@ class LoginScreen extends StatelessWidget {
                                 style: dont_have_account),
                             TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignupScreen()),
-                                );
+                                Navigator.pushNamed(context, SignUpClient.pageRoute);
                               },
                               child:
                                   Text('Create account', style: create_account),
