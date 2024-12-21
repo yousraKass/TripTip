@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
-import 'package:triptip/data/repo/offer/offer_model.dart';
+import '/data/models/OfferModel.dart';
 
 class OfferWidgetsUtils {
   // Responsive sizing constants
@@ -116,3 +116,4 @@ class OfferWidgetsUtils {
     return MediaQuery.of(context).padding;
   }
 }
+

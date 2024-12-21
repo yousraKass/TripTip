@@ -60,7 +60,7 @@ final List<OfferModel> dummyOffers = [
       'assets/images/offer3.png',
     ],
   ),
-    OfferModel(
+  OfferModel(
     image: 'assets/images/offer4.png',
     title: 'To-Oran',
     location: 'Algeria',
@@ -99,5 +99,4 @@ final List<OfferModel> dummyOffers = [
       'assets/images/offer3.png',
     ],
   ),
-
 ];

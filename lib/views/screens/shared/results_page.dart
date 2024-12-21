@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/widgets/offer_card.dart';
-import 'package:triptip/views/widgets/search_bar_widget.dart';
-import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
-import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
-import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/data/repo/offer/offer_model.dart';
-import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+import '/views/widgets/offer_card.dart';
+import '/views/widgets/search_bar_widget.dart';
+import '/views/widgets/BottomNaviagtionBarClient.dart';
+import '/views/widgets/BottomNavigationBarAgency.dart';
+import '/views/themes/colors.dart';
+import '/data/repo/offer/offer_model.dart';
+import '/views/screens/shared/SignUpAsScreen.dart';
 import 'filter_page.dart';
-import 'package:triptip/views/themes/fonts.dart';
+import '/views/themes/fonts.dart';
 
 
 
@@ -173,7 +173,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: OfferCard(offer: dummyOffers[index]),
+                    //child: OfferCard(offer: dummyOffers[index]),
                   );
                 },
               ),

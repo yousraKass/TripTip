@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'landing_page.dart';
-import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/themes/fonts.dart'; 
+import '/views/themes/colors.dart';
+import '/views/themes/fonts.dart'; 
 
 class Intro03 extends StatelessWidget {
   static const pageRoute = '/Intro03';

@@ -1,4 +1,4 @@
-import 'package:triptip/data/repo/review_agency/ReviewText.dart';
+import '/data/repo/review_agency/ReviewText.dart';
 
 class AgencyTexts {
   static const contactUs = 'How to contact us';

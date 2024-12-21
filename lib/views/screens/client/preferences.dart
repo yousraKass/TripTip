@@ -20,7 +20,7 @@ class _MyPreferencesPageState extends State<MyPreferencesPage> {
 
   @override
   void initState() {
-    interests = preferences.GetUserPreferences();
+    //interests = preferences.GetUserPreferences();
     super.initState();
   }
 

@@ -56,7 +56,7 @@ class _FavoritePageState extends State<FavoritePage> {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16),
-          child: FavoriteOffer(offer: dummyOffers[index]),
+          //child: FavoriteOffer(offer: dummyOffers[index]),
         );
       },
     );

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/widgets/search_bar_widget.dart';
-import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
-import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
-import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+import '/views/widgets/search_bar_widget.dart';
+import '/views/widgets/BottomNaviagtionBarClient.dart';
+import '/views/widgets/BottomNavigationBarAgency.dart';
+import '/views/themes/colors.dart';
+import '/views/screens/shared/SignUpAsScreen.dart';
 import 'filter_page.dart';
 import 'results_page.dart';
-import 'package:triptip/views/themes/fonts.dart';
+import '/views/themes/fonts.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

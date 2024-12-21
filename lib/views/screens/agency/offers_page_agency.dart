@@ -5,6 +5,7 @@ import 'package:triptip/views/widgets/offer_card_agency.dart';
 import 'package:triptip/data/repo/offer/offer_model.dart';
 import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 
+
 class OffersPageAgency extends StatefulWidget {
   const OffersPageAgency({super.key});
   static const pageRoute = '/OffersPageAgency';
@@ -85,17 +86,17 @@ class _OffersPageAgencyState extends State<OffersPageAgency> {
       
       return Padding(
         padding: const EdgeInsets.only(bottom: 16),
-        child: OfferCardAgency(
-          offer: offers[index],
-          onDelete: () {
-            setState(() {
-              // Safely remove the item
-              if (index < offers.length) {
-                offers.removeAt(index);
-              }
-            });
-          },
-        ),
+        // child: OfferCardAgency(
+        //   offer: offers[index],
+        //   onDelete: () {
+        //     setState(() {
+        //       // Safely remove the item
+        //       if (index < offers.length) {
+        //         offers.removeAt(index);
+        //       }
+        //     });
+        //   },
+        // ),
       );
     },
   );

@@ -30,7 +30,7 @@ class SearchBarWidget extends StatelessWidget {
           hintStyle: const TextStyle(
             fontFamily: FontFamily.regular,
             fontSize: 16,
-            color: Colors.grey,
+            color: Colors.black,
           ),
           filled: true,
           fillColor: Colors.white,

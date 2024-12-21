@@ -1,5 +1,4 @@
 import 'package:triptip/data/repo/review_agency/ReviewText.dart';
-
 class AppTexts {
   //Offer info
   static const priceTitle = 'Price';
@@ -22,7 +21,6 @@ class AppTexts {
 }
 
 class Offertext {
-
   static const List<double> ratingValues = [
     0.8, // 5 stars rating
     0.15, // 4 stars rating

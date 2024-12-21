@@ -19,7 +19,7 @@ class _NotificationsClientState extends State<NotificationsClient> {
 
   @override
   Widget build(BuildContext context) {
-    agency_notifications = notifications.GetNotifications();
+   // agency_notifications = notifications.GetNotifications();
 
     return MaterialApp(
       home: Scaffold(
