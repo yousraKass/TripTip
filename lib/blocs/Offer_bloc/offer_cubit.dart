@@ -11,236 +11,236 @@ class OfferCubit extends Cubit<OfferState> {
   OfferCubit({required this.offerRepo}) : super(OfferInitialState());
 
 
-  // fetchInitialData() async {
-  //   try {
-  //     emit(OfferLoadingState());
-  //     final topOffer = await offerRepo.fetchTopOffer();
-  //     final places = await offerRepo.fetchPlaces();
-  //     final categories = await offerRepo.fetchcategories();
-  //     final offers = await offerRepo.fetchOffers();
-      
-  //     _updateState(
-  //       topOffer: topOffer,
-  //       places: places,
-  //       categories: categories,
-  //       offers: offers,
-  //     );
-  //   } catch (e) {
-  //     _handleError(e.toString());
-  //   }
-  // }
-
-
   fetchInitialData() async {
-  try {
-    emit(OfferLoadingState());
-
-    // Simulated top offer data
-    final topOffer = OfferModel(
-      image: 'assets/images/choosen_offer.png',
-      cityName: "Today's Deal",
-      countryName: "Special Offer",
-      rating: 4.9,
-      price: 10000.0,
-      startDate: "2023-12-20",
-      endDate: "2023-12-21",
-      descriptionText: "It is a too good deal, you will travel with free food, plenty of free food.",
-      category: "Limited Time Offer",
-      thumbnails: [],
-      days: 1,
-    );
-
-    // Simulated places data
-    final places = [
-      OfferModel(
-        image: "assets/images/Annaba.png",
-        cityName: "Annaba",
-        countryName: "Algeria",
-        rating: 4.5,
-        price: 0,
-        startDate: "2024-01-01",
-        endDate: "2024-01-02",
-        descriptionText: "Discover the beautiful coastal city of Annaba.",
-        category: "Destination",
-        thumbnails: [],
-        days: 1,
-      ),
-      OfferModel(
-        image: "assets/images/Tunis.png",
-        cityName: "Tunis",
-        countryName: "Tunisia",
-        rating: 4.7,
-        price: 0,
-        startDate: "2024-01-01",
-        endDate: "2024-01-02",
-        descriptionText: "Explore the rich culture and history of Tunis.",
-        category: "Destination",
-        thumbnails: [],
-        days: 1,
-      ),
-      OfferModel(
-        image: "assets/images/Istanbul.png",
-        cityName: "Istanbul",
-        countryName: "Turkey",
-        rating: 4.8,
-        price: 0,
-        startDate: "2024-01-01",
-        endDate: "2024-01-02",
-        descriptionText: "Visit the stunning city of Istanbul, where East meets West.",
-        category: "Destination",
-        thumbnails: [],
-        days: 1,
-      ),
-      OfferModel(
-        image: "assets/images/Jijel.png",
-        cityName: "Jijel",
-        countryName: "Algeria",
-        rating: 4.6,
-        price: 0,
-        startDate: "2024-01-01",
-        endDate: "2024-01-02",
-        descriptionText: "Relax in the serene landscapes of Jijel.",
-        category: "Destination",
-        thumbnails: [],
-        days: 1,
-      ),
-      OfferModel(
-        image: "assets/images/sahara.png",
-        cityName: "Sahara",
-        countryName: "Algeria",
-        rating: 4.9,
-        price: 0,
-        startDate: "2024-01-01",
-        endDate: "2024-01-02",
-        descriptionText: "Experience the magic of the Sahara desert.",
-        category: "Destination",
-        thumbnails: [],
-        days: 1,
-      ),
-    ];
-
-    // Simulated categories data
-    final categories = [
-      OfferModel(
-        image: "assets/images/cat01.png",
-        cityName: "Shopping",
-        countryName: "",
-        rating: 0,
-        price: 0,
-        startDate: "",
-        endDate: "",
-        descriptionText: "Explore the best shopping destinations.",
-        category: "Shopping",
-        thumbnails: [],
-        days: 0,
-      ),
-      OfferModel(
-        image: "assets/images/cat02.png",
-        cityName: "Swimming",
-        countryName: "",
-        rating: 0,
-        price: 0,
-        startDate: "",
-        endDate: "",
-        descriptionText: "Find great swimming spots.",
-        category: "Swimming",
-        thumbnails: [],
-        days: 0,
-      ),
-      OfferModel(
-        image: "assets/images/cat03.png",
-        cityName: "Mountains",
-        countryName: "",
-        rating: 0,
-        price: 0,
-        startDate: "",
-        endDate: "",
-        descriptionText: "Discover scenic mountain destinations.",
-        category: "Mountains",
-        thumbnails: [],
-        days: 0,
-      ),
-      OfferModel(
-        image: "assets/images/cat04.png",
-        cityName: "Camping",
-        countryName: "",
-        rating: 0,
-        price: 0,
-        startDate: "",
-        endDate: "",
-        descriptionText: "Enjoy the great outdoors with camping adventures.",
-        category: "Camping",
-        thumbnails: [],
-        days: 0,
-      ),
-    ];
-
-    // Simulated offers data
-    final offers = [
-      OfferModel(
-        image: 'assets/images/offer1.png',
-        cityName: 'To-Oran',
-        countryName: 'Algeria',
-        rating: 4.8,
-        price: 40000,
-        startDate: "2024-01-10",
-        endDate: "2024-01-15",
-        descriptionText: "A wonderful journey to Oran.",
-        category: "Tour",
-        thumbnails: [
-          'assets/images/offer1.png',
-          'assets/images/offer2.png',
-          'assets/images/offer3.png',
-        ],
-        days: 5,
-      ),
-      OfferModel(
-        image: 'assets/images/offer2.png',
-        cityName: 'To-Maldives',
-        countryName: 'Maldives',
-        rating: 4.7,
-        price: 45000,
-        startDate: "2024-01-20",
-        endDate: "2024-01-26",
-        descriptionText: "Relax in the Maldives.",
-        category: "Tour",
-        thumbnails: [
-          'assets/images/offer1.png',
-          'assets/images/offer2.png',
-          'assets/images/offer3.png',
-        ],
-        days: 6,
-      ),
-      OfferModel(
-        image: 'assets/images/offer3.png',
-        cityName: 'To-Paris',
-        countryName: 'France',
-        rating: 4.9,
-        price: 50000,
-        startDate: "2024-02-01",
-        endDate: "2024-02-07",
-        descriptionText: "Discover the romance of Paris.",
-        category: "Tour",
-        thumbnails: [
-          'assets/images/offer1.png',
-          'assets/images/offer2.png',
-          'assets/images/offer3.png',
-        ],
-        days: 7,
-      ),
-    ];
-
-    // Update the state with the fetched data
-    _updateState(
-      topOffer: topOffer,
-      places: places,
-      categories: categories,
-      offers: offers,
-    );
-  } catch (e) {
-    _handleError(e.toString());
+    try {
+      emit(OfferLoadingState());
+      final topOffer = await offerRepo.fetchTopOffer();
+      final places = await offerRepo.fetchPlaces();
+      final categories = await offerRepo.fetchCategories();
+      final offers = await offerRepo.fetchOffers();
+      
+      _updateState(
+        topOffer: topOffer,
+        places: places,
+        categories: categories,
+        offers: offers,
+      );
+    } catch (e) {
+      _handleError(e.toString());
+    }
   }
-}
+
+
+//   fetchInitialData() async {
+//   try {
+//     emit(OfferLoadingState());
+
+//     // Simulated top offer data
+//     final topOffer = OfferModel(
+//       image: 'assets/images/choosen_offer.png',
+//       cityName: "Today's Deal",
+//       countryName: "Special Offer",
+//       rating: 4.9,
+//       price: 10000.0,
+//       startDate: "2023-12-20",
+//       endDate: "2023-12-21",
+//       descriptionText: "It is a too good deal, you will travel with free food, plenty of free food.",
+//       category: "Limited Time Offer",
+//       thumbnails: [],
+//       days: 1,
+//     );
+
+//     // Simulated places data
+//     final places = [
+//       OfferModel(
+//         image: "assets/images/Annaba.png",
+//         cityName: "Annaba",
+//         countryName: "Algeria",
+//         rating: 4.5,
+//         price: 0,
+//         startDate: "2024-01-01",
+//         endDate: "2024-01-02",
+//         descriptionText: "Discover the beautiful coastal city of Annaba.",
+//         category: "Destination",
+//         thumbnails: [],
+//         days: 1,
+//       ),
+//       OfferModel(
+//         image: "assets/images/Tunis.png",
+//         cityName: "Tunis",
+//         countryName: "Tunisia",
+//         rating: 4.7,
+//         price: 0,
+//         startDate: "2024-01-01",
+//         endDate: "2024-01-02",
+//         descriptionText: "Explore the rich culture and history of Tunis.",
+//         category: "Destination",
+//         thumbnails: [],
+//         days: 1,
+//       ),
+//       OfferModel(
+//         image: "assets/images/Istanbul.png",
+//         cityName: "Istanbul",
+//         countryName: "Turkey",
+//         rating: 4.8,
+//         price: 0,
+//         startDate: "2024-01-01",
+//         endDate: "2024-01-02",
+//         descriptionText: "Visit the stunning city of Istanbul, where East meets West.",
+//         category: "Destination",
+//         thumbnails: [],
+//         days: 1,
+//       ),
+//       OfferModel(
+//         image: "assets/images/Jijel.png",
+//         cityName: "Jijel",
+//         countryName: "Algeria",
+//         rating: 4.6,
+//         price: 0,
+//         startDate: "2024-01-01",
+//         endDate: "2024-01-02",
+//         descriptionText: "Relax in the serene landscapes of Jijel.",
+//         category: "Destination",
+//         thumbnails: [],
+//         days: 1,
+//       ),
+//       OfferModel(
+//         image: "assets/images/sahara.png",
+//         cityName: "Sahara",
+//         countryName: "Algeria",
+//         rating: 4.9,
+//         price: 0,
+//         startDate: "2024-01-01",
+//         endDate: "2024-01-02",
+//         descriptionText: "Experience the magic of the Sahara desert.",
+//         category: "Destination",
+//         thumbnails: [],
+//         days: 1,
+//       ),
+//     ];
+
+//     // Simulated categories data
+//     final categories = [
+//       OfferModel(
+//         image: "assets/images/cat01.png",
+//         cityName: "Shopping",
+//         countryName: "",
+//         rating: 0,
+//         price: 0,
+//         startDate: "",
+//         endDate: "",
+//         descriptionText: "Explore the best shopping destinations.",
+//         category: "Shopping",
+//         thumbnails: [],
+//         days: 0,
+//       ),
+//       OfferModel(
+//         image: "assets/images/cat02.png",
+//         cityName: "Swimming",
+//         countryName: "",
+//         rating: 0,
+//         price: 0,
+//         startDate: "",
+//         endDate: "",
+//         descriptionText: "Find great swimming spots.",
+//         category: "Swimming",
+//         thumbnails: [],
+//         days: 0,
+//       ),
+//       OfferModel(
+//         image: "assets/images/cat03.png",
+//         cityName: "Mountains",
+//         countryName: "",
+//         rating: 0,
+//         price: 0,
+//         startDate: "",
+//         endDate: "",
+//         descriptionText: "Discover scenic mountain destinations.",
+//         category: "Mountains",
+//         thumbnails: [],
+//         days: 0,
+//       ),
+//       OfferModel(
+//         image: "assets/images/cat04.png",
+//         cityName: "Camping",
+//         countryName: "",
+//         rating: 0,
+//         price: 0,
+//         startDate: "",
+//         endDate: "",
+//         descriptionText: "Enjoy the great outdoors with camping adventures.",
+//         category: "Camping",
+//         thumbnails: [],
+//         days: 0,
+//       ),
+//     ];
+
+//     // Simulated offers data
+//     final offers = [
+//       OfferModel(
+//         image: 'assets/images/offer1.png',
+//         cityName: 'To-Oran',
+//         countryName: 'Algeria',
+//         rating: 4.8,
+//         price: 40000,
+//         startDate: "2024-01-10",
+//         endDate: "2024-01-15",
+//         descriptionText: "A wonderful journey to Oran.",
+//         category: "Tour",
+//         thumbnails: [
+//           'assets/images/offer1.png',
+//           'assets/images/offer2.png',
+//           'assets/images/offer3.png',
+//         ],
+//         days: 5,
+//       ),
+//       OfferModel(
+//         image: 'assets/images/offer2.png',
+//         cityName: 'To-Maldives',
+//         countryName: 'Maldives',
+//         rating: 4.7,
+//         price: 45000,
+//         startDate: "2024-01-20",
+//         endDate: "2024-01-26",
+//         descriptionText: "Relax in the Maldives.",
+//         category: "Tour",
+//         thumbnails: [
+//           'assets/images/offer1.png',
+//           'assets/images/offer2.png',
+//           'assets/images/offer3.png',
+//         ],
+//         days: 6,
+//       ),
+//       OfferModel(
+//         image: 'assets/images/offer3.png',
+//         cityName: 'To-Paris',
+//         countryName: 'France',
+//         rating: 4.9,
+//         price: 50000,
+//         startDate: "2024-02-01",
+//         endDate: "2024-02-07",
+//         descriptionText: "Discover the romance of Paris.",
+//         category: "Tour",
+//         thumbnails: [
+//           'assets/images/offer1.png',
+//           'assets/images/offer2.png',
+//           'assets/images/offer3.png',
+//         ],
+//         days: 7,
+//       ),
+//     ];
+
+//     // Update the state with the fetched data
+//     _updateState(
+//       topOffer: topOffer,
+//       places: places,
+//       categories: categories,
+//       offers: offers,
+//     );
+//   } catch (e) {
+//     _handleError(e.toString());
+//   }
+// }
 
 
 
@@ -281,7 +281,7 @@ class OfferCubit extends Cubit<OfferState> {
         emit(OfferLoadingState());
       }
       
-      final categories = await offerRepo.fetchcategories();
+      final categories = await offerRepo.fetchCategories();
       _updateState(categories: categories);
     } catch (e) {
       _handleError(e.toString());
