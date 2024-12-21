@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/screens/agency/forget_password_page.dart';
+import 'package:triptip/views/screens/agency/agencyProfile.dart';
+import 'package:triptip/views/screens/agency/forget_password_page_agency.dart';
 import 'package:triptip/views/screens/agency/signup_agency.dart';
-import 'package:triptip/views/screens/shared/landing_page.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
+
 
 class LoginPageAgency extends StatefulWidget {
   const LoginPageAgency({super.key});
@@ -27,7 +28,11 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       home: Scaffold(
+        appBar: AppBar(
+          leading: back_btn(context),
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -72,7 +77,7 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
                             child: TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                      context, ForgetPassword.pageRoute);
+                                      context, ForgetPasswordAgency.pageRoute);
                                 },
                                 child: Text(
                                   "Forgot password?",
@@ -83,7 +88,7 @@ class _LoginPageAgencyState extends State<LoginPageAgency> {
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(context, LandingPage.pageRoute);
+                                Navigator.pushNamed(context, AgencyScreen.pageRoute);
                               }                              
                             },
                             child: Text(

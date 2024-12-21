@@ -55,9 +55,9 @@ String? validateDate(String? date) {
     return 'Date is required';
   }
   // Validate date format (example: yyyy-mm-dd)
-  if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(date)) {
-    return 'Please enter a valid date in yyyy-mm-dd format';
-  }
+  // if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(date)) {
+  //   return 'Please enter a valid date in yyyy-mm-dd format';
+  // }
   return null;
 }
 

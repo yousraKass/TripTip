@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/logos.dart';
-import 'package:triptip/logic/form_validators.dart';
-import 'package:triptip/views/widgets/Forms_widgets.dart';
-import 'package:triptip/views/screens/shared/landing_page.dart';
+import 'package:triptip/views/widgets/Password_form_field.dart';
+import 'package:triptip/views/screens/agency/login_page_agency.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({super.key});
 
-  static const pageRoute = "/agency_forget_password_page";
+class NewPasswordClient extends StatefulWidget {
+  const NewPasswordClient({super.key});
+
+  static const pageRoute = "/new_password_client_page";
 
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
+  State<NewPasswordClient> createState() => _NewPasswordClientState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
+class _NewPasswordClientState extends State<NewPasswordClient> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController txt_controller_psd = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +42,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Forget Password",
+                      "Create New Password",
                       style: mainTitle,
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     Text(
-                      "Enter your email address below , we will send you an email to reset your password",
+                      "Keep your account secure by creating a new password",
                       style: subTitle,
                     ),
                     SizedBox(
@@ -59,18 +61,16 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          UserInput(
-                              context, "Enter your email", validateEmail, null),
+                          PasswordFormField(txtControllerPsd: txt_controller_psd),
                           SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(
-                                    context, LandingPage.pageRoute);
+                                Navigator.pushNamed(context, LoginPageAgency.pageRoute);  
                               }
                             },
                             child: Text(
-                              "Request code",
+                              "Save new password",
                               style: accounts_button_text_style,
                             ),
                             style: accounts_button_style(context),

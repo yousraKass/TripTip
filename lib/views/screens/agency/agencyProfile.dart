@@ -8,8 +8,8 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/data/repo/review_agency/ReviewText.dart';
 import 'package:triptip/views/widgets/ReviewItem.dart';
 import 'EditAgencyProfile.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
-
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+import 'package:triptip/views/screens/agency/add_offer.dart';
 
 class AgencyScreen extends StatefulWidget {
   static const pageRoute = '/AgencyProfile';
@@ -29,6 +29,7 @@ class _AgencyScreenState extends State<AgencyScreen> {
     // Initialize the future for agency data
     agencyDataFuture = agencyInformations.getAgencyData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +63,7 @@ class _AgencyScreenState extends State<AgencyScreen> {
           }
         },
       ),
-      bottomNavigationBar:BottomNavigationBarExample(),
+      bottomNavigationBar: BottomNavigationBarExampleAgency(),
     );
   }
 
@@ -101,27 +102,30 @@ class _AgencyScreenState extends State<AgencyScreen> {
                   ),
                 ),
                 child: Stack(
-                  children: [Positioned(
-                        top: 30,
-                        right: 20,
-                        child: IconButton(
-                          icon: Container(
-                            padding: const EdgeInsets.all(3),
-                            child: SizedBox(
-                              height: 28,
-                              width: 28,
-                              child: Image.asset(
-                                'assets/icons/settings.png',
-                                color: AppColors.black,
-                                fit: BoxFit.contain,
-                              ),
+                  children: [
+                    Positioned(
+                      top: 30,
+                      right: 20,
+                      child: IconButton(
+                        icon: Container(
+                          padding: const EdgeInsets.all(3),
+                          child: SizedBox(
+                            height: 28,
+                            width: 28,
+                            child: Image.asset(
+                              'assets/icons/settings.png',
+                              color: AppColors.black,
+                              fit: BoxFit.contain,
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, SettingsScreenAgency.pageRoute);
-                          },
                         ),
-                      ),],
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, SettingsScreenAgency.pageRoute);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -179,7 +183,8 @@ class _AgencyScreenState extends State<AgencyScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, EditAgencyProfileScreen.pageRoute);
+                      Navigator.pushNamed(
+                          context, EditAgencyProfileScreen.pageRoute);
                     }),
               ],
             ),
@@ -323,15 +328,24 @@ class _AgencyScreenState extends State<AgencyScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              AgencyTexts.offersTitle, // Use title from AgencyTexts
-              style: TextStyle(
-                fontFamily: FontFamily.bold,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+            child: Row(
+              children: [
+                Text(
+                  AgencyTexts.offersTitle, // Use title from AgencyTexts
+                  style: TextStyle(
+                    fontFamily: FontFamily.bold,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AddOfferPage.pageRoute);
+                    },
+                    icon: Icon(Icons.add))
+              ],
             ),
           ),
           const SizedBox(height: 10),
@@ -433,11 +447,10 @@ class _AgencyScreenState extends State<AgencyScreen> {
               time: limitedReviews[index].time,
               review: limitedReviews[index].review,
             ),
-            
-              const Divider(
-                color: Color.fromARGB(234, 224, 224, 224),
-                thickness: 3.0,
-              ),
+            const Divider(
+              color: Color.fromARGB(234, 224, 224, 224),
+              thickness: 3.0,
+            ),
           ],
         ),
       ),
@@ -459,7 +472,6 @@ class _AgencyScreenState extends State<AgencyScreen> {
           ],
         ));
   }
-  
 }
 
 class Contact extends StatelessWidget {

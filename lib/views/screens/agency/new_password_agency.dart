@@ -6,16 +6,16 @@ import 'package:triptip/views/widgets/Password_form_field.dart';
 import 'package:triptip/views/screens/agency/login_page_agency.dart';
 
 
-class NewPassword extends StatefulWidget {
-  const NewPassword({super.key});
+class NewPasswordAgency extends StatefulWidget {
+  const NewPasswordAgency({super.key});
 
-  static const pageRoute = "/new_password_page";
+  static const pageRoute = "/new_password_ agency_page";
 
   @override
-  State<NewPassword> createState() => _NewPasswordState();
+  State<NewPasswordAgency> createState() => _NewPasswordAgencyState();
 }
 
-class _NewPasswordState extends State<NewPassword> {
+class _NewPasswordAgencyState extends State<NewPasswordAgency> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController txt_controller_psd = TextEditingController();
 

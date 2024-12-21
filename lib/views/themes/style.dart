@@ -60,7 +60,7 @@ ButtonStyle LoginInWith_button_style(BuildContext context) {
   return ElevatedButton.styleFrom(
     backgroundColor: Colors.white,
     disabledBackgroundColor: Colors.white,
-    minimumSize: Size(MediaQuery.of(context).size.width * 0.5, 60),
+    minimumSize: Size(MediaQuery.of(context).size.width * 0.4, 60),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10),
       side: BorderSide(
@@ -75,18 +75,18 @@ ButtonStyle LoginInWith_button_style(BuildContext context) {
 
 TextStyle LoginInWith_button_text_style = TextStyle(
   fontFamily: FontFamily.medium,
-  fontSize: 16,
+  fontSize: 12,
   color: AppColors.black,
 );
 
 TextStyle dont_have_account = TextStyle(
   fontFamily: FontFamily.regular,
-  fontSize: 16,
+  fontSize: 12,
 );
 
 TextStyle create_account = TextStyle(
   fontFamily: FontFamily.medium,
-  fontSize: 16,
+  fontSize: 12,
   color: AppColors.black,
 );
 

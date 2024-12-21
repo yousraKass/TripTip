@@ -4,6 +4,8 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import '../../widgets/notification_card_agency.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
+
 
 class NotificationsAgency extends StatefulWidget {
   const NotificationsAgency({super.key});
@@ -30,7 +32,8 @@ class _NotificationsAgencyState extends State<NotificationsAgency> {
             style: navbarTitle,
           ),
         ),
-        // bottomNavigationBar: BottomNavigationBar(items: items),
+        bottomNavigationBar: BottomNavigationBarExampleAgency(),
+
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

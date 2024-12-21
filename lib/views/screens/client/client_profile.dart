@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Preferences_image_slider.dart';
-import 'package:triptip/views/widgets/logos.dart';
+import 'package:triptip/views/widgets/ClientrProfileHeader.dart';
+import 'package:triptip/views/screens/client/preferences.dart';
 import 'package:triptip/main.dart';
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 
 class ClientProfile extends StatefulWidget {
   const ClientProfile({super.key});
@@ -16,85 +18,33 @@ class ClientProfile extends StatefulWidget {
 
 class _ClientProfileState extends State<ClientProfile> {
   late Future<List> client_preferences;
-  void _editProfileName() {
-    // Logic to edit profile name
-    print("Edit profile name clicked");
-  }
-
-  void _editPreferences() {
-    // Logic to edit preferences
-    print("Edit preferences clicked");
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     client_preferences = preferences.GetUserPreferences();
     return Scaffold(
       backgroundColor: AppColors.white,
+      bottomNavigationBar: BottomNavigationBarExampleClient(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               // Header Section
-              Stack(
-                children: [
-                  Container(
-                    height: 250,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [AppColors.main, AppColors.white],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    left: 10,
-                    child: trip3(context),
-                  ),
-                  Positioned(
-                    top: 20,
-                    right: 60,
-                    child: IconButton(
-                      icon: const Icon(Icons.notifications, size: 30),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Positioned(
-                    top: 20,
-                    right: 10,
-                    child: IconButton(
-                      icon: const Icon(Icons.settings, size: 30),
-                      onPressed: () {},
-                    ),
-                  ),
-
-                  Positioned(
-                    bottom: 40,
-                    left: MediaQuery.of(context).size.width / 2 - 80,
-                    child: CircleAvatar(
-                      radius: 80,
-                      backgroundImage: AssetImage('assets/images/golang.png'),
-                    ),
-                  ),
-                ],
-              ),
+              buildHeader(context, {"image": "assets/images/agencypfp.png", "title": "Kassous Yousra"}), 
+              
+              //     Positioned(
+              //       top: 10,
+              //       left: 10,
+              //       child: trip3(context),
+              //     ),
+            
 
               const SizedBox(height: 40),
 
               Padding(
                 padding: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
                 child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children:const [
-                        Icon(Icons.person),
-                        SizedBox(width: 10),
-                        Text("Kassous yousra", style: user_info_style),
-                      ],
-                    ),
+                  children: [                    
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -125,7 +75,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
 
               // Preferences Section
               Row(
@@ -140,9 +90,20 @@ class _ClientProfileState extends State<ClientProfile> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: _editPreferences,
+                  icon: SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: Image.asset(
+                      'assets/icons/editer.png',
+                      height: 30,
+                      width: 30,
+                      color: AppColors.black,
+                    ),
                   ),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, MyPreferencesPage.pageRoute);
+                  }),
                 ],
               ),
               const SizedBox(height: 20),

@@ -4,6 +4,7 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/widgets/ReviewItem.dart'; // Assuming this widget exists
 import 'package:triptip/data/repo/review_agency/ReviewText.dart';
+import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 
 
 class ReviewScreenAgency extends StatefulWidget {
@@ -57,6 +58,7 @@ class _ReviewScreenAgencyState extends State<ReviewScreenAgency> {
           }
         },
       ),
+      bottomNavigationBar:BottomNavigationBarExampleAgency(),
     );
   }
 

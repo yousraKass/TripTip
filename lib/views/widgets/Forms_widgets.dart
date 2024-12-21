@@ -23,7 +23,8 @@ Widget UserInput(BuildContext context, String placeholder, Function validate,
           hintStyle: field_hint,
           border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.shade500,                                    
+              color: Colors.grey.shade500,
+                                    
               width: 0.5,
             ),
           ),

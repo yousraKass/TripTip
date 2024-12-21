@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/screens/agency/agencyProfile.dart';
 
-class BottomNavigationBarExample extends StatefulWidget {
-  const BottomNavigationBarExample({super.key});
+import 'package:triptip/views/screens/shared/landing_page.dart';
+import 'package:triptip/views/screens/agency/notifications_agency.dart';
+import 'package:triptip/views/screens/shared/search_page.dart';
+import 'package:triptip/views/screens/client/favorite_page.dart';
+import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
+
+class BottomNavigationBarExampleAgency extends StatefulWidget {
+  const BottomNavigationBarExampleAgency({super.key});
 
   @override
-  _BottomNavigationBarExampleState createState() =>
-      _BottomNavigationBarExampleState();
+  _BottomNavigationBarExampleAgencyState createState() =>
+      _BottomNavigationBarExampleAgencyState();
 }
 
-class _BottomNavigationBarExampleState
-    extends State<BottomNavigationBarExample> {
+class _BottomNavigationBarExampleAgencyState
+    extends State<BottomNavigationBarExampleAgency> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -22,19 +27,19 @@ class _BottomNavigationBarExampleState
   switch (index) {
     case 0:
       print('Home tapped');
-      
+      Navigator.pushNamed(context, LandingPage.pageRoute);
       break;
     case 1:
       print('Notifications tapped');
-      
+      Navigator.pushNamed(context, NotificationsAgency.pageRoute);
       break;
     case 3:
       print('Favorites tapped');
-      
+      Navigator.pushNamed(context, FavoritePage.pageRoute);
       break;
     case 4:
       print('Profile tapped');
-      Navigator.pushNamed(context, AgencyScreen.pageRoute);
+      Navigator.pushNamed(context, SignUpChoicePage.pageRoute);
       break;
     default:
       print('Unknown item tapped');
@@ -132,8 +137,7 @@ class _BottomNavigationBarExampleState
                 Colors.transparent, // Make the Material background transparent
             child: InkWell(
               onTap: () {
-                print('Search button tapped');
-                // Add your search button action here
+                Navigator.pushNamed(context, SearchPage.pageRoute);
               },
               borderRadius: BorderRadius.circular(50), // Circular ripple effect
               child: Container(

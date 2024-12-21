@@ -3,10 +3,11 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/data/repo/offer/offer_model.dart';
-import 'package:triptip/views/widgets/BottomNavigationBar.dart';
+import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 
 class OffersPage extends StatefulWidget {
   const OffersPage({super.key});
+  static const pageRoute = '/OffersPage';
 
   @override
   _OffersPageState createState() => _OffersPageState();
@@ -19,7 +20,7 @@ class _OffersPageState extends State<OffersPage> {
       backgroundColor: AppColors.white,
       appBar: _buildAppBar(context),
       body: _buildOffersList(),
-      bottomNavigationBar: const BottomNavigationBarExample(),
+      bottomNavigationBar: const BottomNavigationBarExampleClient(),
     );
   }
 
@@ -27,11 +28,13 @@ class _OffersPageState extends State<OffersPage> {
     return AppBar(
       leading: IconButton(
         icon: Image.asset(
-          'assets/icons/undo_icon.png',
+          'assets/icons/back.png',
           width: 50,
           height: 50,
         ),
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.pop(context),
+        },
       ),
       centerTitle: true,
       title: const Text(

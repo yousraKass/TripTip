@@ -1,32 +1,59 @@
 # ninja log v5
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/libflutter_linux_gtk.so	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_engine.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_value.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_view.h	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	6dfa065e4a76b188
-5	23384	0	flutter/_phony_	6dfa065e4a76b188
-5	23384	0	/home/yousra/1cs/mobile dev/project/TripTip/build/linux/x64/debug/flutter/_phony_	6dfa065e4a76b188
-23424	25232	1733439983605580408	plugins/file_selector_linux/CMakeFiles/file_selector_linux_plugin.dir/file_selector_plugin.cc.o	d6523d93d0e21000
-23423	25267	1733439983637580044	CMakeFiles/triptip.dir/flutter/generated_plugin_registrant.cc.o	f711dbbebf17abf0
-23415	25412	1733439983775578474	CMakeFiles/triptip.dir/my_application.cc.o	49f61a23fa9aa1ce
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_engine.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/libflutter_linux_gtk.so	6dfa065e4a76b188
+11198	11471	0	CMakeFiles/install.util	b6afa68345abe88f
 23396	25564	1733439983936576644	CMakeFiles/triptip.dir/main.cc.o	6c590814ed45758d
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_view.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	6dfa065e4a76b188
+10	9652	0	flutter/_phony_	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	6dfa065e4a76b188
+9654	10831	1734538025818387590	CMakeFiles/triptip.dir/flutter/generated_plugin_registrant.cc.o	f711dbbebf17abf0
+10888	11198	1734538026188399975	intermediates_do_not_run/triptip	12115eb5d0205c48
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	6dfa065e4a76b188
+23424	25232	1733439983605580408	plugins/file_selector_linux/CMakeFiles/file_selector_linux_plugin.dir/file_selector_plugin.cc.o	d6523d93d0e21000
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	6dfa065e4a76b188
+9653	10887	1734538025872389398	CMakeFiles/triptip.dir/my_application.cc.o	49f61a23fa9aa1ce
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_value.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	6dfa065e4a76b188
+9086	9334	1733444335967486598	plugins/file_selector_linux/libfile_selector_linux_plugin.so	f975fe5256df939d
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/build/linux/x64/debug/flutter/_phony_	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	6dfa065e4a76b188
+10	9652	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	6dfa065e4a76b188
 23431	25683	1733439984049575384	plugins/file_selector_linux/CMakeFiles/file_selector_linux_plugin.dir/messages.g.cc.o	810626e2d7c3ab66
-25683	26049	1733439984426571297	plugins/file_selector_linux/libfile_selector_linux_plugin.so	22f3e340b59b6af1
-26050	26446	1733439984822567005	intermediates_do_not_run/triptip	c03851747799ec90
-26446	26827	0	CMakeFiles/install.util	b6afa68345abe88f
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/libflutter_linux_gtk.so	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_engine.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_value.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/fl_view.h	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	6dfa065e4a76b188
+22	10140	0	flutter/_phony_	6dfa065e4a76b188
+22	10140	0	/home/yousra/1cs/mobile dev/project/TripTip/build/linux/x64/debug/flutter/_phony_	6dfa065e4a76b188
+10141	11641	1734619981322689274	CMakeFiles/triptip.dir/flutter/generated_plugin_registrant.cc.o	f711dbbebf17abf0
+10141	11757	1734619981437691957	CMakeFiles/triptip.dir/my_application.cc.o	49f61a23fa9aa1ce
+11757	12082	1734619981764699586	intermediates_do_not_run/triptip	12115eb5d0205c48
+12082	12329	0	CMakeFiles/install.util	b6afa68345abe88f

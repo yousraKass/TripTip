@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/screens/agency/login_page_agency.dart';
+import 'package:triptip/views/screens/client/login_page_client.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/themes/colors.dart';
+import 'package:triptip/views/widgets/Password_form_field.dart';
+
 
 class SignUpClient extends StatefulWidget {
   const SignUpClient({super.key});
@@ -18,7 +20,6 @@ class SignUpClient extends StatefulWidget {
 class _SignUpClientState extends State<SignUpClient> {
   // form key
   final _formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
   String? selectedCountryCode;
   bool isChecked = false;
 
@@ -28,6 +29,9 @@ class _SignUpClientState extends State<SignUpClient> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          leading: back_btn(context),
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -88,54 +92,7 @@ class _SignUpClientState extends State<SignUpClient> {
                         
                           // password
                           InputLabel("Password"),
-                          Center(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              child: TextFormField(
-                                obscureText: _obscureText,
-                                decoration: InputDecoration(
-                                  hintText: "Enter your password",
-                                  hintStyle: field_hint,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade500,
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey
-                                          .shade500, // Set the border color when the field is enabled
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: AppColors
-                                          .main, // Set the border color when the field is focused
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _obscureText
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureText = !_obscureText;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                controller: txt_controller_psd,
-                                validator: (value) {
-                                  return validatePassword(value);
-                                },
-                              ),
-                            ),
-                          ),
+                          PasswordFormField(txtControllerPsd: txt_controller_psd),
 
                           SizedBox(height: 20),
                           Row(
@@ -174,7 +131,12 @@ class _SignUpClientState extends State<SignUpClient> {
                           ),
                           SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushNamed(
+                                    context, LoginPageClient.pageRoute);
+                              }
+                            },
                             child: Text(
                               "Create account",
                               style: accounts_button_text_style,
@@ -196,7 +158,7 @@ class _SignUpClientState extends State<SignUpClient> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, LoginPageAgency.pageRoute);
+                            Navigator.pushNamed(context, LoginPageClient.pageRoute);
                           },
                           child: Text(
                             'Log In ',
