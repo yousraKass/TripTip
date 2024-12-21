@@ -3,7 +3,8 @@ import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
-import 'package:triptip/views/screens/agency/login_page_agency.dart';
+import 'package:triptip/views/screens/client/login_page_client.dart';
+
 
 
 class NewPasswordClient extends StatefulWidget {
@@ -66,7 +67,7 @@ class _NewPasswordClientState extends State<NewPasswordClient> {
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(context, LoginPageAgency.pageRoute);  
+                                Navigator.pushNamed(context, LoginPageClient.pageRoute);  
                               }
                             },
                             child: Text(

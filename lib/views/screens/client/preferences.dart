@@ -1,128 +1,155 @@
+// my_preferences_page with bloc
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/themes/fonts.dart';
-import 'package:triptip/main(1).dart';
 import 'package:triptip/views/widgets/Preference_widget.dart';
-
-const widgetInRow = 2;
-
-class MyPreferencesPage extends StatefulWidget {
+import 'package:triptip/bloc/client/preferences_cubit.dart';
+import 'package:triptip/bloc/client/preferences_state.dart';
+import 'package:triptip/data/repositories/client/preferences_repository.dart';
+class MyPreferencesPage extends StatelessWidget {
   static const pageRoute = "client_preferences_page";
+  late final PrefRepository = PreferencesRepository();
+  late final   PrefCubit = PreferencesCubit(PrefRepository)..loadPreferences();
+   MyPreferencesPage({Key? key}) : super(key: key);
+
   @override
-  _MyPreferencesPageState createState() => _MyPreferencesPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => PrefCubit,
+      child: const PreferencesView(),
+    );
+  }
 }
 
-class _MyPreferencesPageState extends State<MyPreferencesPage> {
-  // List of interests
-  late Future<List> interests;
-  late List localInterests;
-
-  @override
-  void initState() {
-    interests = preferences.GetUserPreferences();
-    super.initState();
-  }
+class PreferencesView extends StatelessWidget {
+  const PreferencesView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        elevation: 0,
-        title: Text(
-          'My preferences',
-          style: navbarTitle,
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "I am interested in: ",
-              style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18),
-            ),
-            SizedBox(height: 16),
-            Expanded(
-              child: FutureBuilder<List>(
-                future: interests,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text("Error: ${snapshot.error}"));
-                  } else if (snapshot.hasData) {
-                    localInterests = snapshot.data!;
-                    return getGrid(context, localInterests);
-                  } else {
-                    return Center(child: Text("No interests available."));
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: AppColors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextButton(
-              onPressed: () {
-                // just move to the next page
-                Navigator.pushNamed(context, "next_page_route");
-              },
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.main,
-              ),
-              child: Text("Skip"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Handle Back button press
-                // move to the next page and save user preferences
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.main,
-                // Customize color
-              ),
-              child: Text(
-                "Save",
-                style: TextStyle(color: AppColors.white),
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar: _buildAppBar(),
+      body: const PreferencesBody(),
+      bottomNavigationBar: const PreferencesBottomBar(),
     );
   }
 
-  Widget getGrid(BuildContext context, List interests) {
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      backgroundColor: AppColors.white,
+      elevation: 0,
+      title: Text(
+        'My preferences',
+        style: navbarTitle,
+      ),
+      centerTitle: true,
+    );
+  }
+}
+
+class PreferencesBody extends StatelessWidget {
+  const PreferencesBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "I am interested in: ",
+            style: TextStyle(fontFamily: FontFamily.medium, fontSize: 18),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: BlocBuilder<PreferencesCubit, PreferencesState>(
+              builder: (context, state) {
+                return switch (state) {
+                  PreferencesLoading() => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  PreferencesError() => Center(
+                      child: Text("Error: ${state.message}"),
+                    ),
+                  PreferencesLoaded() => PreferencesGrid(
+                      preferences: state.preferences,
+                    ),
+                  _ => const Center(
+                      child: Text("No interests available."),
+                    ),
+                };
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PreferencesGrid extends StatelessWidget {
+  final List preferences;
+
+  const PreferencesGrid({
+    Key? key,
+    required this.preferences,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
         childAspectRatio: 0.85,
       ),
-      itemCount: interests.length,
+      itemCount: preferences.length,
       itemBuilder: (context, index) {
-        final interest = interests[index];
+        final preference = preferences[index];
         return GestureDetector(
           onTap: () {
-            // only toggle data locally
-            interest['selected'] = !interest['selected'];
-            setState(() {});
+            context.read<PreferencesCubit>().togglePreference(preference);
           },
-          child: PreferenceCell(context, interest, "preferences"),
+          child: PreferenceCell(context, preference, "preferences"),
         );
       },
+    );
+  }
+}
+
+class PreferencesBottomBar extends StatelessWidget {
+  const PreferencesBottomBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: AppColors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, "next_page_route"),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.main,
+            ),
+            child: const Text("Skip"),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.main,
+            ),
+            child: Text(
+              "Save",
+              style: TextStyle(color: AppColors.white),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

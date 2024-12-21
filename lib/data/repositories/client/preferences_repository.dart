@@ -1,4 +1,4 @@
-import 'package:triptip/bloc/models/client/preferences_model.dart';
+import 'package:triptip/data/models/client/preferences_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

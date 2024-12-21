@@ -1,5 +1,5 @@
-import 'package:triptip/bloc/models/client/client_model.dart';
-import 'package:triptip/bloc/models/client/preferences_model.dart';
+import 'package:triptip/data/models/client/client_model.dart';
+import 'package:triptip/data/models/client/preferences_model.dart';
 
 abstract class ClientProfileState {}
 

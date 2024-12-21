@@ -1,131 +1,152 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Preferences_image_slider.dart';
 import 'package:triptip/views/widgets/ClientrProfileHeader.dart';
-import 'package:triptip/views/screens/client/preferences.dart';
-import 'package:triptip/main(1).dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+import 'package:triptip/bloc/client/client_profile_cubit.dart';
+import 'package:triptip/bloc/client/client_profile_state.dart';
+import 'package:triptip/views/screens/client/preferences.dart';
+import 'package:triptip/data/repositories/client/client_repo.dart';
+import 'package:triptip/data/models/client/preferences_model.dart';
 
-class ClientProfile extends StatefulWidget {
-  const ClientProfile({super.key});
-
+class ClientProfile extends StatelessWidget {
+  ClientProfile({super.key});
+  late final clientRepository = ClientRepository();
+  late final clientCubit = ClientProfileCubit(clientRepository)
+    ..loadClientProfile();
   static const pageRoute = "/client_profile";
 
   @override
-  State<ClientProfile> createState() => _ClientProfileState();
-}
-
-class _ClientProfileState extends State<ClientProfile> {
-  late Future<List> client_preferences;
-  
-  @override
   Widget build(BuildContext context) {
-    client_preferences = preferences.GetUserPreferences();
     return Scaffold(
       backgroundColor: AppColors.white,
       bottomNavigationBar: BottomNavigationBarExampleClient(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // Header Section
-              buildHeader(context, {"image": "assets/images/agencypfp.png", "title": "Kassous Yousra"}), 
-              
-              //     Positioned(
-              //       top: 10,
-              //       left: 10,
-              //       child: trip3(context),
-              //     ),
-            
+        child: BlocProvider(
+          create: (context) => clientCubit,
+          child: SingleChildScrollView(
+            child: BlocBuilder<ClientProfileCubit, ClientProfileState>(
+              builder: (context, state) {
+                if (state is ClientProfileLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is ClientProfileError) {
+                  return Center(child: Text('Error: ${state.errorMessage}'));
+                } else if (state is ClientProfileLoaded) {
+                  final profile = state.profile;
+                  final preferences = state.preferences;
 
-              const SizedBox(height: 40),
+                  return Column(
+                    children: [
+                      // Header Section
+                      buildHeader(context, {
+                        "image": profile.imagePath,
+                        "title": profile.fullName,
+                      }),
+                      const SizedBox(height: 40),
 
-              Padding(
-                padding: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
-                child: Column(
-                  children: [                    
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.email),
-                        SizedBox(width: 10),
-                        Text("kassousyousra@gmail.com", style: user_info_style),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.location_on),
-                        SizedBox(width: 10),
-                        Text("Canberra ACT 2601, Australia", style: user_info_style),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.calendar_today),
-                        SizedBox(width: 10),
-                        Text("03 décembre 2004", style: user_info_style),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 50),
+                      // User Info Section
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 30, top: 10, bottom: 10),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            _buildInfoRow(
+                              icon: Icons.email,
+                              text: profile.getEmail ?? 'No email provided',
+                            ),
+                            const SizedBox(height: 20),
+                            _buildInfoRow(
+                              icon: Icons.location_on,
+                              text: profile.getWilayaName ?? 'No wilaya',
+                            ),
+                            const SizedBox(height: 20),
+                            _buildInfoRow(
+                              icon: Icons.calendar_today,
+                              text: profile.getBirthdate ?? 'No birthdate',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 50),
 
-              // Preferences Section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      "My preferences:",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  IconButton(
-                  icon: SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: Image.asset(
-                      'assets/icons/editer.png',
-                      height: 30,
-                      width: 30,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        context, MyPreferencesPage.pageRoute);
-                  }),
-                ],
-              ),
-              const SizedBox(height: 20),
-              FutureBuilder<List>(
-                future: client_preferences,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Text('No preferences found');
-                  } else {
-                    return MyCarousel(
-                        data: snapshot.data as List<Map<String, dynamic>>);
-                  }
-                },
-              ),
-            ],
+                      // Preferences Section
+                      _buildPreferencesSection(context, preferences),
+                    ],
+                  );
+                } else {
+                  return const Center(child: Text('Unknown state'));
+                }
+              },
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildInfoRow({required IconData icon, required String text}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(icon),
+        const SizedBox(width: 10),
+        Text(text, style: user_info_style),
+      ],
+    );
+  }
+
+  Widget _buildPreferencesSection(
+      BuildContext context, List<Preference> preferences) {
+    final preferenceMaps = preferences
+        .map((pref) => {
+              'name': pref.name,
+              'selected': pref.selected,
+              'imageUrl': pref.imageUrl,
+            })
+        .toList();
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                "My preferences:",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            IconButton(
+              icon: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset(
+                  'assets/icons/editer.png',
+                  height: 30,
+                  width: 30,
+                  color: AppColors.black,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyPreferencesPage(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        preferences.isEmpty
+            ? const Text('No preferences found')
+            : MyCarousel(data: preferenceMaps),
+      ],
     );
   }
 }

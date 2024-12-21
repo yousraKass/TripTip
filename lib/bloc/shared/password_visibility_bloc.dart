@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:triptip/bloc/events/password_event_visible.dart';
-import 'package:triptip/bloc/states/password_state_visible.dart';
+import 'package:triptip/bloc/shared/password_event_visible.dart';
+import 'package:triptip/bloc/shared/password_state_visible.dart';
 
 
 // Bloc

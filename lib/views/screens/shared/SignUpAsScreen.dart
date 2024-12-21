@@ -1,93 +1,101 @@
 import 'package:flutter/material.dart';
-import 'package:triptip/views/screens/agency/signup_agency.dart';
-import 'package:triptip/views/screens/client/signup_client.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:triptip/views/widgets/logos.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
-
-enum SignUpAs { Client, Agency }
-SignUpAs role = SignUpAs.Client;
+import 'package:triptip/bloc/shared/choice_bloc.dart';
+import 'package:triptip/bloc/shared/choice_state.dart';
+import 'package:triptip/bloc/shared/choice_event.dart';
+import 'package:triptip/views/screens/agency/signup_agency.dart';
+import 'package:triptip/views/screens/client/signup_client.dart';
 
 class SignUpChoicePage extends StatelessWidget {
-  static const pageRoute = '/SignAppUs';
-  
+  static const pageRoute = '/SignUpChoicePage';
+
   const SignUpChoicePage({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Enhanced Logo Section
-            trip2(context),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title and subtitle with enhanced styling
-                  const Text(
-                    'Create account',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2F2F2F),
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Container(
-                    width: size.width * 0.8,
-                    child: const Text(
-                      'Get the best out of TripTip by creating an account',
+      body: BlocListener<ChoiceBloc, ChoiceState>(
+        listener: (context, state) {
+          if (state is ChoiceSelected) {
+            if (state.role == SignUpRole.Client) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpClient()),
+              );
+            } else if (state.role == SignUpRole.Agency) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpAgency()),
+              );
+            }
+          }
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              trip2(context),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Create account',
                       style: TextStyle(
-                        color: Color(0xFF757575),
-                        fontSize: 16,
-                        height: 1.5,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2F2F2F),
+                        letterSpacing: 0.5,
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 12),
+                    Container(
+                      width: size.width * 0.8,
+                      child: const Text(
+                        'Get the best out of TripTip by creating an account',
+                        style: TextStyle(
+                          color: Color(0xFF757575),
+                          fontSize: 16,
+                          height: 1.5,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
 
-                  const SizedBox(height: 40),
+                    // Client Account Choice
+                    _buildEnhancedChoiceCard(
+                      context: context,
+                      icon: Icons.person,
+                      title: 'Client Account',
+                      description:
+                          'Create a personal account to plan your trips',
+                      onTap: () {
+                        context.read<ChoiceBloc>().add(ChooseClient());
+                      },
+                    ),
+                    const SizedBox(height: 20),
 
-                  // Enhanced choice cards
-                  _buildEnhancedChoiceCard(
-                    context: context,
-                    icon: Icons.person,
-                    title: 'Client Account',
-                    description: 'Create a personal account to plan your trips',
-                    onTap: () {
-                      role = SignUpAs.Client;
-                      Navigator.pushNamed(context, SignUpClient.pageRoute);
-                    },
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  _buildEnhancedChoiceCard(
-                    context: context,
-                    icon: Icons.business,
-                    title: 'Agency Account',
-                    description: 'Create a business account to manage travel services',
-                    onTap: () {
-                      role = SignUpAs.Agency;
-                      Navigator.pushNamed(context, SignUpAgency.pageRoute);
-                    },
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  const SizedBox(height: 32),
-
-                  // Enhanced login link
-                 
-                ],
+                    // Agency Account Choice
+                    _buildEnhancedChoiceCard(
+                      context: context,
+                      icon: Icons.business,
+                      title: 'Agency Account',
+                      description:
+                          'Create a business account to manage travel services',
+                      onTap: () {
+                        context.read<ChoiceBloc>().add(ChooseAgency());
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBarExampleClient(),

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../events/choice_event.dart';
-import '../states/choice_state.dart';
+import 'choice_event.dart';
+import 'choice_state.dart';
 
 class ChoiceBloc extends Bloc<ChoiceEvent, ChoiceState> {
   ChoiceBloc() : super(ChoiceInitial()) {

@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:triptip/logic/form_validators.dart';
-import 'package:triptip/bloc/events/agency/agency_event.dart';
-import 'package:triptip/bloc/states/agency/agency_state.dart';
-import 'package:triptip/bloc/repositories/agency/agency_repo.dart';
-import 'package:triptip/bloc/models/agency/agency_model.dart';
+import 'package:triptip/bloc/agency/agency_event.dart';
+import 'package:triptip/bloc/agency/agency_state.dart';
+import 'package:triptip/data/repositories/agency/agency_repo.dart';
+import 'package:triptip/data/models/agency/agency_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Bloc

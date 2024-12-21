@@ -1,4 +1,4 @@
-import 'package:triptip/bloc/models/client/client_model.dart';
+import 'package:triptip/data/models/client/client_model.dart';
 
 abstract class ClientState {}
 

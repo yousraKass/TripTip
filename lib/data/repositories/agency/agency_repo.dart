@@ -1,21 +1,24 @@
+// agency_repository.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:triptip/bloc/models/client/client_model.dart';
+import 'package:triptip/data/models/agency/agency_model.dart';
 
-class ClientRepository {
-  final String baseUrl = 'http://localhost:3000/TripTip/client';
 
-  Future<ClientModel> signUp(ClientModel client) async {
+class AgencyRepository {
+  final String baseUrl =
+      'http://localhost:3000/TripTip'; 
+
+  Future<AgencyModel> signUpAgency(AgencyModel agency) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/signup'),
+        Uri.parse('$baseUrl/agency/signup'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode(client.toJson()),
+        body: json.encode(agency.toJson()),
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         final dynamic data = json.decode(response.body);
-        return ClientModel.fromJson(data);
+        return AgencyModel.fromJson(data);
       } else {
         throw Exception('Failed to sign up: ${response.body}');
       }
@@ -25,7 +28,7 @@ class ClientRepository {
   }
 
   //for login
-   Future<ClientModel> loginClient({
+  Future<AgencyModel> loginAgency({
     required String email,
     required String password,
     
@@ -33,7 +36,7 @@ class ClientRepository {
     try {
       // Adjust the login endpoint based on the role
       final loginResponse = await http.post(
-        Uri.parse('$baseUrl/login'),
+        Uri.parse('$baseUrl/agency'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': email,
@@ -60,12 +63,12 @@ class ClientRepository {
     }
   }
 
-  Future<ClientModel> fetchUserData(
+  Future<AgencyModel> fetchUserData(
       int id, String token, String role) async {
     try {
     
       final response = await http.get(
-        Uri.parse('$baseUrl/login/$role/$id'),
+        Uri.parse('$baseUrl/$role/$id'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -74,48 +77,12 @@ class ClientRepository {
 
       if (response.statusCode == 200) {
         final dynamic data = json.decode(response.body);
-        return ClientModel.fromJson(data);
+        return AgencyModel.fromJson(data);
       } else {
         throw Exception('Failed to fetch user data');
       }
     } catch (e) {
       throw Exception('Failed to fetch user profile: $e');
-    }
-  }
-
-   // Fetch client profile 
-  Future<ClientModel> fetchClientProfile() async {
-    try {
-      final response = await http.get(
-        Uri.parse('$baseUrl/profile/info:1'),
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        return ClientModel.fromJson(data);
-      } else {
-        throw Exception('Failed to load client profile: ${response.body}');
-      }
-    } catch (e) {
-      throw Exception('Failed to connect to the server: $e');
-    }
-  }
-
-  // Update client profile  
-  Future<void> updateClientProfile(ClientModel profile) async {
-    try {
-      final response = await http.put(
-        Uri.parse('$baseUrl/profile/editinfo'),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode(profile.toJson()),
-      );
-
-      if (response.statusCode != 200) {
-        throw Exception('Failed to update client profile: ${response.body}');
-      }
-    } catch (e) {
-      throw Exception('Failed to connect to the server: $e');
     }
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:triptip/views/widgets/offer_card.dart';
 import 'package:triptip/views/widgets/search_bar_widget.dart';
@@ -13,7 +12,8 @@ import 'package:triptip/views/screens/agency/notifications_agency.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'OfferScreen.dart';
 import 'search_page.dart';
-
+import 'package:triptip/bloc/shared/choice_bloc.dart';
+import 'package:triptip/bloc/shared/choice_state.dart';
 import 'offers_page.dart';
 
 
@@ -66,11 +66,11 @@ class LandingPage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                
-                               MaterialPageRoute(
-                                    builder: (context) => role == SignUpAs.Client ?
-                                         NotificationsClient()
-                                        : NotificationsAgency (),
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      final role = context.read<ChoiceBloc>().state.role;
+                                      return role == SignUpRole.Client ? NotificationsClient() : NotificationsAgency();
+                                    },
                                   ),
                                 );
                               },
@@ -84,11 +84,11 @@ class LandingPage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                
                                   MaterialPageRoute(
-                                    builder: (context) => role == SignUpAs.Client ?
-                                         SettingsScreenClient ()
-                                        : SettingsScreenAgency (),
+                                    builder: (context) {
+                                      final role = context.read<ChoiceBloc>().state.role;
+                                      return role == SignUpRole.Client ? SettingsScreenClient() : SettingsScreenAgency();
+                                    },
                                   ),
                                 );
                               },
@@ -271,7 +271,12 @@ class LandingPage extends StatelessWidget {
 
         ],
       ),
-      bottomNavigationBar:role == SignUpAs.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency(),
+      bottomNavigationBar: BlocBuilder<ChoiceBloc, ChoiceState>(
+        builder: (context, state) {
+          final role = state.role;
+          return role == SignUpRole.Client ? BottomNavigationBarExampleClient() : BottomNavigationBarExampleAgency();
+        },
+      ),
     );
   }
 
