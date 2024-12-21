@@ -48,7 +48,7 @@ class OfferService {
 
   Future<OfferData> getOfferDetails() async {
     // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
 
     return OfferData(
       cityName: 'Annaba',

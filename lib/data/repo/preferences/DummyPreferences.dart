@@ -15,13 +15,13 @@ class Dummypreferences extends AbstractPreferenes{
 
 
   Future<List<Map<String,dynamic>>> GetUserPreferences() async {
-    await Future.delayed(Duration(seconds: 2));
+    // await Future.delayed(Duration(seconds: 2));
     return interests;
 
   }
 
   Future<bool> TogglePreference(int index) async{
-    await Future.delayed(Duration(seconds: 2));
+    // await Future.delayed(Duration(seconds: 2));
 
     interests[index]["selected"] = !interests[index]["selected"] ;
     return true;

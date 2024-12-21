@@ -1,0 +1,32 @@
+com.example.triptip.app-fragment-1.7.1-0 /home/yousra/.gradle/caches/transforms-3/0c34857453a37004ca97378f37040f3f/transformed/fragment-1.7.1/res
+com.example.triptip.app-jetified-tracing-1.2.0-1 /home/yousra/.gradle/caches/transforms-3/16cec01517a0d390ac2219d297fe9640/transformed/jetified-tracing-1.2.0/res
+com.example.triptip.app-jetified-datastore-1.0.0-2 /home/yousra/.gradle/caches/transforms-3/35bc2af410d81d88f48aa467a44aed86/transformed/jetified-datastore-1.0.0/res
+com.example.triptip.app-lifecycle-viewmodel-2.7.0-3 /home/yousra/.gradle/caches/transforms-3/3920096d01dba3c577d42aa02feb75e9/transformed/lifecycle-viewmodel-2.7.0/res
+com.example.triptip.app-jetified-startup-runtime-1.1.1-4 /home/yousra/.gradle/caches/transforms-3/409de31f8a0f417cc431ff2121f857e0/transformed/jetified-startup-runtime-1.1.1/res
+com.example.triptip.app-jetified-window-java-1.2.0-5 /home/yousra/.gradle/caches/transforms-3/452500a2aef80f6c2126e045d8a33c32/transformed/jetified-window-java-1.2.0/res
+com.example.triptip.app-jetified-core-ktx-1.13.1-6 /home/yousra/.gradle/caches/transforms-3/52a911520845f3fbbd6d0a4ba5f51fc1/transformed/jetified-core-ktx-1.13.1/res
+com.example.triptip.app-jetified-annotation-experimental-1.4.0-7 /home/yousra/.gradle/caches/transforms-3/556ccadc3a24ac8e6b13ad8c8f3402ec/transformed/jetified-annotation-experimental-1.4.0/res
+com.example.triptip.app-jetified-activity-1.9.2-8 /home/yousra/.gradle/caches/transforms-3/5a974816f21fec26995beb8c2a6649f4/transformed/jetified-activity-1.9.2/res
+com.example.triptip.app-jetified-datastore-preferences-1.0.0-9 /home/yousra/.gradle/caches/transforms-3/62fe9f751a60ee5cec9e22eeaff34326/transformed/jetified-datastore-preferences-1.0.0/res
+com.example.triptip.app-lifecycle-livedata-core-2.7.0-10 /home/yousra/.gradle/caches/transforms-3/7562d7ba9102cc05824b5129b8ccb133/transformed/lifecycle-livedata-core-2.7.0/res
+com.example.triptip.app-core-runtime-2.2.0-11 /home/yousra/.gradle/caches/transforms-3/758c285b31c337f307e7f033b13a60b1/transformed/core-runtime-2.2.0/res
+com.example.triptip.app-lifecycle-livedata-2.7.0-12 /home/yousra/.gradle/caches/transforms-3/88995675c60692b1dd34fbb6b80ff3a2/transformed/lifecycle-livedata-2.7.0/res
+com.example.triptip.app-jetified-profileinstaller-1.3.1-13 /home/yousra/.gradle/caches/transforms-3/93240f24275e58ea5b576e387d2a7864/transformed/jetified-profileinstaller-1.3.1/res
+com.example.triptip.app-jetified-core-1.0.0-14 /home/yousra/.gradle/caches/transforms-3/9ee4997ff0bb2050cd0f3abcb791efa6/transformed/jetified-core-1.0.0/res
+com.example.triptip.app-jetified-lifecycle-process-2.7.0-15 /home/yousra/.gradle/caches/transforms-3/b18a120ce32521527ef4e21be95206e6/transformed/jetified-lifecycle-process-2.7.0/res
+com.example.triptip.app-jetified-savedstate-1.2.1-16 /home/yousra/.gradle/caches/transforms-3/b70afed1b0be56316ed2deec1fad537e/transformed/jetified-savedstate-1.2.1/res
+com.example.triptip.app-core-1.13.1-17 /home/yousra/.gradle/caches/transforms-3/d6a141b9ec9125124f3788fbdbcc10cb/transformed/core-1.13.1/res
+com.example.triptip.app-jetified-lifecycle-livedata-core-ktx-2.7.0-18 /home/yousra/.gradle/caches/transforms-3/dbb2d0922e8a29dfa87d7a82f9a89ae4/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/res
+com.example.triptip.app-lifecycle-runtime-2.7.0-19 /home/yousra/.gradle/caches/transforms-3/dda5aef832235d9b5b0f4e268261c24c/transformed/lifecycle-runtime-2.7.0/res
+com.example.triptip.app-jetified-window-1.2.0-20 /home/yousra/.gradle/caches/transforms-3/ec6c44e5835314560ebe02ae961c1063/transformed/jetified-window-1.2.0/res
+com.example.triptip.app-jetified-lifecycle-viewmodel-savedstate-2.7.0-21 /home/yousra/.gradle/caches/transforms-3/f7335737ac5752d326b8deca9c34bbe6/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/res
+com.example.triptip.app-debug-22 /home/yousra/1cs/mobile dev/project/TripTip/android/app/src/debug/res
+com.example.triptip.app-main-23 /home/yousra/1cs/mobile dev/project/TripTip/android/app/src/main/res
+com.example.triptip.app-pngs-24 /home/yousra/1cs/mobile dev/project/TripTip/build/app/generated/res/pngs/debug
+com.example.triptip.app-resValues-25 /home/yousra/1cs/mobile dev/project/TripTip/build/app/generated/res/resValues/debug
+com.example.triptip.app-packageDebugResources-26 /home/yousra/1cs/mobile dev/project/TripTip/build/app/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.example.triptip.app-packageDebugResources-27 /home/yousra/1cs/mobile dev/project/TripTip/build/app/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.example.triptip.app-debug-28 /home/yousra/1cs/mobile dev/project/TripTip/build/app/intermediates/merged_res/debug/mergeDebugResources
+com.example.triptip.app-debug-29 /home/yousra/1cs/mobile dev/project/TripTip/build/flutter_plugin_android_lifecycle/intermediates/packaged_res/debug/packageDebugResources
+com.example.triptip.app-debug-30 /home/yousra/1cs/mobile dev/project/TripTip/build/image_picker_android/intermediates/packaged_res/debug/packageDebugResources
+com.example.triptip.app-debug-31 /home/yousra/1cs/mobile dev/project/TripTip/build/shared_preferences_android/intermediates/packaged_res/debug/packageDebugResources

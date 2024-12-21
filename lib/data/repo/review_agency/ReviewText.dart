@@ -1,8 +1,8 @@
 
 Future<List<Review>> getReviews() async {
   // Simulate API call
-  await Future.delayed(
-      const Duration(seconds: 2)); // Adjusted to match the async nature
+  // await Future.delayed(
+  //     const Duration(seconds: 2)); // Adjusted to match the async nature
 
   // Generate some sample users and reviews
   return List.generate(

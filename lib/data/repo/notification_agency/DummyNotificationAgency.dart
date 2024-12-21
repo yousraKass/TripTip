@@ -68,18 +68,18 @@ class Dummynotificationagency extends Abstractnotificationagency {
   ];
 
   Future<List<Map<String,dynamic>>> GetNotifications() async {
-    await Future.delayed(Duration(seconds: 2));
+    // await Future.delayed(Duration(seconds: 2));
     return notifications;
   }
 
   Future<bool> SetNotificationRead(int index) async {
-    await Future.delayed(Duration(seconds: 2));
+    // await Future.delayed(Duration(seconds: 2));
     notifications[index]["is_read"] = !notifications[index]["is_read"];
     return true;
   }
 
   Future<bool> AddNotification(Map<String, dynamic> notification) async {
-    await Future.delayed(Duration(seconds: 2));
+    // await Future.delayed(Duration(seconds: 2));
     notifications.add(notification);
     return true;
   }
