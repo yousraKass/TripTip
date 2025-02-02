@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
-import 'package:triptip/views/widgets/offer_card_favorite.dart';
 import 'package:triptip/data/repo/offer/offer_model.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 

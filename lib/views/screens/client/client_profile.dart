@@ -6,18 +6,23 @@ import 'package:triptip/views/widgets/Preferences_image_slider.dart';
 import 'package:triptip/views/widgets/ClientrProfileHeader.dart';
 import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/blocs/client/client_profile_cubit.dart';
-import 'package:triptip/blocs/client/client_profile_state.dart';
+import 'package:triptip/blocs/client/client_state.dart';
 import 'package:triptip/views/screens/client/preferences.dart';
 import 'package:triptip/data/repositories/client/client_repo.dart';
+import 'package:triptip/data/repositories/client/preferences_repository.dart';
 import 'package:triptip/data/models/client/preferences_model.dart';
 
 class ClientProfile extends StatelessWidget {
-  ClientProfile({super.key});
-  late final clientRepository = ClientRepository();
-  late final clientCubit = ClientProfileCubit(clientRepository)
-    ..loadClientProfile();
-  static const pageRoute = "/client_profile";
+ ClientProfile({super.key, required this.clientId}); // Add clientId as a required parameter
+  final String clientId; // Store clientId as a field
 
+  late final clientRepository = ClientRepository();
+  late final preferencesRepository = PreferencesRepository(); // Initialize PreferencesRepository
+  late final clientCubit = ClientProfileCubit(
+    repository: clientRepository,
+    preferencesRepository: preferencesRepository,
+    clientId: clientId, // Pass clientId
+  )..loadClientProfile();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +32,7 @@ class ClientProfile extends StatelessWidget {
         child: BlocProvider(
           create: (context) => clientCubit,
           child: SingleChildScrollView(
-            child: BlocBuilder<ClientProfileCubit, ClientProfileState>(
+            child: BlocBuilder<ClientProfileCubit, ClientState>(
               builder: (context, state) {
                 if (state is ClientProfileLoading) {
                   return const Center(child: CircularProgressIndicator());
@@ -98,13 +103,13 @@ class ClientProfile extends StatelessWidget {
     );
   }
 
-  Widget _buildPreferencesSection(
+  /* Widget _buildPreferencesSection(
       BuildContext context, List<Preference> preferences) {
     final preferenceMaps = preferences
         .map((pref) => {
               'name': pref.name,
               'selected': pref.selected,
-              'imageUrl': pref.imageUrl,
+              'photo': pref.photo,
             })
         .toList();
 
@@ -149,4 +154,59 @@ class ClientProfile extends StatelessWidget {
       ],
     );
   }
+ */
+Widget _buildPreferencesSection(
+    BuildContext context, List<Preference> preferences) {
+  // Filter preferences to show only selected ones
+  final selectedPreferences = preferences.where((pref) => pref.selected).toList();
+
+  final preferenceMaps = selectedPreferences
+      .map((pref) => {
+            'name': pref.name,
+            'selected': pref.selected,
+            'photo': pref.photo, // Use 'photo' instead of 'imageUrl'
+          })
+      .toList();
+
+  return Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              "My preferences:",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          IconButton(
+            icon: SizedBox(
+              height: 20,
+              width: 20,
+              child: Image.asset(
+                'assets/icons/editer.png',
+                height: 30,
+                width: 30,
+                color: AppColors.black,
+              ),
+            ),
+            onPressed: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyPreferencesPage(clientId: clientId), 
+              ),
+            );
+            },
+          ),
+        ],
+      ),
+      const SizedBox(height: 20),
+      selectedPreferences.isEmpty
+          ? const Text('No preferences found')
+          : MyCarousel(data: preferenceMaps),
+    ],
+  );
+}
 }

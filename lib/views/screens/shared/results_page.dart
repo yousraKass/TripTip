@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '/views/widgets/offer_card.dart';
 import '/views/widgets/search_bar_widget.dart';
 import '/views/widgets/BottomNaviagtionBarClient.dart';
 import '/views/widgets/BottomNavigationBarAgency.dart';

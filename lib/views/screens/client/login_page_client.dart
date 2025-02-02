@@ -6,7 +6,7 @@ import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Forms_widgets.dart';
 import 'package:triptip/views/widgets/Password_form_field.dart';
 import 'package:triptip/views/widgets/logos.dart';
-import 'package:triptip/views/screens/agency/forget_password_page_agency.dart';
+import 'package:triptip/views/screens/client/forget_password_page_client.dart';
 import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/screens/client/signup_client.dart';
 import 'package:triptip/blocs/client/client_state.dart';
@@ -85,7 +85,7 @@ class LoginPageClient extends StatelessWidget {
                                 child: TextButton(
                                   onPressed: () {
                                     Navigator.pushNamed(context,
-                                        ForgetPasswordAgency.pageRoute);
+                                        ForgetPasswordClient.pageRoute);
                                   },
                                   child: Text(
                                     "Forgot password?",

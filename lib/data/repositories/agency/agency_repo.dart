@@ -85,4 +85,57 @@ class AgencyRepository {
       throw Exception('Failed to fetch user profile: $e');
     }
   }
+
+
+//for forget password
+ // Send reset code
+  Future<void> sendResetCode(String email) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/send-reset-code'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to send reset code: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
+
+  // Verify reset code
+  Future<void> verifyResetCode(String email, String code) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/verify-reset-code'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'code': code}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to verify reset code: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
+
+  // Update password
+  Future<void> updatePassword(String email, String newPassword) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update-password'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'newPassword': newPassword}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update password: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
 }

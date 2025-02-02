@@ -8,16 +8,21 @@ import 'package:triptip/views/widgets/Preference_widget.dart';
 import 'package:triptip/blocs/client/preferences_cubit.dart';
 import 'package:triptip/blocs/client/preferences_state.dart';
 import 'package:triptip/data/repositories/client/preferences_repository.dart';
+
 class MyPreferencesPage extends StatelessWidget {
   static const pageRoute = "client_preferences_page";
-  late final PrefRepository = PreferencesRepository();
-  late final   PrefCubit = PreferencesCubit(PrefRepository)..loadPreferences();
-   MyPreferencesPage({Key? key}) : super(key: key);
 
+  final String clientId; // Add clientId as a required parameter
+  late final PreferencesRepository prefRepository = PreferencesRepository();
+  late final PreferencesCubit prefCubit;
+
+  MyPreferencesPage({Key? key, required this.clientId}) : super(key: key) {
+    prefCubit = PreferencesCubit(prefRepository, clientId)..loadPreferences();
+  } 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PrefCubit,
+      create: (context) => prefCubit,
       child: const PreferencesView(),
     );
   }
@@ -90,7 +95,7 @@ class PreferencesBody extends StatelessWidget {
   }
 }
 
-class PreferencesGrid extends StatelessWidget {
+/* class PreferencesGrid extends StatelessWidget {
   final List preferences;
 
   const PreferencesGrid({
@@ -120,7 +125,42 @@ class PreferencesGrid extends StatelessWidget {
     );
   }
 }
+ */
 
+class PreferencesGrid extends StatelessWidget {
+  final List preferences;
+
+  const PreferencesGrid({
+    Key? key,
+    required this.preferences,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 0.85,
+      ),
+      itemCount: preferences.length,
+      itemBuilder: (context, index) {
+        final preference = preferences[index];
+        return GestureDetector(
+          onTap: () {
+            context.read<PreferencesCubit>().togglePreference(index);
+          },
+          child: PreferenceCell(
+            context,
+            preference,
+            preference.selected ? "selected" : "not_selected",
+          ),
+        );
+      },
+    );
+  }
+}
 class PreferencesBottomBar extends StatelessWidget {
   const PreferencesBottomBar({Key? key}) : super(key: key);
 
@@ -132,14 +172,18 @@ class PreferencesBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextButton(
-            onPressed: () => Navigator.pushNamed(context, "next_page_route"),
+            onPressed: () => Navigator.pop(context),
             style: TextButton.styleFrom(
               foregroundColor: AppColors.main,
             ),
             child: const Text("Skip"),
           ),
           ElevatedButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              // Save preferences and navigate back
+              context.read<PreferencesCubit>().savePreferences();
+              Navigator.pop(context);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.main,
             ),

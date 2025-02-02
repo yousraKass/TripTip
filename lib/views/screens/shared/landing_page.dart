@@ -700,11 +700,11 @@ Widget buildInterestCard(BuildContext context, OfferModel offer) {
                     );
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.black),
-                    padding: MaterialStateProperty.all(
+                    backgroundColor: WidgetStateProperty.all(Colors.black),
+                    padding: WidgetStateProperty.all(
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                     ),
-                    shape: MaterialStateProperty.all(
+                    shape: WidgetStateProperty.all(
                       const BeveledRectangleBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(0),
