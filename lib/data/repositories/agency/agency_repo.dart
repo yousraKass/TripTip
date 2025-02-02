@@ -2,7 +2,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:triptip/data/models/agency/agency_model.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AgencyRepository {
   final String baseUrl =
@@ -52,7 +52,12 @@ class AgencyRepository {
         final id = data['id'];
         final role = data['role'];
 
-        return await fetchUserData(id, token, role);
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setInt('user_id', id);
+        await prefs.setString('user_token', token);
+        await prefs.setString('user_role', role);
+
+        return await fetchAgencyData(id, token);
       } else if (loginResponse.statusCode == 401) {
         throw Exception('Invalid credentials');
       } else {
@@ -63,12 +68,13 @@ class AgencyRepository {
     }
   }
 
-  Future<AgencyModel> fetchUserData(
-      int id, String token, String role) async {
+
+  Future<AgencyModel> fetchAgencyData( 
+      int id, String token) async {
     try {
     
       final response = await http.get(
-        Uri.parse('$baseUrl/$role/$id'),
+        Uri.parse('$baseUrl/$id'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -85,4 +91,6 @@ class AgencyRepository {
       throw Exception('Failed to fetch user profile: $e');
     }
   }
+
+
 }

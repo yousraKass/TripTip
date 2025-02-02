@@ -1,3 +1,4 @@
+import '../OfferModel.dart';
 abstract class AgencyEvent {}
 
 // Login Event
@@ -15,6 +16,8 @@ class AgencySignupSubmitted extends AgencyEvent {
   final String password;
   final String phoneNumber;
   final int location;
+  final String aboutUs;
+  final List offers;
 
   AgencySignupSubmitted({
     required this.name,

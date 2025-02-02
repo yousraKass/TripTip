@@ -46,7 +46,6 @@ class OfferService {
 
   Future<OfferData> getOfferDetails() async {
     // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
 
     return OfferData(
       cityName: 'Annaba',
@@ -61,7 +60,7 @@ class OfferService {
           'Located in the northeastern corner of Algeria, this coastal city is blessed with pristine beaches, rolling hills, '
           'and the shimmering waters of the Mediterranean. The surrounding landscapes are dotted with lush olive groves and vibrant green fields, '
           'while the nearby Tassili Mountains add a dramatic backdrop to the city’s charm.',
-      images: imagePaths.offerImageUrls,
+      thumbnails: imagePaths.offerImageUrls,
       reviews: await getReviews(),
     );
   }
@@ -77,7 +76,7 @@ class OfferData {
   final String startDate;
   final String endDate;
   final String descriptionText;
-  final List<String> images;
+  final List<String> thumbnails;
   final List<Review> reviews;
 
   OfferData({
@@ -88,7 +87,7 @@ class OfferData {
     required this.startDate,
     required this.endDate,
     required this.descriptionText,
-    required this.images,
+    required this.thumbnails,
     required this.reviews,
   });
 }

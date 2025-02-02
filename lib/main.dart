@@ -159,6 +159,7 @@ class TripTipApp extends StatelessWidget {
         BlocProvider(
           create: (context) => OfferCubit(
             offerRepo: OfferRepo(),
+            
           ),
         ),
       ],
@@ -167,7 +168,7 @@ class TripTipApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.teal,
         ),
-        initialRoute: SignUpChoicePage.pageRoute,
+        initialRoute: OfferDetailsPage.pageRoute,
         routes: {
           SignUpChoicePage.pageRoute: (context) => const SignUpChoicePage(),
           SignUpClient.pageRoute: (context) => SignUpClient(),
@@ -175,6 +176,7 @@ class TripTipApp extends StatelessWidget {
           SignUpAgency.pageRoute: (context) => SignUpAgency(),
           LoginPageAgency.pageRoute: (context) => LoginPageAgency(),
           LandingPage.pageRoute: (context) => const LandingPage(),
+          OfferDetailsPage.pageRoute: (ctx) => const OfferDetailsPage(offerId: 1,),
         },
       ),
     );

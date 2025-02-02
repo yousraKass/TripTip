@@ -58,7 +58,7 @@ class OfferWidgetsUtils {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: offer.thumbnails.length,
+        itemCount: offer.thumbnails?.length ?? 0,
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(
@@ -67,7 +67,7 @@ class OfferWidgetsUtils {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(thumbnailSize),
               child: Image.asset(
-                offer.thumbnails[index],
+                offer.thumbnails![index],
                 width: thumbnailSize,
                 height: thumbnailSize,
                 fit: BoxFit.cover,
@@ -85,8 +85,8 @@ class OfferWidgetsUtils {
     return Row(
       children: List.generate(5, (index) {
         return Icon(
-          index < offer.rating ? Icons.star : Icons.star_border,
-          color: index < offer.rating ? AppColors.main : AppColors.main,
+          index < (offer.rating ?? 0) ? Icons.star : Icons.star_border,
+          color: index < (offer.rating ?? 0) ? AppColors.main : AppColors.main,
           size: iconSize,
         );
       }),

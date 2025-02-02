@@ -36,6 +36,8 @@ class AgencyBloc extends Bloc<AgencyEvent, AgencyState> {
         password: event.password,
         phoneNumber: event.phoneNumber,
         location: event.location,
+        aboutUs: event.aboutUs,
+        offers: event.offers ?? [],
       );
       final result = await repository.signUpAgency(agency);
       emit(SignupSuccess(agency: result));
@@ -64,9 +66,22 @@ class AgencyBloc extends Bloc<AgencyEvent, AgencyState> {
     }
   }
 
-  Future<void> _storeUserData(AgencyModel user) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user_token', user.email);
-    await prefs.setString('user_role', user.password);
+  Future<AgencyModel> _storeUserData(AgencyModel user) async {
+    return AgencyModel(
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      phoneNumber: user.phoneNumber,
+      location: user.location,
+      aboutUs: user.aboutUs,
+      offers: user.offers,
+    );
   }
+
+  Future<AgencyModel> fetchAgencyData(int id, String token) async {
+    final user = await repository.fetchAgencyData(id, token);
+    await _storeUserData(user);
+    return user;
+  }
+
 }

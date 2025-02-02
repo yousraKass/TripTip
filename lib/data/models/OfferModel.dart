@@ -1,28 +1,31 @@
 class OfferModel {
+  final int id;
   final String image;
   final String cityName; // title
   final String countryName; // location
-  final double rating;
+  final double? rating;
   final double price;
   final String startDate;
   final String endDate;
-  final String descriptionText;
-  final String category;
-  final List<String> thumbnails;
+  final String? descriptionText;
+  final String? category;
+  final List<String>? thumbnails;
   final int days;
 
   OfferModel({
+    required this.id,
     required this.image,
     required this.cityName,
     required this.countryName,
-    required this.rating,
+    this.rating,
     required this.price,
     required this.startDate,
     required this.endDate,
     required this.descriptionText,
     required this.category,
-    required this.thumbnails,
+    this.thumbnails,
     required this.days,
+
   });
 
   factory OfferModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +35,7 @@ class OfferModel {
     final daysDifference = end.difference(start).inDays;
 
     return OfferModel(
+      id: json['id'],
       image: json['image'],
       cityName: json['cityName'],
       countryName: json['countryName'],
@@ -48,6 +52,7 @@ class OfferModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'image': image,
       'cityName': cityName,
       'countryName': countryName,

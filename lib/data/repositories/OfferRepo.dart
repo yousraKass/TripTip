@@ -1,15 +1,17 @@
 import '../models/OfferModel.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+
 class OfferRepo {
-  final String baseUrl = "http://localhost:3000"; 
-  
+  final String baseUrl = 'http://localhost:3000/TripTip'; 
   // Method to get JWT token from storage
   Future<String?> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('jwt_token');
+    return prefs.getString('token');
   }
 
   // Helper method to create authenticated headers
@@ -89,4 +91,24 @@ class OfferRepo {
       throw Exception("Failed To Fetch Places: ${response.statusCode}");
     }
   }
+
+
+  Future<OfferModel> fetchOfferById(int id) async {
+    final headers = await _getAuthHeaders();
+    final response = await http.get(
+      Uri.parse('$baseUrl/offer/$id'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> offerJson = json.decode(response.body);
+      return OfferModel.fromJson(offerJson);
+    } else if (response.statusCode == 401) {
+      throw Exception("Unauthorized - Please login again");
+    } else {
+      throw Exception("Failed To Fetch Offer: ${response.statusCode}");
+    }
+  }
+
+
+
 }
