@@ -10,8 +10,15 @@ class OfferErrorState extends OfferState {
   final String message;
   OfferErrorState({required this.message});
 }
+class OfferAdded extends OfferState {
+  final OfferModel offer;
+
+  OfferAdded(this.offer);
+}
+
 
 class OfferLoadedState extends OfferState {
+  final OfferModel? singleOffer;
   final List<OfferModel> offers;
   final List<OfferModel> places;
   final List<OfferModel> categories;
@@ -20,6 +27,7 @@ class OfferLoadedState extends OfferState {
   final String? hoveredCity;
 
   OfferLoadedState({
+    this.singleOffer,
     this.offers = const [],
     this.places = const [],
     this.categories = const [],
@@ -32,6 +40,7 @@ class OfferLoadedState extends OfferState {
     List<OfferModel>? offers,
     List<OfferModel>? places,
     List<OfferModel>? categories,
+    OfferModel?singleOffer,
     OfferModel? topOffer,
     Set<String>? favorites,
     String? hoveredCity,
