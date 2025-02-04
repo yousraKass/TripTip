@@ -11,8 +11,6 @@
 // import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 // import 'package:triptip/views/screens/agency/add_offer.dart';
 
-
-
 // class AgencyScreen extends StatefulWidget {
 //   static const pageRoute = '/AgencyProfile';
 
@@ -609,44 +607,66 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:triptip/data/models/agency/agency_model.dart';
 import 'package:triptip/views/screens/agency/SettingsScreenAgency.dart';
-import 'package:triptip/views/screens/agency/ReviewScreenAgency.dart';
 import 'package:triptip/views/themes/fonts.dart';
 import 'package:triptip/views/themes/colors.dart';
-import 'package:triptip/views/widgets/ReviewItem.dart';
 import 'package:triptip/data/repo/agency_profile/AgencyText.dart';
 import 'EditAgencyProfile.dart';
 import 'package:triptip/views/widgets/BottomNavigationBarAgency.dart';
 import 'package:triptip/views/screens/agency/add_offer.dart';
 import 'package:triptip/blocs/agency/agency_bloc.dart';
 import 'package:triptip/blocs/agency/agency_state.dart';
+Future<Map<String, dynamic>> initializePrefs() async {
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString('user_token');
+  final id = prefs.getInt('user_id');
+  return {'token': token, 'id': id};
+}
 
 class AgencyScreen extends StatelessWidget {
-  static const pageRoute = '/AgencyProfile';
+  // Function to get initials
+  String _getInitials(String name) {
+    List<String> words = name.trim().split(' ');
+    if (words.length > 1) {
+      return (words[0][0] + words[1][0])
+          .toUpperCase(); // First letter of each word
+    } else {
+      return name
+          .substring(0, 2)
+          .toUpperCase(); // First two letters of a single word
+    }
+  }
 
-  const AgencyScreen({super.key});
+  static const pageRoute = '/AgencyProfile';
+  final int? agencyId;
+  const AgencyScreen({super.key, this.agencyId});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AgencyBloc, AgencyState>(
       builder: (context, state) {
+        final AgencyModel agencyModel;
         if (state is AgencyLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is LoginSuccess || state is SignupSuccess) {
-          final agencyModel = state is LoginSuccess ? state.agency : (state as SignupSuccess).agency;
+          final agencyModel = state is LoginSuccess
+              ? state.agency
+              : (state as SignupSuccess).agency;
+          // else if (state is AgencyLoaded) {
+          // agencyModel = state.agency as AgencyModel;
           return Scaffold(
             backgroundColor: AppColors.white,
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  _buildHeader(agencyModel,context),
+                  _buildHeader(agencyModel, context),
                   _buildContactUs(agencyModel),
                   _buildAboutUS(agencyModel),
-                  _buildOffers(agencyModel,context),
+                  _buildOffers(agencyModel, context),
                 ],
               ),
             ),
@@ -690,7 +710,7 @@ class AgencyScreen extends StatelessWidget {
               child: Container(
                 height: 280,
                 decoration: BoxDecoration(
-                  color: AppColors.main,
+                  color: AppColors.third,
                   // image: DecorationImage(
                   //   image: AssetImage(agencyModel.backGroundAgency),
                   //   fit: BoxFit.cover,
@@ -727,33 +747,70 @@ class AgencyScreen extends StatelessWidget {
           ],
         ),
 
-  Positioned(
-  top: 170,
-  left: 60,
-  child: Column(
-    children: [
-      CircleAvatar(
-        radius: 60,
-        backgroundColor: Colors.white,
-        backgroundImage: agencyModel.profilePictureAgency != null 
-            ? AssetImage(agencyModel.profilePictureAgency!) 
-            : null, // Remove default image to handle text fallback
-        child: agencyModel.profilePictureAgency == null 
-            ? Text(
-                (agencyModel.name ?? 'XX').substring(0, 2).toUpperCase(), // Get first 2 letters
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black, // Adjust color as needed
-                ),
-              ) 
-            : null,
-      ),
-    ],
-  ),
-),
+//   Positioned(
+//   top: 170,
+//   left: 60,
+//   child: Column(
+//     children: [
+//       CircleAvatar(
+//         radius: 60,
+//         backgroundColor: Colors.white,
+//         backgroundImage: agencyModel.profilePictureAgency != null
+//             ? AssetImage(agencyModel.profilePictureAgency!)
+//             : null, // Remove default image to handle text fallback
+//         child: agencyModel.profilePictureAgency == null
+//             ? Text(
+//                 (agencyModel.name ?? 'XX').substring(0, 2).toUpperCase(), // Get first 2 letters
+//                 style: TextStyle(
+//                   fontSize: 30,
+//                   fontWeight: FontWeight.bold,
+//                   color: Colors.black, // Adjust color as needed
+//                 ),
+//               )
+//             : null,
+//       ),
+//     ],
+//   ),
+// ),
 
-        _buildTitle(agencyModel,context),
+        Positioned(
+          top: 170,
+          left: 60,
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 60,
+                backgroundColor: Colors.grey[300], // Soft grey background
+                backgroundImage: agencyModel.profilePictureAgency != null
+                    ? AssetImage(agencyModel.profilePictureAgency!)
+                    : null,
+                child: agencyModel.profilePictureAgency == null
+                    ? Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: AppColors.third,
+                              width: 3), // Circular border
+                          color: AppColors.primaryColor, // Background color
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          _getInitials(agencyModel.name ??
+                              'XX'), // Extract initials properly
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white, // Text color for contrast
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
+            ],
+          ),
+        ),
+
+        _buildTitle(agencyModel, context),
       ],
     );
   }
@@ -824,7 +881,6 @@ class AgencyScreen extends StatelessWidget {
             ),
           ],
         ),
-
         const SizedBox(height: 10),
         const Text(
           '             ${AgencyTexts.contactUs}',
@@ -916,7 +972,7 @@ class AgencyScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOffers(AgencyModel agencyModel,BuildContext context) {
+  Widget _buildOffers(AgencyModel agencyModel, BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 0),
       child: Column(
@@ -985,7 +1041,6 @@ class AgencyScreen extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class Contact extends StatelessWidget {
@@ -1019,8 +1074,6 @@ class Contact extends StatelessWidget {
     );
   }
 }
-
-
 
 // Custom Clipper for the Header Curve
 class HeaderClipper extends CustomClipper<Path> {

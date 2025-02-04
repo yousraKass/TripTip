@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:triptip/views/screens/agency/login_page_agency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:triptip/views/screens/agency/forget_password_page_agency.dart';
+import 'package:triptip/views/screens/client/agencyScreenClientView.dart';
 import 'package:triptip/views/screens/client/forget_password_page_client.dart';
 import 'package:triptip/views/screens/agency/new_password_agency.dart';
 import 'package:triptip/views/screens/client/login_page_client.dart';
@@ -38,7 +39,7 @@ import 'package:triptip/views/screens/agency/add_offer.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
 import 'blocs/Offer_bloc/offer_cubit.dart';
 import 'data/repositories/OfferRepo.dart';
-
+import 'package:triptip/data/models/OfferModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:triptip/views/screens/shared/SignUpAsScreen.dart';
@@ -48,6 +49,10 @@ import 'package:triptip/views/screens/agency/login_page_agency.dart';
 import 'package:triptip/views/screens/client/login_page_client.dart';
 import 'package:triptip/views/screens/agency/signup_agency.dart';
 import 'package:triptip/views/screens/client/signup_client.dart';
+import 'package:triptip/blocs/agency/agency_bloc.dart';
+import 'package:triptip/data/repositories/agency/agency_repo.dart';
+import 'package:triptip/data/repositories/search_repository.dart';
+import 'package:triptip/blocs/Search/search_cubit.dart';
 
 late AbstractPreferenes preferences;
 late Abstractnotificationagency notifications;
@@ -86,12 +91,8 @@ Future<bool> my_init_app() async {
 //         NotificationsClient.pageRoute: (ctx) => NotificationsClient(),
 //         ClientProfile.pageRoute: (ctx) => ClientProfile(),
 //         EditClientProfileScreen.pageRoute: (ctx) => EditClientProfileScreen(),
-//         OfferDetailsPage.pageRoute: (ctx) => const OfferDetailsPage(),
 //         ReviewScreenAgency.pageRoute: (ctx) => const ReviewScreenAgency(),
 //         ReviewScreenClient.pageRoute: (ctx) => const ReviewScreenClient(),
-//         AgencyScreen.pageRoute: (ctx) => const AgencyScreen(),
-//         EditAgencyProfileScreen.pageRoute: (ctx) =>
-//         const EditAgencyProfileScreen(),
 //         SettingsScreenClient.pageRoute: (ctx) => const SettingsScreenClient(),
 //         SettingsScreenAgency.pageRoute: (ctx) => const SettingsScreenAgency(),
 //         Intro01.pageRoute: (ctx) => const Intro01(),
@@ -153,13 +154,20 @@ class TripTipApp extends StatelessWidget {
         BlocProvider<ChoiceBloc>(
           create: (context) => ChoiceBloc(),
         ),
+        BlocProvider<AgencyBloc>(
+          create: (context) => AgencyBloc(repository: AgencyRepository()),
+        ),
         BlocProvider<PasswordVisibilityBloc>(
           create: (context) => PasswordVisibilityBloc(),
         ),
         BlocProvider(
           create: (context) => OfferCubit(
             offerRepo: OfferRepo(),
-            
+          ),
+        ),
+        BlocProvider(
+          create: (context) => SearchCubit(
+            repository: SearchRepository(),
           ),
         ),
       ],
@@ -168,15 +176,24 @@ class TripTipApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.teal,
         ),
-        initialRoute: OfferDetailsPage.pageRoute,
+        initialRoute: LandingPage.pageRoute,
         routes: {
+          OffersPageAgency.pageRoute: (ctx) => const OffersPageAgency(),
+          FilterPage.pageRoute: (ctx) => const FilterPage(),
+          ResultsPage.pageRoute: (ctx) => const ResultsPage(),
+          SearchPage.pageRoute: (ctx) => const SearchPage(),
+          AgencyScreenClientView.pageRoute: (ctx) => AgencyScreenClientView(),
+          AgencyScreen.pageRoute: (ctx) => const AgencyScreen(),
+          EditAgencyProfileScreen.pageRoute: (ctx) => EditAgencyProfileScreen(),
           SignUpChoicePage.pageRoute: (context) => const SignUpChoicePage(),
           SignUpClient.pageRoute: (context) => SignUpClient(),
           LoginPageClient.pageRoute: (context) => LoginPageClient(),
           SignUpAgency.pageRoute: (context) => SignUpAgency(),
           LoginPageAgency.pageRoute: (context) => LoginPageAgency(),
           LandingPage.pageRoute: (context) => const LandingPage(),
-          OfferDetailsPage.pageRoute: (ctx) => const OfferDetailsPage(offerId: 1,),
+          OfferDetailsPage.pageRoute: (ctx) => const OfferDetailsPage(
+                offerId: 1,
+              ),
         },
       ),
     );

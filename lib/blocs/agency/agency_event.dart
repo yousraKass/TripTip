@@ -1,4 +1,5 @@
-import '../OfferModel.dart';
+import '../../data/models/OfferModel.dart';
+
 abstract class AgencyEvent {}
 
 // Login Event
@@ -15,9 +16,9 @@ class AgencySignupSubmitted extends AgencyEvent {
   final String email;
   final String password;
   final String phoneNumber;
-  final int location;
-  final String aboutUs;
-  final List offers;
+  final String location;
+  final String? aboutUs;
+  final List<OfferModel>? offers;
 
   AgencySignupSubmitted({
     required this.name,
@@ -25,5 +26,37 @@ class AgencySignupSubmitted extends AgencyEvent {
     required this.password,
     required this.phoneNumber,
     required this.location,
+    this.aboutUs,
+    this.offers,
   });
 }
+
+class AgencyEditProfileSubmitted extends AgencyEvent {
+  final String name;
+  final String email;
+  final String password;
+  final String phoneNumber;
+  final String location;
+  final String? aboutUs;
+  final List<OfferModel>? offers;
+  final String? token;
+
+  AgencyEditProfileSubmitted({
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.phoneNumber,
+    required this.location,
+    this.aboutUs,
+    this.offers,
+    this.token,
+  });
+}
+
+class FetchAgencyById extends AgencyEvent {
+  final int agencyId;
+  final String token;
+  
+  FetchAgencyById(this.agencyId, this.token);
+}
+

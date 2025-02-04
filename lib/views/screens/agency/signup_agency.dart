@@ -204,7 +204,7 @@ class SignUpAgency extends StatelessWidget {
                                           email: emailController.text,
                                           password: passwordController.text,
                                           phoneNumber: phoneController.text,
-                                          location: TransferNametoNumber(locationController.text) ?? 0,
+                                          location: locationController.text,
                                         ),
                                       );
                                     }

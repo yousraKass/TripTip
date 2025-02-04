@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:triptip/data/models/agency/agency_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:triptip/data/models/OfferModel.dart';
 
 class AgencyRepository {
   final String baseUrl =
@@ -70,11 +71,11 @@ class AgencyRepository {
 
 
   Future<AgencyModel> fetchAgencyData( 
-      int id, String token) async {
+      int id, String token,) async {
     try {
     
       final response = await http.get(
-        Uri.parse('$baseUrl/$id'),
+        Uri.parse('$baseUrl/agency/$id'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -89,6 +90,32 @@ class AgencyRepository {
       }
     } catch (e) {
       throw Exception('Failed to fetch user profile: $e');
+    }
+  }
+
+   
+
+
+
+  
+  Future<AgencyModel> editAgencyProfile(AgencyModel agency, String token) async {
+    try {
+      final response = await http.put(
+        Uri.parse('$baseUrl/${agency.id}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: json.encode(agency.toJson()),
+      );
+
+      if (response.statusCode == 200) {
+        return AgencyModel.fromJson(json.decode(response.body));
+      } else {
+        throw Exception('Failed to edit profile: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to the server: $e');
     }
   }
 
