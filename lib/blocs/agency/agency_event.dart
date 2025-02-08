@@ -2,6 +2,12 @@ import '../../data/models/OfferModel.dart';
 
 abstract class AgencyEvent {}
 
+
+class FetchPublicAgencyById extends AgencyEvent {
+  final int agencyId;
+  
+  FetchPublicAgencyById(this.agencyId);
+}
 // Login Event
 class AgencyLoginSubmitted extends AgencyEvent {
   final String email;

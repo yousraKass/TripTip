@@ -10,7 +10,7 @@ class ClientRepository {
       final response = await http.post(
         Uri.parse('$baseUrl/signup'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode(client.toJson()),
+        body: json.encode(client.toJsonForAuth()),
       );
 
       if (response.statusCode == 201) {
@@ -25,10 +25,9 @@ class ClientRepository {
   }
 
   //for login
-   Future<ClientModel> loginClient({
+  Future<ClientModel> loginClient({
     required String email,
     required String password,
-    
   }) async {
     try {
       // Adjust the login endpoint based on the role
@@ -49,6 +48,8 @@ class ClientRepository {
         final id = data['id'];
         final role = data['role'];
 
+        print('Logged in user ID: $id'); // Print the id
+
         return await fetchUserData(id, token, role);
       } else if (loginResponse.statusCode == 401) {
         throw Exception('Invalid credentials');
@@ -60,12 +61,10 @@ class ClientRepository {
     }
   }
 
-  Future<ClientModel> fetchUserData(
-      int id, String token, String role) async {
+  Future<ClientModel> fetchUserData(int id, String token, String role) async {
     try {
-    
       final response = await http.get(
-        Uri.parse('$baseUrl/login/$role/$id'),
+        Uri.parse('$baseUrl/profile/info:$id'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -73,7 +72,10 @@ class ClientRepository {
       );
 
       if (response.statusCode == 200) {
+        print("r1");
         final dynamic data = json.decode(response.body);
+        print("r2");
+        print(data);
         return ClientModel.fromJson(data);
       } else {
         throw Exception('Failed to fetch user data');
@@ -83,36 +85,106 @@ class ClientRepository {
     }
   }
 
-   // Fetch client profile 
-  Future<ClientModel> fetchClientProfile() async {
+
+  Future<ClientModel> fetchClientProfile(int clientId) async {
     try {
+      print('Fetching profile for clientId: $clientId'); // Debug log
       final response = await http.get(
-        Uri.parse('$baseUrl/profile/info:1'),
+        Uri.parse('$baseUrl/profile/info:$clientId'),
         headers: {'Content-Type': 'application/json'},
-      );
+      ).timeout(const Duration(seconds: 10));
+
+      print('Response status code: ${response.statusCode}'); // Debug log
+      print('Response body: ${response.body}'); // Debug log
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+        print('Parsed JSON data: $data'); // Debug log
         return ClientModel.fromJson(data);
+      } else if (response.statusCode == 404) {
+        throw Exception('Client profile not found');
       } else {
-        throw Exception('Failed to load client profile: ${response.body}');
+        throw Exception(
+            'Failed to load client profile: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching client profile: $e'); // Debug log
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
+
+// Update client profile
+  Future<void> updateClientProfile(ClientModel profile) async {
+    try {
+      final response = await http
+          .put(
+            Uri.parse('$baseUrl/profile/editinfo'),
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode(profile.toJsonForEditInfo()),
+          )
+          .timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        print('Profile updated successfully');
+      } else if (response.statusCode == 400) {
+        throw Exception('Bad request: ${response.body}');
+      } else if (response.statusCode == 404) {
+        throw Exception('Client profile not found');
+      } else {
+        throw Exception(
+            'Failed to update client profile: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Failed to connect to the server: $e');
     }
   }
 
-  // Update client profile  
-  Future<void> updateClientProfile(ClientModel profile) async {
+//for forget password
+  // Send reset code
+  Future<void> sendResetCode(String email) async {
     try {
-      final response = await http.put(
-        Uri.parse('$baseUrl/profile/editinfo'),
+      final response = await http.post(
+        Uri.parse('$baseUrl/send-reset-code'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode(profile.toJson()),
+        body: json.encode({'email': email}),
       );
 
       if (response.statusCode != 200) {
-        throw Exception('Failed to update client profile: ${response.body}');
+        throw Exception('Failed to send reset code: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
+
+  // Verify reset code
+  Future<void> verifyResetCode(String email, String code) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/verify-reset-code'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'code': code}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to verify reset code: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
+
+  // Update password
+  Future<void> updatePassword(String email, String newPassword) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update-password'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'newPassword': newPassword}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update password: ${response.body}');
       }
     } catch (e) {
       throw Exception('Failed to connect to the server: $e');

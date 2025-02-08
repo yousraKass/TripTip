@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/fonts.dart';
-import 'package:triptip/views/widgets/offer_card_favorite.dart';
 import 'package:triptip/data/repo/offer/offer_model.dart';
-import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+// import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 
 class FavoritePage extends StatefulWidget {
   static const pageRoute = '/favoriteScreenClient';
@@ -20,7 +19,7 @@ class _FavoritePageState extends State<FavoritePage> {
       backgroundColor: AppColors.white,
       appBar: _buildAppBar(context),
       body: _buildOffersList(),
-      bottomNavigationBar: const BottomNavigationBarExampleClient(),
+      // bottomNavigationBar: const BottomNavigationBarExampleClient(),
     );
   }
 

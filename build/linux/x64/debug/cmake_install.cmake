@@ -68,7 +68,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xRuntimex" OR NOT CMAKE_INSTALL_COMP
      NOT IS_SYMLINK "$ENV{DESTDIR}/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/triptip")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/triptip"
-         OLD_RPATH "/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/file_selector_linux:/home/dell/Triptip/TripTip/linux/flutter/ephemeral:"
+         OLD_RPATH "/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/file_selector_linux:/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/gtk:/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/url_launcher_linux:/home/dell/Triptip/TripTip/linux/flutter/ephemeral:"
          NEW_RPATH "$ORIGIN/lib")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/triptip")
@@ -114,6 +114,30 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xRuntimex" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
+   "/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib/libgtk_plugin.so")
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  file(INSTALL DESTINATION "/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib" TYPE FILE FILES "/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/gtk/libgtk_plugin.so")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xRuntimex" OR NOT CMAKE_INSTALL_COMPONENT)
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
+   "/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib/liburl_launcher_linux_plugin.so")
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  file(INSTALL DESTINATION "/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib" TYPE FILE FILES "/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/url_launcher_linux/liburl_launcher_linux_plugin.so")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xRuntimex" OR NOT CMAKE_INSTALL_COMPONENT)
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
    "/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib/")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
@@ -146,6 +170,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/dell/Triptip/TripTip/build/linux/x64/debug/flutter/cmake_install.cmake")
   include("/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/file_selector_linux/cmake_install.cmake")
+  include("/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/gtk/cmake_install.cmake")
+  include("/home/dell/Triptip/TripTip/build/linux/x64/debug/plugins/url_launcher_linux/cmake_install.cmake")
 
 endif()
 

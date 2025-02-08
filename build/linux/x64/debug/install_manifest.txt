@@ -2,6 +2,8 @@
 /home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/data/icudtl.dat
 /home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
 /home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib/libfile_selector_linux_plugin.so
+/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib/libgtk_plugin.so
+/home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/lib/liburl_launcher_linux_plugin.so
 /home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES.Z
 /home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
 /home/dell/Triptip/TripTip/build/linux/x64/debug/bundle/data/flutter_assets/assets/images/offer4.png

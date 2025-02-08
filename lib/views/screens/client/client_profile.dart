@@ -4,83 +4,85 @@ import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/Preferences_image_slider.dart';
 import 'package:triptip/views/widgets/ClientrProfileHeader.dart';
-import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/blocs/client/client_profile_cubit.dart';
-import 'package:triptip/blocs/client/client_profile_state.dart';
+import 'package:triptip/blocs/client/client_state.dart';
 import 'package:triptip/views/screens/client/preferences.dart';
 import 'package:triptip/data/repositories/client/client_repo.dart';
+import 'package:triptip/data/repositories/client/preferences_repository.dart';
 import 'package:triptip/data/models/client/preferences_model.dart';
+import 'package:triptip/data/imageUpload/imageUpload.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ClientProfile extends StatelessWidget {
-  ClientProfile({super.key});
-  late final clientRepository = ClientRepository();
-  late final clientCubit = ClientProfileCubit(clientRepository)
-    ..loadClientProfile();
-  static const pageRoute = "/client_profile";
+  static const pageRoute = "/ClientProfile";
+  final int clientId;
+
+  /* ClientProfile({required this.clientId}); */
+  const ClientProfile({Key? key, required this.clientId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      bottomNavigationBar: BottomNavigationBarExampleClient(),
       body: SafeArea(
         child: BlocProvider(
-          create: (context) => clientCubit,
-          child: SingleChildScrollView(
-            child: BlocBuilder<ClientProfileCubit, ClientProfileState>(
-              builder: (context, state) {
-                if (state is ClientProfileLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is ClientProfileError) {
-                  return Center(child: Text('Error: ${state.errorMessage}'));
-                } else if (state is ClientProfileLoaded) {
-                  final profile = state.profile;
-                  final preferences = state.preferences;
+          create: (context) => ClientProfileCubit(
+            repository: ClientRepository(),
+            clientId: clientId,
+          )..loadClientProfile(),
+          child: BlocBuilder<ClientProfileCubit, ClientState>(
+            builder: (context, state) {
+              if (state is ClientProfileLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is ClientProfileError) {
+                return Center(child: Text('Error: ${state.errorMessage}'));
+              } else if (state is ClientProfileLoaded) {
+                final profile = state.profile;
+                final preferences = state.preferences;
 
-                  return Column(
-                    children: [
-                      // Header Section
-                      buildHeader(context, {
-                        "image": profile.imagePath,
-                        "title": profile.fullName,
-                      }),
-                      const SizedBox(height: 40),
+                return Column(
+                  children: [
+                    // Header Section
+                    buildHeader(context, {
+                      "image": profile.imagePath,
+                      "title": profile.fullName,
+                    }),
+                    const SizedBox(height: 40),
 
-                      // User Info Section
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 30, top: 10, bottom: 10),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 20),
-                            _buildInfoRow(
-                              icon: Icons.email,
-                              text: profile.getEmail ?? 'No email provided',
-                            ),
-                            const SizedBox(height: 20),
-                            _buildInfoRow(
-                              icon: Icons.location_on,
-                              text: profile.getWilayaName ?? 'No wilaya',
-                            ),
-                            const SizedBox(height: 20),
-                            _buildInfoRow(
-                              icon: Icons.calendar_today,
-                              text: profile.getBirthdate ?? 'No birthdate',
-                            ),
-                          ],
-                        ),
+                    // User Info Section
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 30, top: 10, bottom: 10),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20),
+                          _buildInfoRow(
+                            icon: Icons.email,
+                            text: profile.getEmail ?? 'No email provided',
+                          ),
+                          const SizedBox(height: 20),
+                          _buildInfoRow(
+                            icon: Icons.location_on,
+                            text: profile.getWilayaName ?? 'No wilaya',
+                          ),
+                          const SizedBox(height: 20),
+                          _buildInfoRow(
+                            icon: Icons.calendar_today,
+                            text: profile.getBirthdate ?? 'No birthdate',
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 50),
+                    ),
+                    const SizedBox(height: 50),
 
-                      // Preferences Section
-                      _buildPreferencesSection(context, preferences),
-                    ],
-                  );
-                } else {
-                  return const Center(child: Text('Unknown state'));
-                }
-              },
-            ),
+                    // Preferences Section
+                    _buildPreferencesSection(context, preferences),
+                  ],
+                );
+              } else {
+                return const Center(child: Text('Unknown state'));
+              }
+            },
           ),
         ),
       ),
@@ -100,12 +102,13 @@ class ClientProfile extends StatelessWidget {
 
   Widget _buildPreferencesSection(
       BuildContext context, List<Preference> preferences) {
-    final preferenceMaps = preferences
-        .map((pref) => {
-              'name': pref.name,
-              'selected': pref.selected,
-              'imageUrl': pref.imageUrl,
-            })
+    // Filter preferences to show only selected ones
+    final selectedPreferences =
+        preferences.where((pref) => pref.selected).toList();
+
+    // Convert Preference objects to maps
+    final preferenceMaps = selectedPreferences
+        .map((pref) => pref.toJson()) // Use toJson() to convert to Map
         .toList();
 
     return Column(
@@ -135,7 +138,7 @@ class ClientProfile extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MyPreferencesPage(),
+                    builder: (context) => MyPreferencesPage(clientId: clientId),
                   ),
                 );
               },
@@ -143,9 +146,9 @@ class ClientProfile extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 20),
-        preferences.isEmpty
+        selectedPreferences.isEmpty
             ? const Text('No preferences found')
-            : MyCarousel(data: preferenceMaps),
+            : MyCarousel(data: preferenceMaps), // Pass the list of maps
       ],
     );
   }

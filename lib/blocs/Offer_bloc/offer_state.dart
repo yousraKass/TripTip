@@ -11,6 +11,12 @@ class OfferErrorState extends OfferState {
   OfferErrorState({required this.message});
 }
 
+class OfferAdded extends OfferState {
+  final OfferModel offer;
+
+  OfferAdded(this.offer);
+}
+
 class OfferLoadedState extends OfferState {
   final OfferModel? singleOffer;
   final List<OfferModel> offers;

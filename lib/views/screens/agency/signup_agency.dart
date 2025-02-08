@@ -14,12 +14,11 @@ import 'package:triptip/blocs/shared/password_event_visible.dart';
 import 'package:triptip/blocs/shared/password_state_visible.dart';
 import 'package:triptip/data/repositories/agency/agency_repo.dart';
 
-
 class SignUpAgency extends StatelessWidget {
   SignUpAgency({super.key});
-     static const pageRoute = "/SignUpAgency";
-      late final agencyRepository = AgencyRepository();
-      late final   signupBloc = AgencyBloc(repository: agencyRepository);
+  static const pageRoute = "/SignUpAgency";
+  late final agencyRepository = AgencyRepository();
+  late final signupBloc = AgencyBloc(repository: agencyRepository);
   // Controllers for form fields
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -34,7 +33,7 @@ class SignUpAgency extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isChecked = false;
     return BlocProvider(
-      create: (context) => signupBloc, 
+      create: (context) => signupBloc,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -55,7 +54,7 @@ class SignUpAgency extends StatelessWidget {
                     SizedBox(height: 10),
                     Text(
                       "Join TripTip and explore endless possibilities",
-                      style: subTitle, 
+                      style: subTitle,
                     ),
                     SizedBox(height: 30),
                     BlocListener<AgencyBloc, AgencyState>(
@@ -64,7 +63,7 @@ class SignUpAgency extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Signup Successful!')),
                           );
-                          Navigator.pushNamed(context, '/login');
+                         Navigator.pushNamed(context, LoginPageAgency.pageRoute);
                         } else if (state is AgencyFailure) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(state.error)),
@@ -75,39 +74,39 @@ class SignUpAgency extends StatelessWidget {
                         key: _formKey,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // Name Field
                             InputLabel("Agency's name"),
-                          UserInput(context, "Enter agency name",
-                              validateAgencyName, nameController),
+                            UserInput(context, "Enter agency name",
+                                validateAgencyName, nameController),
                             SizedBox(height: 20),
 
                             // agency phone
-                          InputLabel("Phone"),
-                          UserInput(context, 'Enter phone number',
-                              validatePhoneNumber, phoneController),
+                            InputLabel("Phone"),
+                            UserInput(context, 'Enter phone number',
+                                validatePhoneNumber, phoneController),
                             SizedBox(height: 20),
 
                             // agency email
-                          InputLabel("Agency email"),
-                          UserInput(context, "Enter agency email",
-                              validateEmail, emailController),
+                            InputLabel("Agency email"),
+                            UserInput(context, "Enter agency email",
+                                validateEmail, emailController),
                             SizedBox(height: 20),
 
                             // agency location
-                          InputLabel("Agency location"),
-                          UserInput(context, "Enter agency location",
-                              validateLocation, locationController),
+                            InputLabel("Agency location"),
+                            UserInput(context, "Enter agency location",
+                                validateLocation, locationController),
                             SizedBox(height: 20),
 
-                         
                             // Password Field
                             InputLabel("Password"),
                             Center(
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.9,
-                                child: BlocBuilder<PasswordVisibilityBloc, PasswordVisibilityState>(
+                                child: BlocBuilder<PasswordVisibilityBloc,
+                                    PasswordVisibilityState>(
                                   builder: (context, state) {
                                     return TextFormField(
                                       obscureText: !state.isPasswordVisible,
@@ -139,7 +138,10 @@ class SignUpAgency extends StatelessWidget {
                                                 : Icons.visibility_off,
                                           ),
                                           onPressed: () {
-                                            context.read<PasswordVisibilityBloc>().add(TogglePasswordVisibility());
+                                            context
+                                                .read<PasswordVisibilityBloc>()
+                                                .add(
+                                                    TogglePasswordVisibility());
                                           },
                                         ),
                                       ),
@@ -153,43 +155,42 @@ class SignUpAgency extends StatelessWidget {
                             SizedBox(height: 20),
 
                             // Terms & Conditions
-                            Row(
-                            children: [
-                              // Checkbox
-                              Checkbox(
-                                value: isChecked,
-                                onChanged: (value) {
+                            /* Row(
+                              children: [
+                                // Checkbox
+                                Checkbox(
+                                  value: isChecked,
+                                  onChanged: (value) {
                                     isChecked = value ?? false;
-                                    
-                                },
-                              ),
+                                  },
+                                ),
 
-                              // Text with underlined terms and conditions
-                              GestureDetector(
-                                onTap: () {
-                                  // Optional: Handle the click event
-                                  print("Terms and conditions clicked");
-                                },
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: 'I accept ',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 16.0),
-                                    children: [
-                                      TextSpan(
-                                        text: 'terms and conditions',
-                                        style: TextStyle(
-                                          color: AppColors.main,
-                                          decoration: TextDecoration
-                                              .underline, // Underline the text
+                                // Text with underlined terms and conditions
+                                GestureDetector(
+                                  onTap: () {
+                                    // Optional: Handle the click event
+                                    print("Terms and conditions clicked");
+                                  },
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'I accept ',
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 16.0),
+                                      children: [
+                                        TextSpan(
+                                          text: 'terms and conditions',
+                                          style: TextStyle(
+                                            color: AppColors.main,
+                                            decoration: TextDecoration
+                                                .underline, // Underline the text
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ), */
                             SizedBox(height: 20),
 
                             // Submit Button
@@ -198,6 +199,9 @@ class SignUpAgency extends StatelessWidget {
                                 return ElevatedButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
+                                      print('sign is submitting');
+                                      print(nameController.text);
+                                      print(emailController.text);
                                       BlocProvider.of<AgencyBloc>(context).add(
                                         AgencySignupSubmitted(
                                           name: nameController.text,
@@ -236,7 +240,8 @@ class SignUpAgency extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => LoginPageAgency()),
+                                          builder: (context) =>
+                                              LoginPageAgency()),
                                     );
                                   },
                                   child: Text(

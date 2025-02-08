@@ -4,9 +4,9 @@ import 'package:triptip/logic/form_validators.dart';
 import 'package:triptip/views/themes/colors.dart';
 import 'package:triptip/views/themes/style.dart';
 import 'package:triptip/views/widgets/logos.dart';
-import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
+// import 'package:triptip/views/widgets/BottomNaviagtionBarClient.dart';
 import 'package:triptip/blocs/client/client_profile_cubit.dart';
-import 'package:triptip/blocs/client/client_profile_state.dart';
+import 'package:triptip/blocs/client/client_state.dart';
 import 'package:triptip/data/models/client/client_model.dart';
 import 'dart:io';
 
@@ -44,8 +44,8 @@ class EditClientProfileScreen extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         leading: back_btn(context),
       ),
-      bottomNavigationBar: BottomNavigationBarExampleClient(),
-      body: BlocConsumer<ClientProfileCubit, ClientProfileState>(
+      // bottomNavigationBar: BottomNavigationBarExampleClient(),
+      body: BlocConsumer<ClientProfileCubit, ClientState>(
         listener: (context, state) {
           if (state is ClientProfileUpdated) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -82,7 +82,7 @@ class EditClientProfileScreen extends StatelessWidget {
     );
   }
 
- Widget _buildProfilePicture(BuildContext context, ClientProfileState state) {
+ Widget _buildProfilePicture(BuildContext context, ClientState state) {
     final String imagePath = state is ClientProfileLoaded 
         ? state.profile.getImagePath ?? 'IMG not provided' 
         : '';
@@ -109,7 +109,7 @@ class EditClientProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildForm(BuildContext context, ClientProfileState state) {
+  Widget _buildForm(BuildContext context, ClientState state) {
     return Column(
       children: [
         TextFormField(
@@ -146,7 +146,7 @@ class EditClientProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSaveButton(BuildContext context, ClientProfileState state) {
+  Widget _buildSaveButton(BuildContext context, ClientState state) {
     return ElevatedButton(
       onPressed: () {
         final updatedProfile = ClientModel(

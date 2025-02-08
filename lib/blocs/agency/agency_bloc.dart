@@ -15,6 +15,18 @@ class AgencyBloc extends Bloc<AgencyEvent, AgencyState> {
     on<AgencyLoginSubmitted>(_onLoginSubmitted);
     on<AgencySignupSubmitted>(_onSignupSubmitted);
     on<FetchAgencyById>(_onFetchAgencyById);
+    on<AgencyEditProfileSubmitted>(_onEditProfileSubmitted);
+  }
+
+    void _onFetchPublicAgencyById(
+      FetchPublicAgencyById event, Emitter<AgencyState> emit) async {
+    emit(AgencyLoading());
+    try {
+      final agency = await repository.fetchPublicAgencyData(event.agencyId);
+      emit(PublicAgencyLoaded(agency: agency));
+    } catch (e) {
+      emit(AgencyFailure(error: e.toString()));
+    }
   }
 
   void _onSignupSubmitted(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../themes/colors.dart';
 import '../themes/fonts.dart';
 
+
 // class SearchBarWidget extends StatelessWidget {
 //   final TextEditingController? controller;
 
