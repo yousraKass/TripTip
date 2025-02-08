@@ -28,7 +28,7 @@ class OfferCubit extends Cubit<OfferState> {
   //     _handleError(e.toString());
   //   }
   // }
-
+// for testing the Bloc Only
   fetchInitialData() async {
   try {
     emit(OfferLoadingState());
